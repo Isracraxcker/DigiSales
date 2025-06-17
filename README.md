@@ -194,7 +194,7 @@ npm run dev
 <div align="center">
 
 ### Login Principal
-![Login](https://i.ibb.co/SXfyrYKZ/login.png)
+![Login](./src/assets/login.png)
 
 ### Gestión de Inventario
 ![Inventario](https://via.placeholder.com/800x400/059669/ffffff?text=Gestión+de+Inventario)
