@@ -227,7 +227,6 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 <div align="center">
 
-<img src="https://github.com/Isracraxcker.png" alt="Andy Jaramillo" width="150" height="150" style="border-radius: 50%;">
 
 ### **Andy Jaramillo**
 *Tecnólogo Full Stack | Especialista en React & Next.js*
