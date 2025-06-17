@@ -5,12 +5,12 @@ import {
   InputText2,
   Linea,
   Title,
-  
+  useAuthStore,
 } from "../../index";
 import { v } from "../../styles/variables";
 import { Device } from "../../styles/breakpoints";
 export function LoginTemplate() {
-  
+  const { loginGoogle } = useAuthStore();
   return (
     <Container>
       <div className="card">
@@ -42,7 +42,7 @@ export function LoginTemplate() {
           <span>0</span>
         </Linea>
         <Btnsave
-          // funcion={"#"}
+          funcion={loginGoogle}
           titulo="Google"
           bgcolor="#fff"
           icono={<v.iconogoogle />}

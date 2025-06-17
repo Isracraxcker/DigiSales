@@ -1,28 +1,41 @@
 import styled, { ThemeProvider } from "styled-components";
-import { GlobalStyles, MyRoutes, Sidebar, useThemeStore } from "./index";
+import {
+  AuthContextProvider,
+  GlobalStyles,
+  MyRoutes,
+  Sidebar,
+  useThemeStore,
+  Login
+} from "./index";
 import { Device } from "./styles/breakpoints";
 import { useState } from "react";
-
+import { useLocation } from "react-router-dom";
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { themeStyle } = useThemeStore();
-  return (
+  const { pathname } = useLocation();
+  
+   return (
     <ThemeProvider theme={themeStyle}>
-      <Container className={sidebarOpen ? "active" : ""}>
+      <AuthContextProvider>
         <GlobalStyles />
-        <section className="contentSidebar">
-          <Sidebar
-            state={sidebarOpen}
-            setState={() => setSidebarOpen(!sidebarOpen)}
-          />
-        </section>
-
-        <section className="contentMenuhambur">MENU HAMBUR</section>
-
-        <section className="contentRouters">
-          <MyRoutes />
-        </section>
-      </Container>
+        {pathname != "/login" ? (
+          <Container className={sidebarOpen ? "active" : ""}>
+            <section className="contentSidebar">
+              <Sidebar
+                state={sidebarOpen}
+                setState={() => setSidebarOpen(!sidebarOpen)}
+              />
+            </section>
+            <section className="contentMenuhambur">menu hambur</section>
+            <section className="contentRouters">
+              <MyRoutes />
+            </section>
+          </Container>
+        ) : (
+          <Login />
+        )}
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }
