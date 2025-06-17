@@ -1,9 +1,17 @@
 export { default as App } from './App';
+export * from './components/atomos/Icono';
+export * from './components/atomos/Linea';
+export * from './components/atomos/Title';
+export * from './components/moleculas/Btnsave';
+export * from './components/organismos/Footer';
 export * from './components/organismos/ToggleTema';
+export * from './components/organismos/formularios/InputText2';
 export * from './components/organismos/sidebar/Sidebar';
 export * from './components/templates/HomeTemplate';
+export * from './components/templates/LoginTemplate';
 export * from './main';
 export * from './pages/Home';
+export * from './pages/Login';
 export * from './routes/routes';
 export * from './store/ThemeStore';
 export * from './styles/GlobalStyles';
