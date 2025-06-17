@@ -29,22 +29,22 @@ export const DesplegableUser = [
 export const LinksArray = [
   {
     label: "Inicio",
-    icon: "noto-v1:house",
+    icon: "fluent-color:home-20",
     to: "/",
   },
   {
     label: "Vender",
-    icon: "flat-color-icons:shop",
+    icon: "fluent-color:building-store-20",
     to: "/pos",
   },
   {
     label: "Inventario",
-    icon: "flat-ui:box",
+    icon: "fluent-color:clipboard-text-edit-20",
     to: "/kardex",
   },
   {
     label: "Reportes",
-    icon: "flat-ui:graph",
+    icon: "fluent-color:data-area-20",
     to: "/reportes",
   },
  
@@ -53,7 +53,7 @@ export const SecondarylinksArray = [
  
   {
     label: "Configuración",
-    icon:"icon-park:setting-two",
+    icon:"fluent-color:settings-20",
     to: "/configurar",
     color:"#CE82FF"
   },
