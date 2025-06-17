@@ -193,8 +193,8 @@ npm run dev
 
 <div align="center">
 
-### Dashboard Principal
-![Dashboard](https://via.placeholder.com/800x400/2563eb/ffffff?text=Dashboard+Principal)
+### Login Principal
+![Login](https://i.ibb.co/SXfyrYKZ/login.png)
 
 ### Gestión de Inventario
 ![Inventario](https://via.placeholder.com/800x400/059669/ffffff?text=Gestión+de+Inventario)
