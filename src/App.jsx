@@ -1,4 +1,3 @@
-
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyles, MyRoutes, Sidebar, useThemeStore } from "./index";
 import { Device } from "./styles/breakpoints";
@@ -9,10 +8,13 @@ function App() {
   const { themeStyle } = useThemeStore();
   return (
     <ThemeProvider theme={themeStyle}>
-      <Container>
+      <Container className={sidebarOpen ? "active" : ""}>
         <GlobalStyles />
         <section className="contentSidebar">
-          <Sidebar state={sidebarOpen} setState={() => setSidebarOpen(!sidebarOpen)} />
+          <Sidebar
+            state={sidebarOpen}
+            setState={() => setSidebarOpen(!sidebarOpen)}
+          />
         </section>
 
         <section className="contentMenuhambur">MENU HAMBUR</section>
@@ -29,7 +31,7 @@ const Container = styled.main`
   display: grid;
   grid-template-columns: 1fr;
   transition: 0.1s ease-in-out;
-  background-color: black;
+  color: ${({ theme }) => theme.text};
 
   .contentSidebar {
     display: none;
