@@ -243,20 +243,6 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 ---
 
-## 📊 Estadísticas del Proyecto
-
-<div align="center">
-
-![GitHub stars](https://img.shields.io/github/stars/Isracraxcker/DigiSales?style=social)
-![GitHub forks](https://img.shields.io/github/forks/Isracraxcker/DigiSales?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/Isracraxcker/DigiSales?style=social)
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Isracraxcker/DigiSales&type=Date)](https://star-history.com/#Isracraxcker/DigiSales&Date)
-
-</div>
-
----
-
 
 <div align="center">
 
