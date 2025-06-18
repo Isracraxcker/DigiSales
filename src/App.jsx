@@ -9,6 +9,7 @@ import {
 } from "./index";
 import { Device } from "./styles/breakpoints";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 function App() {
@@ -20,6 +21,7 @@ function App() {
    <ThemeProvider theme={themeStyle}>
       <AuthContextProvider>
         <GlobalStyles />
+        <Toaster position="bottom-right" reverseOrder={false} />
         {pathname != "/login" ? (
           <Container className={sidebarOpen ? "active" : ""}>
             <section className="contentSidebar">

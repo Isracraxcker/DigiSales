@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Routes, Route } from "react-router-dom";
 import {
   Categorias,
@@ -5,11 +6,37 @@ import {
   Home,
   Login,
   ProtectedRoute,
+  Spinner1,
   UserAuth,
+  useEmpresaStore,
+  useUsuariosStore,
 } from "../index";
-
+import { useQuery } from "@tanstack/react-query";
 export function MyRoutes() {
   const { user } = UserAuth();
+  const { datausuarios, mostrarusuarios } = useUsuariosStore();
+  const { mostrarempresa, dataempresa } = useEmpresaStore();
+
+ //mostrar usuarios
+  const { isLoading, error } = useQuery({
+    queryKey: "mostrar usuarios",
+    queryFn: mostrarusuarios,refetchOnWindowFocus:false
+  });
+
+  //mostrar empresa
+  const {data:dtempresa} = useQuery({
+    queryKey: ["mostrar empresa",  datausuarios?.id ],
+    queryFn: () => mostrarempresa({_id_usuario: datausuarios?.id }),enabled:!!datausuarios,refetchOnWindowFocus:false
+  });
+
+  // Cargando empresa y usuarios
+  if (isLoading) {
+    return <Spinner1 />;
+  }
+  if (error) {
+    return <span>error...</span>;
+  }
+
   return (
     <Routes>
       <Route element={<ProtectedRoute user={user} redirectTo="/login" />}>

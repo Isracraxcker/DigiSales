@@ -7,7 +7,6 @@ export async function InsertarEmpresa(p) {
     .select()
     .maybeSingle();
   if (error) {
-    
     return;
   }
   return data;

@@ -1,11 +1,12 @@
 
+
 import styled from "styled-components";
-import { Btn1, Buscador, Title } from "../../index";
+import { Btn1, Buscador, TablaCategorias, Title } from "../../index";
 import { v } from "../../styles/variables";
 import { useCategoriasStore } from "../../store/CategoriasStore";
 
 export function CategoriasTemplate() {
-  const { setBuscador } = useCategoriasStore();
+  const { datacategorias,setBuscador } = useCategoriasStore();
   return (
     <Container>
       <section className="area1">
@@ -20,7 +21,9 @@ export function CategoriasTemplate() {
         <Buscador setBuscador={setBuscador}/>
       </section>
 
-      <section className="main"></section>
+      <section className="main">
+        <TablaCategorias  data={datacategorias} />
+      </section>
     </Container>
   );
 }
