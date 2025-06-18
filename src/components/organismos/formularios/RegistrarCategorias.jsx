@@ -108,6 +108,7 @@ export function RegistrarCategorias({
               <span onClick={onClose}>x</span>
             </section>
           </div>
+
           <PictureContainer>
             {fileurl != "-" ? (
               <div className="ContentImage">
@@ -130,6 +131,7 @@ export function RegistrarCategorias({
               onChange={(e) => prepararImagen(e)}
             ></input>
           </PictureContainer>
+          
           <form className="formulario" onSubmit={handleSubmit(handlesub)}>
             <section className="form-subcontainer">
               <article>
@@ -143,7 +145,7 @@ export function RegistrarCategorias({
                       required: true,
                     })}
                   />
-                  <label className="form__label">categoria</label>
+                  <label className="form__label">Categoria</label>
                   {errors.descripcion?.type === "required" && (
                     <p>Campo requerido</p>
                   )}
@@ -165,6 +167,7 @@ export function RegistrarCategorias({
                 titulo="Guardar"
                 bgcolor="#F9D70B"
               />
+              
             </section>
           </form>
         </div>

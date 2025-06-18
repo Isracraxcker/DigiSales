@@ -9,25 +9,22 @@ import {
 import { v } from "../../styles/variables";
 import { TablaCategorias } from "../organismos/tablas/TablaCategorias";
 import { useState } from "react";
-import ConfettiExplosion from "react-confetti-explosion";
-export function CategoriasTemplate() {
 
-  
+export function CategoriasTemplate() {
   const [openRegistro, SetopenRegistro] = useState(false);
-  const { datacategorias,setBuscador } = useCategoriasStore();
+  const { datacategorias, setBuscador } = useCategoriasStore();
   const [accion, setAccion] = useState("");
   const [dataSelect, setdataSelect] = useState([]);
-  const [isExploding, setIsExploding] = useState(false);
+
   function nuevoRegistro() {
     SetopenRegistro(!openRegistro);
     setAccion("Nuevo");
     setdataSelect([]);
-    setIsExploding(false)
   }
   return (
     <Container>
       {openRegistro && (
-        <RegistrarCategorias setIsExploding={setIsExploding}
+        <RegistrarCategorias
           onClose={() => SetopenRegistro(!openRegistro)}
           dataSelect={dataSelect}
           accion={accion}
@@ -38,17 +35,21 @@ export function CategoriasTemplate() {
         <Btn1
           funcion={nuevoRegistro}
           bgcolor={v.colorPrincipal}
-          titulo="nuevo"
+          titulo="Nuevo"
           icono={<v.iconoagregar />}
         />
       </section>
       <section className="area2">
-        <Buscador setBuscador={setBuscador}/>
+        <Buscador setBuscador={setBuscador} />
       </section>
 
       <section className="main">
-        {isExploding && <ConfettiExplosion />}
-        <TablaCategorias setdataSelect={setdataSelect} setAccion={setAccion} SetopenRegistro={SetopenRegistro} data={datacategorias} />
+        <TablaCategorias
+          setdataSelect={setdataSelect}
+          setAccion={setAccion}
+          SetopenRegistro={SetopenRegistro}
+          data={datacategorias}
+        />
       </section>
     </Container>
   );

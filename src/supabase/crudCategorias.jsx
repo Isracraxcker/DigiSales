@@ -21,7 +21,8 @@ export async function InsertarCategorias(p, file) {
       id: nuevo_id,
     };
      await EditarIconoCategorias(piconoeditar);
-}
+  }
+  toast.success("¡Categoría insertada correctamente!");
 }
 
 
@@ -83,6 +84,8 @@ export async function EliminarCategorias(p) {
     const ruta = "categorias/" + p.id;
     await supabase.storage.from("imagenes").remove([ruta]);
   }
+
+  toast.success("¡Categoría eliminada correctamente!");
 }
 
 export async function EditarCategorias(p, fileold, filenew) {
@@ -103,6 +106,7 @@ export async function EditarCategorias(p, fileold, filenew) {
       await EditarIconoCategorias(piconoeditar);
     }
   }
+  toast.success("¡Categoría editada correctamente!");
 }
 
 export async function EditarIconoStorage(id, file) {
