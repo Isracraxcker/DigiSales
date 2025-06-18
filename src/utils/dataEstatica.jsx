@@ -54,7 +54,7 @@ export const SecondarylinksArray = [
   {
     label: "Configuración",
     icon:"fluent-color:settings-20",
-    to: "/configurar",
+    to: "/configuracion",
     color:"#CE82FF"
   },
   
@@ -80,14 +80,14 @@ export const DataModulosConfiguracion =[
   {
     title:"Productos",
     subtitle:"registra tus productos",
-    icono:"https://i.ibb.co/85zJ6yG/caja-del-paquete.png",
+    icono:"https://i.ibb.co/Wb1FNnL/productos.png",
     link:"/configurar/productos",
    
   },
   {
     title:"Personal",
     subtitle:"ten el control de tu personal",
-    icono:"https://i.ibb.co/5vgZ0fX/hombre.png",
+    icono:"https://i.ibb.co/DPmcd4vt/personal.png",
     link:"/configurar/usuarios",
    
   },
@@ -95,21 +95,21 @@ export const DataModulosConfiguracion =[
   {
     title:"Tu empresa",
     subtitle:"configura tus opciones básicas",
-    icono:"https://i.ibb.co/x7mHPgm/administracion-de-empresas.png",
+    icono:"https://i.ibb.co/Q7nTzmQS/empresa.png",
     link:"/configurar/empresa",
     
   },
   {
     title:"Categoria de productos",
     subtitle:"asigna categorias a tus productos",
-    icono:"https://i.ibb.co/VYbMRLZ/categoria.png",
-    link:"/configurar/categorias",
+    icono:"https://i.ibb.co/0V2D9cXL/categoria.png",
+    link:"/configuracion/categorias",
     
   },
   {
     title:"Marca de productos",
     subtitle:"gestiona tus marcas",
-    icono:"https://i.ibb.co/1qsbCRb/piensa-fuera-de-la-caja.png",
+    icono:"https://i.ibb.co/S77LbNF3/marcas.png",
     link:"/configurar/marca",
    
   },

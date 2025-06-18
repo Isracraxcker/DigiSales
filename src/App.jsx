@@ -10,13 +10,14 @@ import {
 import { Device } from "./styles/breakpoints";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { themeStyle } = useThemeStore();
   const { pathname } = useLocation();
   
    return (
-    <ThemeProvider theme={themeStyle}>
+   <ThemeProvider theme={themeStyle}>
       <AuthContextProvider>
         <GlobalStyles />
         {pathname != "/login" ? (
@@ -35,6 +36,8 @@ function App() {
         ) : (
           <Login />
         )}
+       
+        <ReactQueryDevtools initialIsOpen={true} />
       </AuthContextProvider>
     </ThemeProvider>
   );

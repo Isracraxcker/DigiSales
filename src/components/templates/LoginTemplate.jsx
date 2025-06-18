@@ -11,6 +11,7 @@ import { v } from "../../styles/variables";
 import { Device } from "../../styles/breakpoints";
 export function LoginTemplate() {
   const { loginGoogle } = useAuthStore();
+
   return (
     <Container>
       <div className="card">
