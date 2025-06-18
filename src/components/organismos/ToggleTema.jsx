@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useThemeStore } from "../../store/ThemeStore";
+
 export function ToggleTema() {
   const { setTheme } = useThemeStore();
 
@@ -97,11 +98,13 @@ export function ToggleTema() {
             </svg>
           </div>
 
-          <div className="w-8 icon icon--sun">
+          <div className="icon icon--sun">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 47.5 47.5"
               id="sun"
+              width="32"
+              height="32"
             >
               <defs>
                 <clipPath id="a">
@@ -118,9 +121,18 @@ export function ToggleTema() {
     </Container>
   );
 }
+
 const Container = styled.div`
-justify-content:center;
-display:flex;
+  justify-content: center;
+  display: flex;
+  padding: 10px 0;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .toggle {
     width: 46px;
     height: 46px;
@@ -128,11 +140,14 @@ display:flex;
     display: grid;
     place-items: center;
     cursor: pointer;
-   
     line-height: 1;
-   
-    margin-top: 15px;
-  
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+      transform: scale(1.05);
+      background: ${(props) => props.theme.bgAlpha};
+    }
   }
 
   .input {
@@ -142,15 +157,28 @@ display:flex;
   .icon {
     grid-column: 1 / 1;
     grid-row: 1 / 1;
-    transition: transform 500ms;
+    transition: transform 500ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .icon--moon {
     transition-delay: 200ms;
+    
+    svg {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   .icon--sun {
     transform: scale(0);
+    
+    svg {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   #switch:checked + .icon--moon {
@@ -162,7 +190,23 @@ display:flex;
     transform: scale(1) rotate(360deg);
   }
 
-  .w-8 {
-    width: 2rem /* 32px */;
+  /* Responsividad */
+  @media (max-width: 768px) {
+    padding: 15px 0;
+    
+    .toggle {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .icon--moon svg {
+      width: 32px;
+      height: 32px;
+    }
+    
+    .icon--sun svg {
+      width: 34px;
+      height: 34px;
+    }
   }
 `;

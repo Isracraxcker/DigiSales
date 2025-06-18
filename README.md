@@ -98,31 +98,13 @@ pnpm install
 
 #### 3️⃣ **Configuración de Variables de Entorno**
 
-Crea un archivo `.env.local` en la raíz del proyecto:
+Crea un archivo `.env` en la raíz del proyecto:
 
 ```bash
 # Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=tu_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
+VITE_APP_SUPABASE_URL= ...
+VITE_APP_SUPABASE_ANON_KEY= ...
 
-# Database
-DATABASE_URL=tu_database_url
-
-# App Configuration
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXTAUTH_SECRET=tu_secret_key
-NEXTAUTH_URL=http://localhost:3000
-```
-
-#### 4️⃣ **Configurar Base de Datos**
-
-```bash
-# Ejecutar migraciones
-npm run db:push
-
-# Poblar con datos de ejemplo (opcional)
-npm run db:seed
 ```
 
 #### 5️⃣ **Iniciar el Servidor de Desarrollo**
@@ -131,7 +113,7 @@ npm run db:seed
 npm run dev
 ```
 
-🎉 **¡Listo!** La aplicación estará disponible en [http://localhost:3000](http://localhost:3000)
+🎉 **¡Listo!** La aplicación estará disponible en [http://localhost:5173](http://localhost:5173)
 
 ---
 
@@ -142,14 +124,6 @@ npm run dev
 | `npm run dev` | 🔥 Servidor de desarrollo con hot-reload | Desarrollo local |
 | `npm run build` | 🏗️ Build optimizado para producción | Pre-despliegue |
 | `npm run start` | 🚀 Servidor de producción | Testing de build |
-| `npm run lint` | 🔍 Análisis de código con ESLint | Control de calidad |
-| `npm run lint:fix` | 🔧 Corrección automática de linting | Limpieza de código |
-| `npm run type-check` | 📝 Verificación de tipos TypeScript | Validación pre-commit |
-| `npm run db:push` | 🗄️ Sincronizar esquema de base de datos | Cambios de BD |
-| `npm run db:studio` | 👀 Abrir Prisma Studio | Visualización de datos |
-| `npm run test` | 🧪 Ejecutar tests unitarios | Testing |
-| `npm run test:e2e` | 🤖 Tests end-to-end con Playwright | Testing integral |
-
 ---
 
 ## 🌐 Despliegue en Producción
@@ -168,7 +142,7 @@ npm run dev
 2. **Configurar Variables de Entorno**
    - Accede al dashboard de Vercel
    - Ve a Settings > Environment Variables
-   - Agrega todas las variables de `.env.local`
+   - Agrega todas las variables de `.env`
 
 3. **Configurar Dominio Personalizado** (Opcional)
    - En Vercel Dashboard > Domains
@@ -196,8 +170,8 @@ npm run dev
 ### Login Principal
 ![Login](./src/assets/login.png)
 
-### Gestión de Inventario
-![Inventario](https://via.placeholder.com/800x400/059669/ffffff?text=Gestión+de+Inventario)
+### Presentación del Sistema DigiSales
+![Landing Home](./src/assets/home.png)
 
 ### Sistema de Ventas
 ![Ventas](https://via.placeholder.com/800x400/dc2626/ffffff?text=Sistema+de+Ventas)

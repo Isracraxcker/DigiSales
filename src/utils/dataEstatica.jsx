@@ -50,6 +50,13 @@ export const LinksArray = [
  
 ];
 export const SecondarylinksArray = [
+
+   {
+    label: "Perfil",
+    icon:"fluent-color:person-16",
+    to: "/perfil",
+    color:"#CE82FF"
+  },
  
   {
     label: "Configuración",
@@ -57,6 +64,8 @@ export const SecondarylinksArray = [
     to: "/configuracion",
     color:"#CE82FF"
   },
+
+  
   
   
 
