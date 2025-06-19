@@ -107,6 +107,66 @@ VITE_APP_SUPABASE_ANON_KEY= ...
 
 ```
 
+#### 4️⃣ **Configuración de Autenticación con Google**
+
+DigiSales utiliza Google OAuth 2.0 para la autenticación. Sigue estos pasos para configurarlo:
+
+##### **a) Configurar Supabase**
+
+1. **Accede a tu Dashboard de Supabase**
+   - Ve a `Authentication > Providers`
+   - Habilita el proveedor **Google**
+
+2. **Obtener la URL de Callback**
+   ```bash
+   # La URL de callback será algo así:
+   https://[TU-PROJECT-ID].supabase.co/auth/v1/callback
+   ```
+   📋 **¡Importante!** Copia esta URL, la necesitarás en el siguiente paso.
+
+##### **b) Configurar Google Cloud Console**
+
+1. **Acceder a Google Cloud Console**
+   - Ve a [Google Cloud Console](https://console.cloud.google.com/)
+   - Navega a `APIs y Servicios > Credenciales`
+
+2. **Crear Credenciales OAuth 2.0**
+   ```bash
+   # Pasos detallados:
+   1. Hacer clic en "Crear credenciales"
+   2. Seleccionar "ID de cliente de OAuth 2.0"
+   3. Elegir tipo de aplicación: "Aplicación web"
+   4. Asignar un nombre descriptivo (ej: "DigiSales - Prod")
+   ```
+
+3. **Configurar URLs Autorizadas**
+   ```bash
+   # Orígenes de JavaScript autorizados:
+   http://localhost:5173          # Para desarrollo
+   https://tu-dominio.com         # Para producción
+   
+   # URIs de redirección autorizados:
+   https://[TU-PROJECT-ID].supabase.co/auth/v1/callback
+   ```
+
+4. **Obtener las Credenciales**
+   - Copia el `Client ID` y `Client Secret`
+   - Ve de vuelta a Supabase y pégalos en la configuración de Google
+
+##### **c) Actualizar Variables de Entorno**
+
+```bash
+# Supabase Configuration
+VITE_APP_SUPABASE_URL=https://[TU-PROJECT-ID].supabase.co
+VITE_APP_SUPABASE_ANON_KEY=eyJ...
+
+```
+
+🔐 **Notas de Seguridad:**
+- Nunca compartas tu `Client Secret` públicamente
+- Usa diferentes credenciales para desarrollo y producción
+- Revisa regularmente los permisos de tu aplicación en Google
+
 #### 5️⃣ **Iniciar el Servidor de Desarrollo**
 
 ```bash
