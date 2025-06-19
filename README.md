@@ -195,12 +195,25 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 - 📧 **Email:** andyisraeljaramillo@gmail.com
 - 💼 **LinkedIn:** [Andy Jaramillo](https://linkedin.com/in/andyjaramillo)
 
+### 🗄️ **Script de Base de Datos**
+
+¿Necesitas el script completo de la base de datos para PostgreSQL/Supabase?
+
+**💡 Obtén acceso al script completo por solo $2 USD**
+- 📋 **Incluye:** Todas las tablas, funciones, triggers y configuraciones RLS
+- 🚀 **Setup completo:** Listo para importar en tu proyecto
+- 🛡️ **Seguridad:** Configuraciones de seguridad a nivel de fila implementadas
+
+
+[![☕ Obtener Script BD - $2](https://img.shields.io/badge/💳_Obtener_Script_BD-$2_USD-FF813F?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://buymeacoffee.com/andyisraela)
+
+*Una vez realizada la compra, recibirás el script completo en tu email en menos de 24 horas.*
+
 ---
 
 ## 👨‍💻 Sobre el Desarrollador
 
 <div align="center">
-
 
 ### **Andy Jaramillo**
 *Tecnólogo Full Stack | Especialista en React & Next.js*
@@ -212,11 +225,9 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 *"Transformando ideas en experiencias digitales excepcionales"*
 
-
 </div>
 
 ---
-
 
 <div align="center">
 
@@ -224,7 +235,10 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 *Si este proyecto te resulta útil, no olvides darle una ⭐ en GitHub*
 
-**¿Te gusta el proyecto?** Considera [☕ invitarme un café](https://buymeacoffee.com/andyisraela)
+**¿Te gusta el proyecto?** 
+- ⭐ **Dale una estrella** al repositorio
+- ☕ **Apóyame con un café** en [Buy Me a Coffee](https://buymeacoffee.com/andyisraela)
+- 🗄️ **Obtén el script de BD completo** por solo $2 USD
 
 ---
 
