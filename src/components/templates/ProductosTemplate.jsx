@@ -2,40 +2,46 @@ import styled from "styled-components";
 import {
   Btn1,
   Buscador,
-  RegistrarCategorias,
+  RegistrarProductos,
+  TablaProductos,
   Title,
-  useCategoriasStore,
+  useProductosStore,
 } from "../../index";
 import { v } from "../../styles/variables";
-import { TablaCategorias } from "../organismos/tablas/TablaCategorias";
 import { useState } from "react";
-
-export function CategoriasTemplate() {
+import ConfettiExplosion from "react-confetti-explosion";
+export function ProductosTemplate() {
   const [openRegistro, SetopenRegistro] = useState(false);
-  const { datacategorias, setBuscador } = useCategoriasStore();
+  const { dataProductos, setBuscador, generarCodigo } = useProductosStore();
   const [accion, setAccion] = useState("");
   const [dataSelect, setdataSelect] = useState([]);
-
+  const [isExploding, setIsExploding] = useState(false);
   function nuevoRegistro() {
     SetopenRegistro(!openRegistro);
     setAccion("Nuevo");
     setdataSelect([]);
+    setIsExploding(false);
+    generarCodigo();
   }
+
   return (
     <Container>
       {openRegistro && (
-        <RegistrarCategorias
+        <RegistrarProductos
+          setIsExploding={setIsExploding}
           onClose={() => SetopenRegistro(!openRegistro)}
           dataSelect={dataSelect}
           accion={accion}
+          state={openRegistro}
         />
       )}
+
       <section className="area1">
-        <Title>Categorias</Title>
+        <Title>Productos</Title>
         <Btn1
           funcion={nuevoRegistro}
           bgcolor={v.colorPrincipal}
-          titulo="Nuevo"
+          titulo="nuevo"
           icono={<v.iconoagregar />}
         />
       </section>
@@ -44,18 +50,18 @@ export function CategoriasTemplate() {
       </section>
 
       <section className="main">
-        <TablaCategorias
+        {isExploding && <ConfettiExplosion />}
+        <TablaProductos
           setdataSelect={setdataSelect}
           setAccion={setAccion}
           SetopenRegistro={SetopenRegistro}
-          data={datacategorias}
+          data={dataProductos}
         />
       </section>
     </Container>
   );
 }
 const Container = styled.div`
-  height: calc(100vh - 30px);
   padding: 15px;
   display: grid;
   grid-template:
@@ -64,7 +70,7 @@ const Container = styled.div`
     "main" auto;
   .area1 {
     grid-area: area1;
-
+    /* background-color: rgba(103, 93, 241, 0.14); */
     display: flex;
     justify-content: end;
     align-items: center;
@@ -72,12 +78,13 @@ const Container = styled.div`
   }
   .area2 {
     grid-area: area2;
-
+    /* background-color: rgba(7, 237, 45, 0.14); */
     display: flex;
     justify-content: end;
     align-items: center;
   }
   .main {
     grid-area: main;
+    /* background-color: rgba(237, 7, 221, 0.14); */
   }
 `;

@@ -7,6 +7,7 @@ import {
   Login,
   ProtectedRoute,
   Spinner1,
+  Productos,
   UserAuth,
   useEmpresaStore,
   useUsuariosStore,
@@ -17,16 +18,19 @@ export function MyRoutes() {
   const { datausuarios, mostrarusuarios } = useUsuariosStore();
   const { mostrarempresa, dataempresa } = useEmpresaStore();
 
- //mostrar usuarios
+  //mostrar usuarios
   const { isLoading, error } = useQuery({
     queryKey: "mostrar usuarios",
-    queryFn: mostrarusuarios,refetchOnWindowFocus:false
+    queryFn: mostrarusuarios,
+    refetchOnWindowFocus: false,
   });
 
   //mostrar empresa
-  const {data:dtempresa} = useQuery({
-    queryKey: ["mostrar empresa",  datausuarios?.id ],
-    queryFn: () => mostrarempresa({_id_usuario: datausuarios?.id }),enabled:!!datausuarios,refetchOnWindowFocus:false
+  const { data: dtempresa } = useQuery({
+    queryKey: ["mostrar empresa", datausuarios?.id],
+    queryFn: () => mostrarempresa({ _id_usuario: datausuarios?.id }),
+    enabled: !!datausuarios,
+    refetchOnWindowFocus: false,
   });
 
   // Cargando empresa y usuarios
@@ -43,6 +47,7 @@ export function MyRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/configuracion" element={<Configuraciones />} />
         <Route path="/configuracion/categorias" element={<Categorias />} />
+        <Route path="/configuracion/productos" element={<Productos />} />
       </Route>
       <Route path="/login" element={<Login />} />
     </Routes>

@@ -21,7 +21,7 @@ function App() {
    <ThemeProvider theme={themeStyle}>
       <AuthContextProvider>
         <GlobalStyles />
-        <Toaster position="bottom-right" reverseOrder={false} />
+        <Toaster  position="top-center" reverseOrder={false} />
         {pathname != "/login" ? (
           <Container className={sidebarOpen ? "active" : ""}>
             <section className="contentSidebar">
