@@ -49,7 +49,7 @@
 - 🎨 **Styled Components** - Diseño modular y responsivo  
 - 🔄 **Zustand** - Gestión de estado eficiente
 - 📊 **Chart.js & React-Chartjs-2** - Visualización de datos avanzada
-- 🎯 **TypeScript** - Desarrollo type-safe
+- 🎯 **JavaScript** - Desarrollo con seguridad de tipos
 
 ### **Backend & Base de Datos**
 - 🛡️ **Supabase** - Backend-as-a-Service completo
@@ -62,7 +62,7 @@
 - ☁️ **Vercel** - Despliegue y hosting optimizado
 - 📈 **Vercel Analytics** - Métricas de rendimiento
 - 🔄 **GitHub Actions** - CI/CD automatizado
-- 🌐 **CDN Global** - Distribución de contenido optimizada
+
 
 ---
 
@@ -157,7 +157,7 @@ npm run dev
 | 🔺 **Vercel** | ⭐ Fácil | ⭐⭐⭐ Alta | 💰 Freemium | Startups, MVPs |
 | ☁️ **AWS** | ⭐⭐⭐ Compleja | ⭐⭐⭐⭐ Muy Alta | 💰💰 Variable | Empresas grandes |
 | 🌊 **Netlify** | ⭐⭐ Fácil | ⭐⭐ Media | 💰 Freemium | Proyectos pequeños |
-| 🔥 **Railway** | ⭐⭐ Media | ⭐⭐⭐ Alta | 💰💰 Pay-as-go | Full-stack apps |
+
 
 </div>
 
