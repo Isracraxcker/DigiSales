@@ -5,208 +5,312 @@ export function ToggleTema() {
   const { setTheme } = useThemeStore();
 
   return (
-    <Container>
-      <div className="container">
-        <label className="toggle">
-          <input
-            id="switch"
-            className="input"
-            type="checkbox"
-            onClick={setTheme}
-          />
-          <div className="icon icon--moon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
-              viewBox="0 0 512 512"
-              id="moon"
-            >
-              <g>
-                <path
-                  fill="#6A6D68"
-                  d="M412.95,381.15c-8.05,10.119-16.94,19.33-26.55,27.54c-2.271,1.939-4.58,3.819-6.92,5.64   c-0.261,0.21-0.521,0.42-0.78,0.63c-0.09,0.07-0.19,0.13-0.28,0.2c-5.979,4.6-12.2,8.83-18.64,12.689   c-1.92,1.15-3.851,2.28-5.811,3.37c-18.14,10.061-37.819,17.221-58.42,21.16c-12.27,2.34-24.87,3.55-37.66,3.55   c-27.92,0-54.94-5.739-80.32-17.04c-7.74-3.46-15.3-7.43-22.47-11.81c-6.96-4.24-13.77-9-20.24-14.14   c-5.28-4.19-10.3-8.62-15.07-13.25c-1.3-1.261-2.57-2.54-3.82-3.83c-30.43-31.21-49.57-71.37-54.6-115.38   c-4.54-39.75,2.83-79.04,20.95-113.75c4.99-9.561,10.81-18.78,17.41-27.561c0.2-0.26,0.4-0.529,0.6-0.79   c0.9-1.18,1.81-2.359,2.74-3.529c37.77-47.521,94.29-74.78,155.07-74.78c45.101,0,87.641,14.87,123.021,42.99   c1.54,1.22,2.89,2.33,4.14,3.39c3.16,2.64,6.29,5.43,9.51,8.5c0.49,0.47,0.99,0.94,1.471,1.43c1.3,1.25,2.58,2.54,3.84,3.83   c32.41,33.351,51.979,77.011,55.31,123.75C458.97,293.51,443.88,342.23,412.95,381.15z"
-                  opacity=".9"
-                ></path>
-                <path
-                  fill="#A3AAA0"
-                  d="M408.95,377.15c-8.05,10.119-16.94,19.33-26.55,27.54c-2.271,1.939-4.58,3.819-6.92,5.64   c-0.261,0.21-0.521,0.42-0.78,0.63c-0.09,0.07-0.19,0.13-0.28,0.2c-5.979,4.6-12.2,8.83-18.64,12.689   c-1.92,1.15-3.851,2.28-5.811,3.37c-19.76,10.96-41.359,18.471-63.979,22.141c-10.51,1.699-21.23,2.569-32.101,2.569   c-27.92,0-54.94-5.739-80.32-17.04c-7.74-3.46-15.3-7.43-22.47-11.81c-6.96-4.24-13.77-9-20.24-14.14   c-5.21-4.141-10.17-8.511-14.89-13.08c-0.06-0.051-0.12-0.11-0.18-0.17c-32.64-31.721-53.18-73.381-58.42-119.21   c-4.54-39.75,2.83-79.04,20.95-113.75c4.99-9.561,10.81-18.78,17.41-27.561c1.09-1.449,2.2-2.89,3.34-4.319   c0.55-0.69,1.1-1.37,1.65-2.051c37.76-46.25,93.52-72.729,153.42-72.729c45.101,0,87.641,14.87,123.021,42.99   c1.54,1.22,2.89,2.33,4.14,3.39c3.16,2.64,6.29,5.43,9.51,8.5c1.811,1.72,3.58,3.48,5.311,5.26c0.05,0.061,0.11,0.11,0.16,0.17   c32.319,33.33,51.83,76.92,55.149,123.58C454.97,289.51,439.88,338.23,408.95,377.15z"
-                ></path>
-                <circle
-                  cx="285"
-                  cy="156"
-                  r="44.5"
-                  fill="#666865"
-                  stroke="#5E5E5D"
-                ></circle>
-                <circle
-                  cx="385"
-                  cy="300"
-                  r="21.5"
-                  fill="#666865"
-                  stroke="#5E5E5D"
-                ></circle>
-                <circle
-                  cx="166"
-                  cy="296.5"
-                  r="27.84"
-                  fill="#666865"
-                  stroke="#5E5E5D"
-                ></circle>
-                <circle
-                  cx="261.25"
-                  cy="272.75"
-                  r="14.75"
-                  fill="#666865"
-                  stroke="#5E5E5D"
-                ></circle>
-                <circle
-                  cx="151.5"
-                  cy="184"
-                  r="28"
-                  fill="#666865"
-                  stroke="#5E5E5D"
-                ></circle>
-                <circle
-                  cx="297.5"
-                  cy="382.501"
-                  r="27.5"
-                  fill="#666865"
-                  stroke="#5E5E5D"
-                ></circle>
-                <circle
-                  cx="395"
-                  cy="213"
-                  r="18.5"
-                  fill="#666865"
-                  stroke="#5E5E5D"
-                ></circle>
-                <circle
-                  cx="317"
-                  cy="216"
-                  r="8"
-                  fill="#666865"
-                  stroke="#5E5E5D"
-                ></circle>
-                <path
-                  fill="#666865"
-                  stroke="#5E5E5D"
-                  d="M299.55,450.38   c-12.27,2.34-24.87,3.55-37.66,3.55c-27.92,0-54.94-5.739-80.32-17.04c-7.74-3.46-15.3-7.43-22.47-11.81   c-6.96-4.24-13.77-9-20.24-14.14c-5.28-4.19-10.3-8.62-15.07-13.25c-1.3-1.261-2.57-2.54-3.82-3.83   c-0.06-0.051-0.12-0.11-0.18-0.17c-32.64-31.721-53.18-73.381-58.42-119.21c-4.54-39.75,2.83-79.04,20.95-113.75   c4.99-9.561,10.81-18.78,17.41-27.561c1.09-1.449,2.2-2.89,3.34-4.319c0.55-0.69,1.1-1.37,1.65-2.051   c-0.16,3.011-0.29,6.2-0.39,9.58c-2.39,79.15,12.97,253.43,185.661,310.98C293.12,448.41,296.31,449.42,299.55,450.38z"
-                  opacity=".2"
-                ></path>
-              </g>
-            </svg>
-          </div>
+   <StyledWrapper>
+      <label aria-checked="false" role="switch" className="switch">
+        <input type="checkbox" onClick={setTheme} />
+        <span className="slider">
+          <span className="slider-inner" />
+        </span>
+      </label>
+    </StyledWrapper>
 
-          <div className="icon icon--sun">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 47.5 47.5"
-              id="sun"
-              width="32"
-              height="32"
-            >
-              <defs>
-                <clipPath id="a">
-                  <path d="M0 38h38V0H0v38Z"></path>
-                </clipPath>
-              </defs>
-              <g fill="#ffac33" transform="matrix(1.25 0 0 -1.25 0 47.5)">
-                <path d="M17 35s0 2 2 2 2-2 2-2v-2s0-2-2-2-2 2-2 2v2zM35 21s2 0 2-2-2-2-2-2h-2s-2 0-2 2 2 2 2 2h2zM5 21s2 0 2-2-2-2-2-2H3s-2 0-2 2 2 2 2 2h2zM10.121 29.706s1.414-1.414 0-2.828-2.828 0-2.828 0l-1.415 1.414s-1.414 1.414 0 2.829c1.415 1.414 2.829 0 2.829 0l1.414-1.415ZM31.121 8.707s1.414-1.414 0-2.828-2.828 0-2.828 0l-1.414 1.414s-1.414 1.414 0 2.828 2.828 0 2.828 0l1.414-1.414ZM30.708 26.879s-1.414-1.414-2.828 0 0 2.828 0 2.828l1.414 1.414s1.414 1.414 2.828 0 0-2.828 0-2.828l-1.414-1.414ZM9.708 5.879s-1.414-1.414-2.828 0 0 2.828 0 2.828l1.414 1.414s1.414 1.414 2.828 0 0-2.828 0-2.828L9.708 5.879ZM17 5s0 2 2 2 2-2 2-2V3s0-2-2-2-2 2-2 2v2zM29 19c0 5.523-4.478 10-10 10-5.523 0-10-4.477-10-10 0-5.522 4.477-10 10-10 5.522 0 10 4.478 10 10"></path>
-              </g>
-            </svg>
-          </div>
-        </label>
-      </div>
-    </Container>
   );
 }
 
-const Container = styled.div`
-  justify-content: center;
-  display: flex;
-  padding: 10px 0;
-
-  .container {
-    display: flex;
+const StyledWrapper = styled.div`
     justify-content: center;
-    align-items: center;
-  }
-
-  .toggle {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    line-height: 1;
-    transition: all 0.3s ease;
+    display: flex;
+  /* Base Styles */
+  .switch {
+    display: inline-block;
+    width: 3em;
+    height: 2em;
     position: relative;
+    font-size: 18px;
+    user-select: none;
+    margin: 20px;
+  }
 
-    &:hover {
-      transform: scale(1.05);
-      background: ${(props) => props.theme.bgAlpha};
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  /* Slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, #87ceeb, #e0f6ff);
+    border-radius: 50px;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      inset 0 -5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  /* Inner slider for additional styling */
+  .slider-inner {
+    position: absolute;
+    top: 0.3em;
+    left: 0.3em;
+    height: 2.4em;
+    width: 2.4em;
+    border-radius: 50%;
+    background-color: #ffd700;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Checked state */
+  .switch input:checked + .slider {
+    background: linear-gradient(to right, #1a237e, #3949ab);
+  }
+
+  .switch input:checked + .slider .slider-inner {
+    transform: translateX(3em);
+    background-color: #ffffff;
+  }
+
+  /* Focus state */
+  .switch input:focus + .slider {
+    outline: none;
+    box-shadow: 0 0 0.4em rgba(25, 118, 210, 0.5);
+  }
+
+  /* Hover and active states */
+  .switch:hover .slider {
+    background: linear-gradient(to right, #64b5f6, #e3f2fd);
+  }
+
+  .switch input:checked:hover + .slider {
+    background: linear-gradient(to right, #283593, #5c6bc0);
+  }
+
+  /* Animation for slider inner */
+  @keyframes sunPulse {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 0 rgba(255, 215, 0, 0.7),
+        0 0 0 0 rgba(255, 215, 0, 0.4);
+    }
+    50% {
+      box-shadow:
+        0 0 20px 10px rgba(255, 215, 0, 0.7),
+        0 0 40px 20px rgba(255, 215, 0, 0.4);
     }
   }
 
-  .input {
-    display: none;
-  }
-
-  .icon {
-    grid-column: 1 / 1;
-    grid-row: 1 / 1;
-    transition: transform 500ms ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .icon--moon {
-    transition-delay: 200ms;
-    
-    svg {
-      width: 30px;
-      height: 30px;
+  @keyframes moonPhase {
+    0%,
+    100% {
+      box-shadow:
+        inset -10px -5px 0 0 #ddd,
+        0 0 20px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+      box-shadow:
+        inset 0 0 0 0 #ddd,
+        0 0 20px rgba(255, 255, 255, 0.5);
     }
   }
 
-  .icon--sun {
-    transform: scale(0);
-    
-    svg {
-      width: 32px;
-      height: 32px;
+  .switch input:not(:checked) + .slider .slider-inner {
+    animation: sunPulse 3s infinite;
+  }
+
+  .switch input:checked + .slider .slider-inner {
+    animation: moonPhase 5s infinite;
+  }
+
+  /* Stars effect */
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 1;
     }
   }
 
-  #switch:checked + .icon--moon {
-    transform: rotate(360deg) scale(0);
+  .slider::before,
+  .slider::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: all 0.6s ease;
+    opacity: 0;
   }
 
-  #switch:checked ~ .icon--sun {
-    transition-delay: 200ms;
-    transform: scale(1) rotate(360deg);
+  .slider::before {
+    top: 20%;
+    left: 30%;
   }
 
-  /* Responsividad */
+  .slider::after {
+    bottom: 25%;
+    right: 25%;
+  }
+
+  .switch input:checked + .slider::before,
+  .switch input:checked + .slider::after {
+    opacity: 1;
+    animation: twinkle 2s infinite;
+  }
+
+  .switch input:checked + .slider::before {
+    animation-delay: 0.5s;
+  }
+
+  /* 3D effect */
+  .slider {
+    transform-style: preserve-3d;
+    perspective: 500px;
+  }
+
+  .slider-inner {
+    transform: translateZ(5px);
+  }
+
+  .switch input:checked + .slider .slider-inner {
+    transform: translateX(3em) translateZ(5px) rotateY(180deg);
+  }
+
+  /* Cloud effect for day mode */
+  .slider-inner::before,
+  .slider-inner::after {
+    content: "";
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    transition: all 0.6s ease;
+  }
+
+  .slider-inner::before {
+    width: 1em;
+    height: 1em;
+    top: -0.5em;
+    left: -0.2em;
+  }
+
+  .slider-inner::after {
+    width: 1.2em;
+    height: 1.2em;
+    bottom: -0.6em;
+    right: -0.3em;
+  }
+
+  .switch input:checked + .slider .slider-inner::before,
+  .switch input:checked + .slider .slider-inner::after {
+    opacity: 0;
+  }
+
+  /* Crater effect for night mode */
+  .switch input:checked + .slider .slider-inner::before {
+    width: 0.6em;
+    height: 0.6em;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 0.3em;
+    left: 0.3em;
+    opacity: 1;
+  }
+
+  .switch input:checked + .slider .slider-inner::after {
+    width: 0.4em;
+    height: 0.4em;
+    background-color: rgba(0, 0, 0, 0.15);
+    bottom: 0.5em;
+    right: 0.5em;
+    opacity: 1;
+  }
+
+  /* Accessibility improvements */
+  .switch input:focus + .slider {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+  }
+
+  /* Responsive adjustments */
   @media (max-width: 768px) {
-    padding: 15px 0;
-    
-    .toggle {
-      width: 50px;
-      height: 50px;
+    .switch {
+      width: 5em;
+      height: 2.5em;
     }
-    
-    .icon--moon svg {
-      width: 32px;
-      height: 32px;
+
+    .slider-inner {
+      height: 2em;
+      width: 2em;
     }
-    
-    .icon--sun svg {
-      width: 34px;
-      height: 34px;
+
+    .switch input:checked + .slider .slider-inner {
+      transform: translateX(2.5em) translateZ(5px) rotateY(180deg);
     }
   }
-`;
+
+  @media (max-width: 480px) {
+    .switch {
+      width: 4em;
+      height: 2em;
+    }
+
+    .slider-inner {
+      height: 1.6em;
+      width: 1.6em;
+    }
+
+    .switch input:checked + .slider .slider-inner {
+      transform: translateX(2em) translateZ(5px) rotateY(180deg);
+    }
+  }
+
+  /* High contrast mode */
+  @media (forced-colors: active) {
+    .slider {
+      background: Canvas;
+      border: 2px solid ButtonText;
+    }
+
+    .switch input:checked + .slider {
+      background: Highlight;
+    }
+
+    .slider-inner {
+      background-color: ButtonFace;
+    }
+
+    .switch::before,
+    .switch::after {
+      color: ButtonText;
+    }
+  }
+
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .switch,
+    .slider,
+    .slider-inner {
+      transition: none;
+    }
+
+    .switch input:checked + .slider .slider-inner,
+    .switch input:not(:checked) + .slider .slider-inner,
+    .switch input:checked + .slider::before,
+    .switch input:checked + .slider::after {
+      animation: none;
+    }
+  }`;
+

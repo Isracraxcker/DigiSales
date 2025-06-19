@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+
 import { supabase } from "../index";
 import toast from "react-hot-toast";
 const tabla = "productos";

@@ -9,18 +9,18 @@ import {
 } from "../../index";
 import { v } from "../../styles/variables";
 import { useState } from "react";
-import ConfettiExplosion from "react-confetti-explosion";
+
 export function ProductosTemplate() {
   const [openRegistro, SetopenRegistro] = useState(false);
   const { dataProductos, setBuscador, generarCodigo } = useProductosStore();
   const [accion, setAccion] = useState("");
   const [dataSelect, setdataSelect] = useState([]);
-  const [isExploding, setIsExploding] = useState(false);
+
   function nuevoRegistro() {
     SetopenRegistro(!openRegistro);
     setAccion("Nuevo");
     setdataSelect([]);
-    setIsExploding(false);
+
     generarCodigo();
   }
 
@@ -28,7 +28,6 @@ export function ProductosTemplate() {
     <Container>
       {openRegistro && (
         <RegistrarProductos
-          setIsExploding={setIsExploding}
           onClose={() => SetopenRegistro(!openRegistro)}
           dataSelect={dataSelect}
           accion={accion}
@@ -41,7 +40,7 @@ export function ProductosTemplate() {
         <Btn1
           funcion={nuevoRegistro}
           bgcolor={v.colorPrincipal}
-          titulo="nuevo"
+          titulo="Nuevo"
           icono={<v.iconoagregar />}
         />
       </section>
@@ -50,7 +49,6 @@ export function ProductosTemplate() {
       </section>
 
       <section className="main">
-        {isExploding && <ConfettiExplosion />}
         <TablaProductos
           setdataSelect={setdataSelect}
           setAccion={setAccion}

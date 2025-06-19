@@ -5,9 +5,7 @@ import { Device } from "../../../styles/breakpoints";
 export const LandingPagesWelcome = () => {
   return (
     <Container>
-      
       <ContentSection>
-        
         <SubContentSection>
           <LeftSection className="left-section">
             <h1>DIGISALES - SISTEMA DE VENTAS </h1>
@@ -64,8 +62,7 @@ export const LandingPagesWelcome = () => {
                 bgcontentimagen={"#e3d4cc"}
                 left={"-20px"}
                 title={"Multi-sucursal"}
-                 imagen={"https://i.ibb.co/MV6xZz4/franquicia.png"}
-                
+                imagen={"https://i.ibb.co/MV6xZz4/franquicia.png"}
               />
               <CardFuncion
                 top="210px"
@@ -79,26 +76,31 @@ export const LandingPagesWelcome = () => {
                 bgcontentimagen={"#fdc2b7"}
                 left={"-20px"}
                 title={"Multi-almacen"}
-                imagen={
-                  "https://i.ibb.co/fzxY35Rb/almacen-Photoroom.png"
-                }
+                imagen={"https://i.ibb.co/fzxY35Rb/almacen-Photoroom.png"}
               />
               <CardFuncion
                 top="410px"
                 bgcontentimagen={"#52e0f9"}
                 left={"-50px"}
                 title={"Imprime directo"}
-                
-                imagen={
-                  "https://i.ibb.co/yFmWLnvW/impresoraa.png"
-                }
+                imagen={"https://i.ibb.co/yFmWLnvW/impresoraa.png"}
               />
             </MockupImage>
           </RightSection>
         </SubContentSection>
       </ContentSection>
 
-   
+      <Footer className="footer-section">
+        <FooterTitle>AICODIGI S.A</FooterTitle>
+        <FooterContent>
+          <FooterItem>
+            <FooterText>
+             
+              <FooterDescription>Tnlgo. Andy Jaramillo</FooterDescription>
+            </FooterText>
+          </FooterItem>
+        </FooterContent>
+      </Footer>
     </Container>
   );
 };
@@ -276,7 +278,7 @@ const MockupImage = styled.div`
 `;
 
 const Footer = styled.div`
-  background-color: #0033a0;
+  background-color: #0d073b;
   color: white;
   width: 100%;
   text-align: center;

@@ -25,7 +25,7 @@ export async function MostrarStockAlmacenXSucursal(p) {
 export async function EliminarAlmacen(p) {
   const { error } = await supabase.from(tabla).delete().eq("id", p.id);
   if (error) {
-   toast.error(error.message || "Ocurrió un error al eliminar el almacen");
+    toast.error(error.message || "Ocurrió un error al eliminar el almacen");
     return;
   }
 }
