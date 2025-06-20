@@ -19,6 +19,8 @@ export async function InsertarAdmin(p) {
     toast.error(error.message || "Ocurrió un error al insertar el usuario");
     return;
   }
+
+  toast.success("Usuario ingresado correctamente!");
 }
 
 

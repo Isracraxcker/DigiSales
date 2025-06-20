@@ -5,13 +5,11 @@ const tabla = "almacenes";
 export async function InsertarStockAlmacen(p) {
   const { error } = await supabase.from(tabla).insert(p);
   if (error) {
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: error.message,
-    });
+    toast.error(error.message || "Ocurrió un error al insertar Stock el almacen");
     return;
   }
+
+  toast.success("Stock ingresado correctamente!");
 }
 export async function MostrarStockAlmacenXSucursal(p) {
   const { data } = await supabase
@@ -28,4 +26,6 @@ export async function EliminarAlmacen(p) {
     toast.error(error.message || "Ocurrió un error al eliminar el almacen");
     return;
   }
+
+  toast.success("Almacen eliminado correctamente!");
 }

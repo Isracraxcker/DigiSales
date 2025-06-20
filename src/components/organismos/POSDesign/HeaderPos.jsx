@@ -1,53 +1,168 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
-import { Btn1, InputText2, ListaDesplegable, Reloj } from "../../../index";
-// eslint-disable-next-line no-unused-vars
+import {
+  Btn1,
+  Buscador,
+  InputText2,
+  ListaDesplegable,
+  Reloj,
+  useAlmacenesStore,
+  useDetalleVentasStore,
+  useEmpresaStore,
+  useProductosStore,
+  useSucursalesStore,
+  useUsuariosStore,
+  useVentasStore,useCartVentasStore
+} from "../../../index";
 import { v } from "../../../styles/variables";
 import { Device } from "../../../styles/breakpoints";
 import { Icon } from "@iconify/react";
+import { useEffect, useRef, useState } from "react";
 
 export function HeaderPos() {
+  const [stateLectora, setStateLectora] = useState(true);
+  const [stateTeclado, setStateTeclado] = useState(false);
+  const [stateListaproductos, setStateListaproductos] = useState(false);
+  const { setBuscador, dataProductos, selectProductos } = useProductosStore();
+
+  const { insertarVentas, idventa, eliminarventasIncompletas } =
+    useVentasStore();
+  const { insertarDetalleVentas } = useDetalleVentasStore();
+  const { datausuarios } = useUsuariosStore();
+  const { dataempresa } = useEmpresaStore();
+  const { sucursalesItemSelectAsignadas } = useSucursalesStore();
+  const { dataalmacenxsucursalxproducto } = useAlmacenesStore();
+  const {addItem,items} = useCartVentasStore()
+  const buscadorRef = useRef(null);
+
+  function focusclick() {
+    buscadorRef.current.focus();
+    buscadorRef.current.value.trim() === ""
+      ? setStateListaproductos(false)
+      : setStateListaproductos(true);
+  }
+  function buscar(e) {
+    setBuscador(e.target.value);
+    let texto = e.target.value;
+    if (texto.trim() === "" || stateLectora) {
+      setStateListaproductos(false);
+    } else {
+      setStateListaproductos(true);
+    }
+  }
+  async function funcion_insertarventas() {
+    const pVentas = {
+      id_usuario: datausuarios?.id,
+      id_sucursal: sucursalesItemSelectAsignadas?.id_sucursal,
+      id_empresa: dataempresa.id,
+    };
+
+    const productosItemSelect = useProductosStore.getState().productosItemSelect;
+    const pDetalleVentas = {
+      _id_venta: idventa,
+      _cantidad:1,
+      _precio_venta: productosItemSelect.precio_venta,
+      _total: 1 * productosItemSelect.precio_venta,
+      _descripcion: productosItemSelect.nombre,
+      _id_producto: productosItemSelect.id,
+      _precio_compra: productosItemSelect.precio_compra,
+      _id_sucursal: sucursalesItemSelectAsignadas.id_sucursal,
+     
+    };
+  
+    if (idventa == 0) {
+      console.log(pVentas)
+    
+      const result = await insertarVentas(pVentas);
+
+      (pDetalleVentas._id_venta = result?.id)
+      addItem(pDetalleVentas)
+        
+    }
+    if (idventa > 0) {
+     
+
+      addItem(pDetalleVentas)
+      // await insertarDetalleVentas(pDetalleVentas);
+    }
+  }
+  useEffect(() => {
+    buscadorRef.current.focus();
+    // eliminarventasIncompletas({ id_usuario: datausuarios?.id });
+  }, []);
   return (
     <Header>
       <ContentSucursal>
-        <div>
-          <strong>SUCURSAL:&nbsp; </strong>{" "}
-        </div>
-        |
-        <div>
-          <strong>CAJA:&nbsp; </strong>{" "}
-        </div>
+        <strong>SUCURSAL:&nbsp; </strong>{" "}
+        {sucursalesItemSelectAsignadas.sucursal}
       </ContentSucursal>
       <section className="contentprincipal">
         <Contentuser className="area1">
-          <div className="textos"></div>
+          <div className="contentimg">
+            <img src="https://tiermaker.com/images/templates/mejor-mona-china-1138565/11385651626948340.jpg" />
+          </div>
+          <div className="textos">
+            <span className="usuario">Carlitos</span>
+            <span>🧊cajero</span>
+          </div>
         </Contentuser>
+        <article className="contentlogo area2">
+          <img src={v.logo} />
+          <span>Ada369 web 3.0</span>
+        </article>
 
         <article className="contentfecha area3">
+        
           <Reloj />
         </article>
       </section>
       <section className="contentbuscador">
         <article className="area1">
-          <div className="contentCantidad">
-            <InputText2>
-              <input
-                type="number"
-                min="1"
-                placeholder="cantidad..."
-                className="form__field"
-              />
-            </InputText2>
-          </div>
           <InputText2>
             <input
+              ref={buscadorRef}
+              onChange={buscar}
               className="form__field"
               type="search"
               placeholder="buscar..."
             />
-            <ListaDesplegable top="59px" />
+            <ListaDesplegable
+            funcioncrud={funcion_insertarventas}
+              top="59px"
+              funcion={selectProductos}
+              setState={() => setStateListaproductos(!stateListaproductos)}
+              data={dataProductos}
+              state={stateListaproductos}
+            />
           </InputText2>
         </article>
-        <article className="area2"></article>
+        <article className="area2">
+          <Btn1
+            funcion={() => {
+              setStateLectora(true);
+              setStateTeclado(false);
+              setStateListaproductos(false);
+              focusclick();
+            }}
+            bgcolor={stateLectora ? "#5849fe" : ({ theme }) => theme.bgtotal}
+            color={stateLectora ? "#fff" : ({ theme }) => theme.text}
+            border="2px"
+            titulo="Lectora"
+            icono={<Icon icon="material-symbols:barcode-reader-outline" />}
+          />
+          <Btn1
+            funcion={() => {
+              setStateLectora(false);
+              setStateTeclado(true);
+              focusclick();
+            }}
+            bgcolor={stateTeclado ? "#5849fe" : ({ theme }) => theme.bgtotal}
+            color={stateTeclado ? "#fff" : ({ theme }) => theme.text}
+            border="2px"
+            titulo="Teclado"
+            icono={<Icon icon="icon-park:enter-the-keyboard" />}
+          />
+        </article>
       </section>
     </Header>
   );
@@ -61,7 +176,7 @@ const Header = styled.div`
   flex-direction: column;
   gap: 20px;
   @media ${Device.desktop} {
-    border-bottom: 1px solid ${({ theme }) => theme.color2};
+    border-bottom: 2px solid ${({ theme }) => theme.color2};
   }
 
   .contentprincipal {
@@ -88,7 +203,6 @@ const Header = styled.div`
       display: flex;
       align-items: center;
       font-weight: 700;
-      gap: 8px;
       img {
         width: 30px;
         object-fit: contain;
@@ -107,11 +221,6 @@ const Header = styled.div`
 
     .area1 {
       grid-area: area1;
-      display: flex;
-      gap: 30px;
-      .contentCantidad {
-        width: 150px;
-      }
       /* background-color: #ff00ae; */
     }
     .area2 {
@@ -140,8 +249,7 @@ const ContentSucursal = styled.section`
   /* background-color: red; */
   align-items: center;
   height: 45px;
-  border-bottom: 1px solid ${({ theme }) => theme.color2};
-  gap: 8px;
+  border-bottom: 2px solid ${({ theme }) => theme.color2};
 `;
 const Contentuser = styled.div`
   display: flex;
@@ -161,14 +269,10 @@ const Contentuser = styled.div`
     }
   }
   .textos {
-    display: none;
-
+    display: flex;
+    flex-direction: column;
     .usuario {
       font-weight: 700;
-    }
-    @media ${Device.laptop} {
-      display: flex;
-      flex-direction: column;
     }
   }
 `;

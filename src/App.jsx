@@ -5,7 +5,8 @@ import {
   MyRoutes,
   Sidebar,
   useThemeStore,
-  Login
+  Login,
+  SwitchHamburguesa
 } from "./index";
 import { Device } from "./styles/breakpoints";
 import { useState } from "react";
@@ -30,7 +31,7 @@ function App() {
                 setState={() => setSidebarOpen(!sidebarOpen)}
               />
             </section>
-            <section className="contentMenuhambur">menu hambur</section>
+            <section className="contentMenuhambur"> <SwitchHamburguesa/> </section>
             <section className="contentRouters">
               <MyRoutes />
             </section>
