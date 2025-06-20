@@ -33,8 +33,13 @@ export const LinksArray = [
     to: "/",
   },
   {
+    label: "Dashboard",
+    icon: "fluent-color:poll-20",
+    to: "/reportes",
+  },
+  {
     label: "Vender",
-    icon: "fluent-color:building-store-20",
+    icon: "fluent-color:building-home-20",
     to: "/pos",
   },
   {
@@ -42,11 +47,7 @@ export const LinksArray = [
     icon: "fluent-color:clipboard-text-edit-20",
     to: "/kardex",
   },
-  {
-    label: "Reportes",
-    icon: "fluent-color:data-area-20",
-    to: "/reportes",
-  },
+  
  
 ];
 export const SecondarylinksArray = [
