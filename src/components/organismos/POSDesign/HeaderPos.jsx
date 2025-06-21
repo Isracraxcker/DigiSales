@@ -1,18 +1,12 @@
-/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import {
   Btn1,
-  Buscador,
   InputText2,
   ListaDesplegable,
   Reloj,
-  useAlmacenesStore,
-  useDetalleVentasStore,
-  useEmpresaStore,
   useProductosStore,
   useSucursalesStore,
-  useUsuariosStore,
-  useVentasStore,useCartVentasStore
+  useCartVentasStore,
 } from "../../../index";
 import { v } from "../../../styles/variables";
 import { Device } from "../../../styles/breakpoints";
@@ -24,15 +18,8 @@ export function HeaderPos() {
   const [stateTeclado, setStateTeclado] = useState(false);
   const [stateListaproductos, setStateListaproductos] = useState(false);
   const { setBuscador, dataProductos, selectProductos } = useProductosStore();
-
-  const { insertarVentas, idventa, eliminarventasIncompletas } =
-    useVentasStore();
-  const { insertarDetalleVentas } = useDetalleVentasStore();
-  const { datausuarios } = useUsuariosStore();
-  const { dataempresa } = useEmpresaStore();
   const { sucursalesItemSelectAsignadas } = useSucursalesStore();
-  const { dataalmacenxsucursalxproducto } = useAlmacenesStore();
-  const {addItem,items} = useCartVentasStore()
+  const { addItem } = useCartVentasStore();
   const buscadorRef = useRef(null);
 
   function focusclick() {
@@ -51,44 +38,24 @@ export function HeaderPos() {
     }
   }
   async function funcion_insertarventas() {
-    const pVentas = {
-      id_usuario: datausuarios?.id,
-      id_sucursal: sucursalesItemSelectAsignadas?.id_sucursal,
-      id_empresa: dataempresa.id,
-    };
-
-    const productosItemSelect = useProductosStore.getState().productosItemSelect;
+    const productosItemSelect =
+      useProductosStore.getState().productosItemSelect;
     const pDetalleVentas = {
-      _id_venta: idventa,
-      _cantidad:1,
+      _id_venta: 1,
+      _cantidad: 1,
       _precio_venta: productosItemSelect.precio_venta,
       _total: 1 * productosItemSelect.precio_venta,
       _descripcion: productosItemSelect.nombre,
       _id_producto: productosItemSelect.id,
       _precio_compra: productosItemSelect.precio_compra,
       _id_sucursal: sucursalesItemSelectAsignadas.id_sucursal,
-     
     };
-  
-    if (idventa == 0) {
-      console.log(pVentas)
-    
-      const result = await insertarVentas(pVentas);
 
-      (pDetalleVentas._id_venta = result?.id)
-      addItem(pDetalleVentas)
-        
-    }
-    if (idventa > 0) {
-     
-
-      addItem(pDetalleVentas)
-      // await insertarDetalleVentas(pDetalleVentas);
-    }
+    addItem(pDetalleVentas);
   }
+
   useEffect(() => {
-    buscadorRef.current.focus();
-    // eliminarventasIncompletas({ id_usuario: datausuarios?.id });
+    buscadorRef.current?.focus();
   }, []);
   return (
     <Header>
@@ -112,7 +79,6 @@ export function HeaderPos() {
         </article>
 
         <article className="contentfecha area3">
-        
           <Reloj />
         </article>
       </section>
@@ -127,7 +93,7 @@ export function HeaderPos() {
               placeholder="Buscar..."
             />
             <ListaDesplegable
-            funcioncrud={funcion_insertarventas}
+              funcioncrud={funcion_insertarventas}
               top="59px"
               funcion={selectProductos}
               setState={() => setStateListaproductos(!stateListaproductos)}
