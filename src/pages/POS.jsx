@@ -1,23 +1,17 @@
-/* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
 import {
   POSTemplate,
-  Spinner1,
-  SpinnerSecundario,
   useAlmacenesStore,
   useEmpresaStore,
   useProductosStore,
   useSucursalesStore,
-  useVentasStore,
 } from "../index";
 
 export function POS() {
   const { dataempresa } = useEmpresaStore();
   const { mostrarAlmacenXsucursal } = useAlmacenesStore();
-  const { mostrarventasxsucursal } = useVentasStore();
-  const { productosItemSelect } = useProductosStore();
-  const { sucursalesItemSelectAsignadas, dataSucursales } =
-    useSucursalesStore();
+
+  const { sucursalesItemSelectAsignadas } = useSucursalesStore();
   const { buscarProductos, buscador } = useProductosStore();
   useQuery({
     queryKey: ["buscar productos", buscador],
@@ -27,7 +21,7 @@ export function POS() {
     refetchOnWindowFocus: false,
   });
 
-  useQuery({
+  const { isLoading, error } = useQuery({
     queryKey: [
       "mostrar almacen por sucursal",
       sucursalesItemSelectAsignadas.id_sucursal,
@@ -37,25 +31,14 @@ export function POS() {
         id_sucursal: sucursalesItemSelectAsignadas.id_sucursal,
       }),
   });
-  const{isLoading,error}=useQuery({
-    queryKey: [
-      "mostrar ventas por sucursal",
-      sucursalesItemSelectAsignadas.id_sucursal,
-    ],
-    queryFn: () =>
-      mostrarventasxsucursal({
-        id_sucursal: sucursalesItemSelectAsignadas.id_sucursal
-      }),enabled:!!sucursalesItemSelectAsignadas
-  });
-  if(isLoading){
-      return 
+
+  if (isLoading) {
+    return;
     //  <Spinner1/>
   }
-  
-  
-  if(error)
-  {
-    return <span>Error...{error.message}</span>
+
+  if (error) {
+    return <span>Error...{error.message}</span>;
   }
   return <POSTemplate />;
 }

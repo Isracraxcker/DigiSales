@@ -1,26 +1,25 @@
 /* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import { Device } from "../../styles/breakpoints";
-import {blur_in} from "../../styles/keyframes"
+import { blur_in } from "../../styles/keyframes";
 import { v } from "../../styles/variables";
 import {
   AreaDetalleventaPos,
   AreaTecladoPos,
-  Btn1,
   FooterPos,
   HeaderPos,
-  InputText2,
-  Reloj,
 } from "../../index";
+import { PantallaPago } from "../organismos/POSDesign/PantallaPago";
 export function POSTemplate() {
   return (
     <Container>
-      <HeaderPos />
+      <PantallaPago />
+      {/* <HeaderPos />
       <Main>
         <AreaDetalleventaPos />
         <AreaTecladoPos />
       </Main>
-      <FooterPos />
+      <FooterPos /> */}
     </Container>
   );
 }
