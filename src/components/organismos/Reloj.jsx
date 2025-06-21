@@ -67,7 +67,7 @@ export function Reloj() {
     <Container>
       <div className="cont-reloj">
         <div className="reloj" id="reloj">
-          {<Clock10 size={20} />}  {hora} 
+          {<Clock10 size={20} />} {hora} 
         </div>
         <div className="datos">
           <span id="fec_Datos">{fecha}</span>
