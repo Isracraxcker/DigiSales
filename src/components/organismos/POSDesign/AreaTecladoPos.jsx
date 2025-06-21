@@ -2,16 +2,31 @@ import styled from "styled-components";
 import { Btn1 } from "../../moleculas/Btn1";
 import { TotalPos } from "./TotalPos";
 import { Device } from "../../../styles/breakpoints";
+import { useCartVentasStore } from "../../../store/CartVentasStore";
 export function AreaTecladoPos() {
+  const {setStatePantallaCobro} = useCartVentasStore();
   return (
     <Container>
       <section className="areatipopago">
         <article className="box">
-          <Btn1 bgcolor="#a6f868" titulo="EFECTIVO" border="0" height="70px" width="100%"/>
-          <Btn1 bgcolor="#fb81c6" width="100%" titulo="CREDITO" border="0"/>
+          <Btn1
+            funcion={setStatePantallaCobro}
+            bgcolor="#a6f868"
+            titulo="EFECTIVO"
+            border="0"
+            height="70px"
+            width="100%"
+          />
+          <Btn1 bgcolor="#fb81c6" width="100%" titulo="CREDITO" border="0" />
         </article>
         <article className="box">
-          <Btn1 bgcolor="#fba259" width="100%" titulo="TARJETA" border="0" height="70px" />
+          <Btn1
+            bgcolor="#fba259"
+            width="100%"
+            titulo="TARJETA"
+            border="0"
+            height="70px"
+          />
           <Btn1 bgcolor="#919afd" width="100%" titulo="MIXTO" border="0" />
         </article>
       </section>
@@ -27,12 +42,10 @@ export function AreaTecladoPos() {
         </div>
         <TotalPos />
       </section>
-      
     </Container>
   );
 }
 const Container = styled.div`
-
   border: 2px solid ${({ theme }) => theme.color2};
   display: flex;
   flex-direction: column;
@@ -57,12 +70,12 @@ const Container = styled.div`
       margin: 10px;
     }
   }
-  .totales{
+  .totales {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding:10px;
-    .subtotal{
+    padding: 10px;
+    .subtotal {
       display: none;
       flex-direction: column;
       justify-content: end;
@@ -73,6 +86,5 @@ const Container = styled.div`
         display: flex;
       }
     }
-
   }
 `;

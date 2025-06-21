@@ -1,9 +1,11 @@
-import { Eye, EyeOff, Trash2 } from "lucide-react";
+import { ChevronLeft, Eye, EyeOff, Trash2 } from "lucide-react";
 import { useState } from "react";
 import styled from "styled-components";
+import { useCartVentasStore } from "../../../store/CartVentasStore";
 
-export function PantallaPago() {
+export function PantallaCobro() {
   const [stateVerTicket, setStateVerTicket] = useState(false);
+  const {setStatePantallaCobro} = useCartVentasStore();
   return (
     <Container>
       <section className="contentingresopago">
@@ -18,7 +20,12 @@ export function PantallaPago() {
             <Eye className="icono"  size={25}/>
           )}
         </article>
-        <article></article>
+
+        
+        <article className="contentverticket" onClick={setStatePantallaCobro}>
+          <ChevronLeft />
+          <span>Volver</span>
+        </article>
       </section>
     </Container>
   );

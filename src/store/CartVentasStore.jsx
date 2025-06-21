@@ -1,8 +1,11 @@
+/* eslint-disable no-unused-vars */
+import toast from "react-hot-toast";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 const initialState = {
   items: [],
   total: 0,
+  statePantallaCobro:false
 };
 function calcularTotal(items) {
   return items.reduce(
@@ -83,6 +86,18 @@ export const useCartVentasStore = create(
             .filter(Boolean); //Filtlar elementos nulos
           return { items: updatedItems, total: calcularTotal(updatedItems) };
         }),
+        setStatePantallaCobro:(p)=>set((state)=>{
+           if(state.items.length===0){
+              toast.error("No hay productos en el carrito");
+              return {
+                state
+              }
+           } else {
+              return {
+                statePantallaCobro:!state.statePantallaCobro
+              }
+           }
+        })
     }),
     {
       name: "cart-ventas-storage",

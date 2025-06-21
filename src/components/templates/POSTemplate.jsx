@@ -8,18 +8,24 @@ import {
   AreaTecladoPos,
   FooterPos,
   HeaderPos,
+  useCartVentasStore,
 } from "../../index";
-import { PantallaPago } from "../organismos/POSDesign/PantallaPago";
+import { PantallaCobro } from "../organismos/POSDesign/PantallaCobro";
 export function POSTemplate() {
+
+  const {statePantallaCobro} = useCartVentasStore();
   return (
     <Container>
-      <PantallaPago />
-      {/* <HeaderPos />
+      {
+        statePantallaCobro && <PantallaCobro />
+      }
+      
+       <HeaderPos />
       <Main>
         <AreaDetalleventaPos />
         <AreaTecladoPos />
       </Main>
-      <FooterPos /> */}
+      <FooterPos /> 
     </Container>
   );
 }

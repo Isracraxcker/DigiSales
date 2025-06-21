@@ -22,6 +22,7 @@ export * from './components/organismos/POSDesign/AreaDetalleventaPos';
 export * from './components/organismos/POSDesign/AreaTecladoPos';
 export * from './components/organismos/POSDesign/FooterPos';
 export * from './components/organismos/POSDesign/HeaderPos';
+export * from './components/organismos/POSDesign/PantallaCobro';
 export * from './components/organismos/POSDesign/TotalPos';
 export * from './components/organismos/Reloj';
 export * from './components/organismos/Selector';
