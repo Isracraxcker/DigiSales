@@ -12,20 +12,17 @@ import {
 } from "../../index";
 import { PantallaCobro } from "../organismos/POSDesign/PantallaCobro";
 export function POSTemplate() {
-
-  const {statePantallaCobro} = useCartVentasStore();
+  const { statePantallaCobro } = useCartVentasStore();
   return (
     <Container>
-      {
-        statePantallaCobro && <PantallaCobro />
-      }
-      
-       <HeaderPos />
+      {statePantallaCobro && <PantallaCobro />}
+
+      <HeaderPos />
       <Main>
         <AreaDetalleventaPos />
         <AreaTecladoPos />
       </Main>
-      <FooterPos /> 
+      <FooterPos />
     </Container>
   );
 }
