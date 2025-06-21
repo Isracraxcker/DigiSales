@@ -18,7 +18,7 @@ export function TotalPos() {
           <Btn1 border="2px"  bgcolor="#3FF563" titulo="..." icono={<Icon icon="fluent-emoji:safety-vest" />}/>
         </section>
         <span>{FormatearNumeroDinero(total)}</span>
-        <button onClick={resetState}>resetear</button>
+       
       </section>
     </Container>
   );
