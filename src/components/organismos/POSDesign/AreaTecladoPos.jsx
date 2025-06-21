@@ -4,30 +4,43 @@ import { TotalPos } from "./TotalPos";
 import { Device } from "../../../styles/breakpoints";
 import { useCartVentasStore } from "../../../store/CartVentasStore";
 export function AreaTecladoPos() {
-  const {setStatePantallaCobro} = useCartVentasStore();
+  const { setStatePantallaCobro } = useCartVentasStore();
   return (
     <Container>
       <section className="areatipopago">
         <article className="box">
           <Btn1
-            funcion={setStatePantallaCobro}
+            funcion={() => setStatePantallaCobro({ tipocobro: "efectivo" })}
             bgcolor="#a6f868"
             titulo="EFECTIVO"
             border="0"
             height="70px"
             width="100%"
           />
-          <Btn1 bgcolor="#fb81c6" width="100%" titulo="CREDITO" border="0" />
+          <Btn1
+            funcion={() => setStatePantallaCobro({ tipocobro: "credito" })}
+            bgcolor="#fb81c6"
+            width="100%"
+            titulo="CREDITO"
+            border="0"
+          />
         </article>
         <article className="box">
           <Btn1
+            funcion={() => setStatePantallaCobro({ tipocobro: "tarjeta" })}
             bgcolor="#fba259"
             width="100%"
             titulo="TARJETA"
             border="0"
             height="70px"
           />
-          <Btn1 bgcolor="#919afd" width="100%" titulo="MIXTO" border="0" />
+          <Btn1
+            funcion={() => setStatePantallaCobro({ tipocobro: "mixto" })}
+            bgcolor="#919afd"
+            width="100%"
+            titulo="MIXTO"
+            border="0"
+          />
         </article>
       </section>
       <section className="totales">

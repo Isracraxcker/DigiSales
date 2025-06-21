@@ -4,9 +4,10 @@ import { Btn1 } from "../../moleculas/Btn1";
 import { Device } from "../../../styles/breakpoints";
 import { Icon } from "@iconify/react";
 import { useCartVentasStore, useDetalleVentasStore } from "../../..";
-import {FormatearNumeroDinero} from "../../../utils/Conversiones"
+import { FormatearNumeroDinero } from "../../../utils/Conversiones";
+import { HandCoins } from "lucide-react";
 export function TotalPos() {
-  const {total,resetState} = useCartVentasStore()
+  const { total, setStatePantallaCobro } = useCartVentasStore();
   return (
     <Container>
       <section className="imagen">
@@ -14,11 +15,22 @@ export function TotalPos() {
       </section>
       <section className="contentTotal">
         <section className="contentTituloTotal">
-          <Btn1 border="2px"  bgcolor="#ffffff"   color="#207c33" titulo="COBRAR" icono={<Icon icon="fluent-emoji:money-with-wings" />} />
-          <Btn1 border="2px"  bgcolor="#3FF563" titulo="..." icono={<Icon icon="fluent-emoji:safety-vest" />}/>
+          <Btn1
+            funcion={() => setStatePantallaCobro({ tipocobro: "efectivo" })}
+            border="2px"
+            bgcolor="#ffffff"
+            color="#207c33"
+            titulo="COBRAR"
+            icono={<HandCoins size={20} />}
+          />
+          <Btn1
+            border="2px"
+            bgcolor="#3FF563"
+            titulo="..."
+            icono={<Icon icon="fluent-emoji:safety-vest" />}
+          />
         </section>
         <span>{FormatearNumeroDinero(total)}</span>
-       
       </section>
     </Container>
   );
@@ -60,7 +72,7 @@ const Container = styled.div`
   .imagen {
     z-index: 1;
     width: 55px;
-   
+
     position: relative;
     @media ${Device.desktop} {
       bottom: initial;

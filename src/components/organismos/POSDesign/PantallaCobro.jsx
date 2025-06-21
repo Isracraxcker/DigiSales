@@ -5,7 +5,7 @@ import { useCartVentasStore } from "../../../store/CartVentasStore";
 
 export function PantallaCobro() {
   const [stateVerTicket, setStateVerTicket] = useState(false);
-  const {setStatePantallaCobro} = useCartVentasStore();
+  const { setStatePantallaCobro } = useCartVentasStore();
   return (
     <Container>
       <section className="contentingresopago">
@@ -17,11 +17,10 @@ export function PantallaCobro() {
           {stateVerTicket ? (
             <EyeOff className="icono" size={25} />
           ) : (
-            <Eye className="icono"  size={25}/>
+            <Eye className="icono" size={25} />
           )}
         </article>
 
-        
         <article className="contentverticket" onClick={setStatePantallaCobro}>
           <ChevronLeft />
           <span>Volver</span>
@@ -42,21 +41,19 @@ const Container = styled.div`
   z-index: 100;
   background-color: ${({ theme }) => theme.bgtotal};
 
-  .contentingresopago{
-    .contentverticket{
-        align-self: flex-end;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-         span{
-            font-weight: 70px;
-            font-size: 1.1em;
-         }
-         .icono{
-            
-         }
+  .contentingresopago {
+    .contentverticket {
+      align-self: flex-end;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      span {
+        font-weight: 70px;
+        font-size: 1.1em;
+      }
+      .icono {
+      }
     }
   }
-
 `;

@@ -5,7 +5,8 @@ import { persist } from "zustand/middleware";
 const initialState = {
   items: [],
   total: 0,
-  statePantallaCobro:false
+  statePantallaCobro:false,
+  tipocobro: ""
 };
 function calcularTotal(items) {
   return items.reduce(
@@ -94,7 +95,8 @@ export const useCartVentasStore = create(
               }
            } else {
               return {
-                statePantallaCobro:!state.statePantallaCobro
+                statePantallaCobro:!state.statePantallaCobro,
+                tipocobro:p.tipocobro
               }
            }
         })
