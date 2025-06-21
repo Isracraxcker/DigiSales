@@ -108,7 +108,7 @@ export function HeaderPos() {
         </Contentuser>
         <article className="contentlogo area2">
           <img src={v.logo} />
-          <span>Ada369 web 3.0</span>
+          <span>DigiSales S.A</span>
         </article>
 
         <article className="contentfecha area3">
@@ -124,7 +124,7 @@ export function HeaderPos() {
               onChange={buscar}
               className="form__field"
               type="search"
-              placeholder="buscar..."
+              placeholder="Buscar..."
             />
             <ListaDesplegable
             funcioncrud={funcion_insertarventas}

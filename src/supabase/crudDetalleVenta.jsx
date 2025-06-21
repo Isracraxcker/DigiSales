@@ -1,4 +1,3 @@
-import Swal from "sweetalert2";
 import { supabase } from "../index";
 import toast from "react-hot-toast";
 const tabla = "detalle_venta";
@@ -8,7 +7,7 @@ export async function InsertarDetalleVentas(p) {
     toast.error(error.message || "Ocurrio un error al ingresar detalle venta");
     return;
   }
-   toast.success("Venta ingresada correctamente!");
+  toast.success("Venta ingresada correctamente!");
 }
 
 export async function MostrarDetalleVenta(p) {
@@ -17,7 +16,7 @@ export async function MostrarDetalleVenta(p) {
     _id_venta: p.id_venta,
   });
   if (error) {
-   toast.error(error.message || "Ocurrio un error al mostrar detalle venta");
+    toast.error(error.message || "Ocurrio un error al mostrar detalle venta");
     return;
   }
   return data;
@@ -31,5 +30,3 @@ export async function EliminarDetalleVentas(p) {
   }
   toast.success("Venta eliminada correctamente!");
 }
-
-

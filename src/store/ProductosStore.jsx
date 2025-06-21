@@ -1,30 +1,37 @@
 import { create } from "zustand";
 import {
-  BuscarProductos,MostrarProductos,EliminarProductos,InsertarProductos,EditarProductos, Generarcodigo
+  BuscarProductos,
+  MostrarProductos,
+  EliminarProductos,
+  InsertarProductos,
+  EditarProductos,
+  Generarcodigo,
 } from "../index";
 
 export const useProductosStore = create((set, get) => ({
-  refetchs:null,
+  refetchs: null,
   buscador: "",
   setBuscador: (p) => {
     set({ buscador: p });
   },
   dataProductos: [],
-  ProductosItemSelect: [],
+  productosItemSelect: {
+    id: 1,
+  },
   parametros: {},
   mostrarProductos: async (p) => {
     const response = await MostrarProductos(p);
     set({ parametros: p });
     set({ dataProductos: response });
-    set({ ProductosItemSelect: response[0] });
-    set({refetchs:p.refetchs})
+    set({ productosItemSelect: response[0] });
+    set({ refetchs: p.refetchs });
     return response;
   },
   selectProductos: (p) => {
-    set({ ProductosItemSelect: p });
+    set({ productosItemSelect: p });
   },
   insertarProductos: async (p) => {
-  const response=  await InsertarProductos(p);
+    const response = await InsertarProductos(p);
     const { mostrarProductos } = get();
     const { parametros } = get();
     set(mostrarProductos(parametros));
@@ -47,11 +54,9 @@ export const useProductosStore = create((set, get) => ({
     set({ dataProductos: response });
     return response;
   },
-  codigogenerado:0,
-  generarCodigo:()=>{
-  const response=  Generarcodigo({id:2})
-  set({codigogenerado:response})
-  
- 
-  }
+  codigogenerado: 0,
+  generarCodigo: () => {
+    const response = Generarcodigo({ id: 2 });
+    set({ codigogenerado: response });
+  },
 }));

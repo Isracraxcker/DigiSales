@@ -1,57 +1,79 @@
-/* eslint-disable no-unused-vars */
 import { Routes, Route } from "react-router-dom";
 import {
   Categorias,
   Configuraciones,
   Home,
   Login,
-  ProtectedRoute,
-  Spinner1,
   Productos,
-  UserAuth,
-  useEmpresaStore,
-  useUsuariosStore,
+  ProtectedRoute,
   POS,
+  Layout,
+  PageNot,
 } from "../index";
-import { useQuery } from "@tanstack/react-query";
+
 export function MyRoutes() {
-  const { user } = UserAuth();
-  const { datausuarios, mostrarusuarios } = useUsuariosStore();
-  const { mostrarempresa, dataempresa } = useEmpresaStore();
-
-  //mostrar usuarios
-  const { isLoading, error } = useQuery({
-    queryKey: "mostrar usuarios",
-    queryFn: mostrarusuarios,
-    refetchOnWindowFocus: false,
-  });
-
-  //mostrar empresa
-  const { data: dtempresa } = useQuery({
-    queryKey: ["mostrar empresa", datausuarios?.id],
-    queryFn: () => mostrarempresa({ _id_usuario: datausuarios?.id }),
-    enabled: !!datausuarios,
-    refetchOnWindowFocus: false,
-  });
-
-  // Cargando empresa y usuarios
-  if (isLoading) {
-    return <Spinner1 />;
-  }
-  if (error) {
-    return <span>error...</span>;
-  }
-
   return (
     <Routes>
-      <Route element={<ProtectedRoute user={user} redirectTo="/login" />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/configuracion" element={<Configuraciones />} />
-        <Route path="/configuracion/categorias" element={<Categorias />} />
-        <Route path="/configuracion/productos" element={<Productos />} />
-         <Route path="/pos" element={<POS />} />
-      </Route>
-      <Route path="/login" element={<Login />} />
+      <Route
+        path="/login"
+        element={
+          <ProtectedRoute accessBy="non-authenticated">
+            <Login />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Home />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/configuracion"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Configuraciones />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/configuracion/categorias"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Categorias />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/configuracion/productos"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Productos />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/pos"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <POS />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route path="*" element={<PageNot />} />
     </Routes>
   );
 }

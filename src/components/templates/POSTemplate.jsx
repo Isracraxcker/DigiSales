@@ -1,21 +1,29 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import { Device } from "../../styles/breakpoints";
-import { AreaDetalleventaPos, AreaTecladoPos, HeaderPos } from "../../index";
+import {blur_in} from "../../styles/keyframes"
+import { v } from "../../styles/variables";
+import {
+  AreaDetalleventaPos,
+  AreaTecladoPos,
+  Btn1,
+  FooterPos,
+  HeaderPos,
+  InputText2,
+  Reloj,
+} from "../../index";
 export function POSTemplate() {
   return (
     <Container>
       <HeaderPos />
       <Main>
-        <Toaster position="top-center" />
         <AreaDetalleventaPos />
         <AreaTecladoPos />
       </Main>
       <FooterPos />
-      <MenuFlotante />
     </Container>
   );
 }
-
 const Container = styled.div`
   height: calc(100vh - 60px);
   padding: 10px;
@@ -26,6 +34,7 @@ const Container = styled.div`
     "header" 220px
     "main" auto;
 
+  animation: ${blur_in} 0.5s linear both;
   @media ${Device.desktop} {
     grid-template:
       "header header" 140px
@@ -36,6 +45,7 @@ const Container = styled.div`
 
 const Main = styled.div`
   grid-area: main;
+  /* background-color: rgba(228, 20, 20, 0.5); */
   display: flex;
   flex-direction: column;
   width: 100%;

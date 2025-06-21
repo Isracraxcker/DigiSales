@@ -8,11 +8,7 @@ export function Btn1({
   url,
   color,
   disabled,
-  width,
-  border,
-  height,
-  decorador,
-  imagen,
+  width,border,height,decorador
 }) {
   return (
     <Container
@@ -28,15 +24,12 @@ export function Btn1({
     >
       <section className="content">
         <Icono $color={color}>{icono}</Icono>
-        {imagen && (
-          <ContentImagen>
-            <img src={imagen} />
-          </ContentImagen>
-        )}
         {titulo && (
-          <a href={url} target="_blank">
-            <span className="btn">{titulo}</span>
-          </a>
+          <span className="btn">
+            <a href={url} target="_blank">
+              {titulo}
+            </a>
+          </span>
         )}
       </section>
     </Container>
@@ -60,11 +53,8 @@ const Container = styled.button`
   justify-content: center;
   width: ${(props) => props.$width};
   height: ${(props) => props.$height};
-  overflow: hidden;
-  a {
-    text-decoration: none;
-    color: ${(props) => props.$color} !important;
-  }
+  overflow:hidden;
+  
   &::before {
     content: "";
     display: ${(props) => props.$decorador};
@@ -80,7 +70,6 @@ const Container = styled.button`
   .content {
     display: flex;
     gap: 12px;
-    align-items: center;
   }
   &:active {
     transform: translate(0, 0);
@@ -90,15 +79,5 @@ const Container = styled.button`
     background-color: #646464;
     cursor: no-drop;
     box-shadow: none;
-  }
-`;
-const ContentImagen = styled.section`
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  overflow: hidden;
-  img {
-    width: 100%;
-    object-fit: contain;
   }
 `;

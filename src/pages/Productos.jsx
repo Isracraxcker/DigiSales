@@ -9,6 +9,7 @@ import {
   useProductosStore,
   useSucursalesStore,
 } from "../index";
+import toast from "react-hot-toast";
 
 export function Productos() {
   const {mostrarCategorias} = useCategoriasStore();
@@ -54,7 +55,7 @@ export function Productos() {
     return <Spinner1 />;
   }
   if (error) {
-    return <span>error...</span>;
+    return toast.error(error.message || "Ocurrio un error al mostrar los productos"); 
   }
   return <ProductosTemplate />;
 }

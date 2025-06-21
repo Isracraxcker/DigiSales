@@ -61,7 +61,6 @@
 ### **Infraestructura & DevOps**
 - ☁️ **Vercel** - Despliegue y hosting optimizado
 - 📈 **Vercel Analytics** - Métricas de rendimiento
-- 🔄 **GitHub Actions** - CI/CD automatizado
 
 
 ---
@@ -276,7 +275,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 <div align="center">
 
 ### **Andy Jaramillo**
-*Tecnólogo Full Stack | Especialista en React & Next.js*
+*Tecnólogo Full Stack | Especialista en React.js*
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Isracraxcker)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/andyjaramillo)
