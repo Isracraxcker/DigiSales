@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
-import { Icon } from "@iconify/react";
+
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Device } from "../../styles/breakpoints";
+import { Clock10 } from "lucide-react";
 export function Reloj() {
   const [hora, setHora] = useState("");
   const [fecha, setFecha] = useState("");
@@ -17,27 +18,27 @@ export function Reloj() {
       const añoActual = fechaActual.getFullYear();
 
       const dias = [
-        "domingo",
-        "lunes",
-        "martes",
-        "miércoles",
-        "jueves",
-        "viernes",
-        "sábado",
+        "Domingo",
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado",
       ];
       const meses = [
-        "enero",
-        "febrero",
-        "marzo",
-        "abril",
-        "mayo",
-        "junio",
-        "julio",
-        "agosto",
-        "septiembre",
-        "octubre",
-        "noviembre",
-        "diciembre",
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
       ];
 
       const mes = meses[mesActual];
@@ -64,11 +65,11 @@ export function Reloj() {
 
   return (
     <Container>
-      <div class="cont-reloj">
-        <div class="reloj" id="reloj">
-         {<Icon icon="icon-park:alarm-clock" />} {hora}
+      <div className="cont-reloj">
+        <div className="reloj" id="reloj">
+          {<Clock10 size={20} />}  {hora} 
         </div>
-        <div class="datos">
+        <div className="datos">
           <span id="fec_Datos">{fecha}</span>
         </div>
       </div>
@@ -82,20 +83,19 @@ const Container = styled.div`
     align-items: center;
     flex-direction: row;
     font-weight: bold;
-    gap:10px;
-    margin-top:8px;
+    gap: 10px;
+    margin-top: 8px;
     @media ${Device.laptop} {
-      margin-top:0;
+      margin-top: 0;
     }
   }
   .reloj {
     font-size: 1em;
-    align-items:center;
-    display:flex;
-    gap:5px;
+    align-items: center;
+    display: flex;
+    gap: 5px;
   }
   .datos {
     font-size: 1em;
-   
   }
 `;

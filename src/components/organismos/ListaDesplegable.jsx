@@ -1,5 +1,9 @@
+
+/* eslint-disable react-hooks/rules-of-hooks */
 import styled from "styled-components";
 import { Device } from "../../index";
+import { useEffect, useRef, useState } from "react";
+import { ShoppingBasket,  X } from 'lucide-react';
 export function ListaDesplegable({
   data,
   setState,
@@ -11,6 +15,8 @@ export function ListaDesplegable({
   funcioncrud,
 }) {
   if (!state) return;
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const dropdownRef = useRef(null);
   function seleccionar(p) {
     if (refetch) {
       refetch();
@@ -22,16 +28,31 @@ export function ListaDesplegable({
       funcioncrud();
     }
   }
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      seleccionar(data[selectedIndex]);
+    } else if (e.key === "ArrowDown") {
+      setSelectedIndex((prevIndex) => (prevIndex + 1) % data.length);
+    } else if (e.key === "ArrowUp") {
+      setSelectedIndex(
+        (prevIndex) => (prevIndex - 1 + data.length) % data.length
+      );
+    }
+  };
+  useEffect(() => {
+    dropdownRef.current?.focus();
+  }, []);
   return (
-    <Container scroll={scroll} $top={top}>
+    <Container scroll={scroll} $top={top} ref={dropdownRef} tabIndex={0} onKeyDown={handleKeyDown} >
       <section className="contentClose" onClick={setState}>
-        x
+           <X size={20} />
       </section>
       <section className="contentItems">
         {data?.map((item, index) => {
           return (
-            <ItemContainer key={index} onClick={() => seleccionar(item)}>
-              <span>🌫️</span>
+            <ItemContainer style={{ background: index === selectedIndex ? "rgba(0,0,0,0.1)" : ""}}  key={index} onClick={() => seleccionar(item)}>
+               <ShoppingBasket size={20}  />
               <span>{item?.nombre}</span>
             </ItemContainer>
           );
@@ -55,6 +76,10 @@ const Container = styled.div`
   z-index: 3;
   height: 230px;
   width: 95%;
+    &:focus{
+      outline: none;
+    }
+
   @media ${() => Device.tablet} {
   }
   .contentClose {
