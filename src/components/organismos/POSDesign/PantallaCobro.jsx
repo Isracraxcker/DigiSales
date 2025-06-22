@@ -1,14 +1,31 @@
+
 import { ChevronLeft, Eye, EyeOff, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useCartVentasStore } from "../../../store/CartVentasStore";
+import { IngresoCobro } from "./IngresoCobro";
 
 export function PantallaCobro() {
   const [stateVerTicket, setStateVerTicket] = useState(false);
   const { setStatePantallaCobro } = useCartVentasStore();
+  const ingresoCobro = useRef();
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        if (ingresoCobro.current) {
+          ingresoCobro.current.mutateAsync();
+        }
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    }
+  },[])
   return (
     <Container>
-      <section className="contentingresopago">
+      <section className="contentingresocobro">
         <article
           className="contentverticket"
           onClick={() => setStateVerTicket(!stateVerTicket)}
@@ -20,7 +37,7 @@ export function PantallaCobro() {
             <Eye className="icono" size={25} />
           )}
         </article>
-
+        <IngresoCobro ref={ingresoCobro} />
         <article className="contentverticket" onClick={setStatePantallaCobro}>
           <ChevronLeft />
           <span>Volver</span>
@@ -32,27 +49,33 @@ export function PantallaCobro() {
 
 const Container = styled.div`
   position: absolute;
-  width: 100%;
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   z-index: 100;
   background-color: ${({ theme }) => theme.bgtotal};
-
-  .contentingresopago {
+  .contentingresocobro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: calc(100% - 10rem);
     .contentverticket {
       align-self: flex-end;
       cursor: pointer;
       display: flex;
-      align-items: center;
       gap: 10px;
+      align-items: center;
       span {
-        font-weight: 70px;
-        font-size: 1.1em;
+        font-weight: 700px;
+        font-size: 18px;
       }
       .icono {
+        font-size: 30px;
       }
     }
   }

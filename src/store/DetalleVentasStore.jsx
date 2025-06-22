@@ -22,10 +22,7 @@ export const useDetalleVentasStore = create((set, get) => ({
     return response;
   },
   insertarDetalleVentas: async (p) => {
-    await InsertarDetalleVentas(p);
-    const { mostrardetalleventa } = get();
-    const { parametros } = get();
-    set(mostrardetalleventa(parametros));
+    await InsertarDetalleVentas(p);  
   },
   eliminardetalleventa: async (p) => {
     await EliminarDetalleVentas(p);

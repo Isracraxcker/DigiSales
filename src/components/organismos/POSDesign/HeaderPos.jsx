@@ -17,7 +17,8 @@ export function HeaderPos() {
   const [stateLectora, setStateLectora] = useState(true);
   const [stateTeclado, setStateTeclado] = useState(false);
   const [stateListaproductos, setStateListaproductos] = useState(false);
-  const { setBuscador, dataProductos, selectProductos } = useProductosStore();
+  const { setBuscador, dataProductos, selectProductos, buscador } =
+    useProductosStore();
   const { sucursalesItemSelectAsignadas } = useSucursalesStore();
   const { addItem } = useCartVentasStore();
   const buscadorRef = useRef(null);
@@ -52,6 +53,8 @@ export function HeaderPos() {
     };
 
     addItem(pDetalleVentas);
+    setBuscador("");
+    buscadorRef.current.focus();
   }
 
   useEffect(() => {
@@ -86,6 +89,7 @@ export function HeaderPos() {
         <article className="area1">
           <InputText2>
             <input
+              value={buscador}
               ref={buscadorRef}
               onChange={buscar}
               className="form__field"

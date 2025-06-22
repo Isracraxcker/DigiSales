@@ -1,8 +1,4 @@
-/* eslint-disable no-unused-vars */
 import styled from "styled-components";
-import { useDetalleVentasStore } from "../../../store/DetalleVentasStore";
-import { useQuery } from "@tanstack/react-query";
-import { useVentasStore } from "../../../store/VentasStore";
 import { blur_in } from "../../../styles/keyframes";
 import { FormatearNumeroDinero } from "../../../utils/Conversiones";
 import { Btn1, Lottieanimacion, useCartVentasStore } from "../../../index";
@@ -10,16 +6,8 @@ import animacionvacio from "../../../assets/vacioanimacion.json";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 export function AreaDetalleventaPos() {
-  const { mostrardetalleventa, datadetalleventa, eliminardetalleventa, total } =
-    useDetalleVentasStore();
   const { items, addcantidadItem, restarcantidadItem, removeItem } =
     useCartVentasStore();
-  const { idventa } = useVentasStore();
-  useQuery({
-    queryKey: ["mostrar detalle venta", { id_venta: idventa }],
-    queryFn: () => mostrardetalleventa({ id_venta: idventa }),
-    enabled: idventa != undefined,
-  });
 
   return (
     <AreaDetalleventa className={items.length > 0 ? "" : "animacion"}>

@@ -11,7 +11,6 @@ export async function InsertarVentas(p) {
     toast.error(error.message || "Ocurrió un error al insertar ventas");
     return;
   }
-  toast.success("Venta ingresada correctamente!");
   return data;
 }
 

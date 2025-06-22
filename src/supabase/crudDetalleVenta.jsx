@@ -4,10 +4,9 @@ const tabla = "detalle_venta";
 export async function InsertarDetalleVentas(p) {
   const { error } = await supabase.rpc("insertardetalleventa", p);
   if (error) {
-    toast.error(error.message || "Ocurrio un error al ingresar detalle venta");
+    //toast.error(error.message || "Ocurrio un error al ingresar detalle venta");
     return;
   }
-  toast.success("Venta ingresada correctamente!");
 }
 
 export async function MostrarDetalleVenta(p) {

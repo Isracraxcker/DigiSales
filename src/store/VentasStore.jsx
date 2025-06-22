@@ -9,6 +9,9 @@ import {
 export const useVentasStore = create((set) => ({
   dataventas: [],
   idventa: 0,
+   resetearventas:()=>set({
+    idventa:0
+  }),
   insertarVentas: async (p) => {
     const result = await InsertarVentas(p);
     set({ idventa: result?.id });
