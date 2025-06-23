@@ -9,6 +9,7 @@ import {
   POS,
   Layout,
   PageNot,
+  Empresa,
 } from "../index";
 
 export function MyRoutes() {
@@ -59,6 +60,17 @@ export function MyRoutes() {
           <ProtectedRoute accessBy="authenticated">
             <Layout>
               <Productos />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+
+       <Route
+        path="/configuracion/empresa"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Empresa />
             </Layout>
           </ProtectedRoute>
         }
