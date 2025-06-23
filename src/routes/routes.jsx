@@ -11,6 +11,7 @@ import {
   PageNot,
   Empresa,
 } from "../index";
+import { BasicosConfig } from "../components/organismos/EmpresaConfigDesign/BasicosConfig";
 
 export function MyRoutes() {
   return (
@@ -65,7 +66,7 @@ export function MyRoutes() {
         }
       />
 
-       <Route
+      <Route
         path="/configuracion/empresa"
         element={
           <ProtectedRoute accessBy="authenticated">
@@ -74,7 +75,10 @@ export function MyRoutes() {
             </Layout>
           </ProtectedRoute>
         }
-      />
+      >
+        <Route path="empresabasicos" element={<BasicosConfig />} />
+      </Route>
+
       <Route
         path="/pos"
         element={
