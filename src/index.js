@@ -13,6 +13,8 @@ export * from './components/moleculas/SpinnerSecundario';
 export * from './components/moleculas/SwitchHamburguesa';
 export * from './components/organismos/Buscador';
 export * from './components/organismos/Checkbox1';
+
+export * from './components/organismos/EmpresaConfigDesign/MonedaConfig';
 export * from './components/organismos/Footer';
 export * from './components/organismos/LandingPages/CardFuncion';
 export * from './components/organismos/LandingPages/LandingPagesWelcome';
