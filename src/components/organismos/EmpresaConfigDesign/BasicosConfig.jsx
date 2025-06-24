@@ -11,7 +11,7 @@ export const BasicosConfig = () => {
   const [file, setFile] = useState([]);
   const ref = useRef(null);
   const [fileurl, setFileurl] = useState("-");
-  const { dataempresa } = useEmpresaStore();
+  const { dataempresa, editarEmpresa } = useEmpresaStore();
 
   const {
     register,

@@ -1,10 +1,14 @@
 import { create } from "zustand";
-import { InsertarEmpresa, MostrarEmpresaXidsuario } from "../index";
+import {
+  EditarEmpresa,
+  EditarMonedaEmpresa,
+  InsertarEmpresa,
+  MostrarEmpresaXidsuario,
+} from "../index";
 export const useEmpresaStore = create((set) => ({
-
   dataempresa: [],
 
-  //  mostrar Empresa 
+  //  mostrar Empresa
   mostrarempresa: async (p) => {
     const response = await MostrarEmpresaXidsuario(p);
     set({ dataempresa: response });
@@ -15,5 +19,15 @@ export const useEmpresaStore = create((set) => ({
   insertarempresa: async (p) => {
     const response = await InsertarEmpresa(p);
     console.log("respuesta empresa", response);
+  },
+
+  // editar Empresa
+  editarEmpresa: async (p, fileold, filenew) => {
+    await EditarEmpresa(p, fileold, filenew);
+  },
+
+  // editar Empresa -> Moneda
+  editarMonedaEmpresa: async (p) => {
+    await EditarMonedaEmpresa(p);
   },
 }));
