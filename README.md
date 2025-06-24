@@ -9,12 +9,11 @@
 
 ### 🚀 **Sistema de Ventas Inteligente | AICODIGI**
 
-*Plataforma completa full-stack para gestión integral de ventas y comercio*
+_Plataforma completa full-stack para gestión integral de ventas y comercio_
 
 **Desarrollado por Andy Jaramillo** - Tecnólogo Full Stack
 
 [![GitHub](https://img.shields.io/badge/⭐_Star_this_repo-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Isracraxcker/DigiSales)
-
 
 </div>
 
@@ -46,12 +45,14 @@
 ## 🏗️ Arquitectura y Stack Tecnológico
 
 ### **Frontend**
-- 🎨 **Styled Components** - Diseño modular y responsivo  
+
+- 🎨 **Styled Components** - Diseño modular y responsivo
 - 🔄 **Zustand** - Gestión de estado eficiente
 - 📊 **Chart.js & React-Chartjs-2** - Visualización de datos avanzada
 - 🎯 **JavaScript** - Desarrollo con seguridad de tipos
 
 ### **Backend & Base de Datos**
+
 - 🛡️ **Supabase** - Backend-as-a-Service completo
 - 🗄️ **PostgreSQL** - Base de datos relacional robusta
 - 🔧 **Database Functions & Triggers** - Lógica de negocio automatizada
@@ -59,9 +60,9 @@
 - 🚀 **Real-time Subscriptions** - Actualizaciones en tiempo real
 
 ### **Infraestructura & DevOps**
+
 - ☁️ **Vercel** - Despliegue y hosting optimizado
 - 📈 **Vercel Analytics** - Métricas de rendimiento
-
 
 ---
 
@@ -113,6 +114,7 @@ DigiSales utiliza Google OAuth 2.0 para la autenticación. Sigue estos pasos par
 ##### **a) Configurar Supabase**
 
 1. **Accede a tu Dashboard de Supabase**
+
    - Ve a `Authentication > Providers`
    - Habilita el proveedor **Google**
 
@@ -126,10 +128,12 @@ DigiSales utiliza Google OAuth 2.0 para la autenticación. Sigue estos pasos par
 ##### **b) Configurar Google Cloud Console**
 
 1. **Acceder a Google Cloud Console**
+
    - Ve a [Google Cloud Console](https://console.cloud.google.com/)
    - Navega a `APIs y Servicios > Credenciales`
 
 2. **Crear Credenciales OAuth 2.0**
+
    ```bash
    # Pasos detallados:
    1. Hacer clic en "Crear credenciales"
@@ -139,11 +143,12 @@ DigiSales utiliza Google OAuth 2.0 para la autenticación. Sigue estos pasos par
    ```
 
 3. **Configurar URLs Autorizadas**
+
    ```bash
    # Orígenes de JavaScript autorizados:
    http://localhost:5173          # Para desarrollo
    https://tu-dominio.com         # Para producción
-   
+
    # URIs de redirección autorizados:
    https://[TU-PROJECT-ID].supabase.co/auth/v1/callback
    ```
@@ -162,6 +167,7 @@ VITE_APP_SUPABASE_ANON_KEY=eyJ...
 ```
 
 🔐 **Notas de Seguridad:**
+
 - Nunca compartas tu `Client Secret` públicamente
 - Usa diferentes credenciales para desarrollo y producción
 - Revisa regularmente los permisos de tu aplicación en Google
@@ -178,11 +184,12 @@ npm run dev
 
 ## 🛠️ Scripts Disponibles
 
-| Comando | Descripción | Uso Recomendado |
-|---------|-------------|-----------------|
-| `npm run dev` | 🔥 Servidor de desarrollo con hot-reload | Desarrollo local |
-| `npm run build` | 🏗️ Build optimizado para producción | Pre-despliegue |
-| `npm run start` | 🚀 Servidor de producción | Testing de build |
+| Comando         | Descripción                              | Uso Recomendado  |
+| --------------- | ---------------------------------------- | ---------------- |
+| `npm run dev`   | 🔥 Servidor de desarrollo con hot-reload | Desarrollo local |
+| `npm run build` | 🏗️ Build optimizado para producción      | Pre-despliegue   |
+| `npm run start` | 🚀 Servidor de producción                | Testing de build |
+
 ---
 
 ## 🌐 Despliegue en Producción
@@ -190,15 +197,17 @@ npm run dev
 ### **Despliegue en Vercel (Recomendado)**
 
 1. **Conectar con GitHub**
+
    ```bash
    # Instalar Vercel CLI
    npm i -g vercel
-   
+
    # Deploy
    vercel --prod
    ```
 
 2. **Configurar Variables de Entorno**
+
    - Accede al dashboard de Vercel
    - Ve a Settings > Environment Variables
    - Agrega todas las variables de `.env`
@@ -211,12 +220,11 @@ npm run dev
 
 <div align="center">
 
-| Plataforma | Dificultad | Escalabilidad | Costo | Recomendado Para |
-|------------|:----------:|:-------------:|:-----:|:----------------:|
-| 🔺 **Vercel** | ⭐ Fácil | ⭐⭐⭐ Alta | 💰 Freemium | Startups, MVPs |
-| ☁️ **AWS** | ⭐⭐⭐ Compleja | ⭐⭐⭐⭐ Muy Alta | 💰💰 Variable | Empresas grandes |
-| 🌊 **Netlify** | ⭐⭐ Fácil | ⭐⭐ Media | 💰 Freemium | Proyectos pequeños |
-
+| Plataforma     |   Dificultad    |   Escalabilidad   |     Costo     |  Recomendado Para  |
+| -------------- | :-------------: | :---------------: | :-----------: | :----------------: |
+| 🔺 **Vercel**  |    ⭐ Fácil     |    ⭐⭐⭐ Alta    |  💰 Freemium  |   Startups, MVPs   |
+| ☁️ **AWS**     | ⭐⭐⭐ Compleja | ⭐⭐⭐⭐ Muy Alta | 💰💰 Variable |  Empresas grandes  |
+| 🌊 **Netlify** |   ⭐⭐ Fácil    |    ⭐⭐ Media     |  💰 Freemium  | Proyectos pequeños |
 
 </div>
 
@@ -227,12 +235,15 @@ npm run dev
 <div align="center">
 
 ### Login Principal
+
 ![Login](./src/assets/login.png)
 
 ### Presentación del Sistema DigiSales
+
 ![Landing Home](./src/assets/home.png)
 
 ### Sistema de Ventas
+
 ![Ventas](https://via.placeholder.com/800x400/dc2626/ffffff?text=Sistema+de+Ventas)
 
 </div>
@@ -259,14 +270,14 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 ¿Necesitas el script completo de la base de datos para PostgreSQL/Supabase?
 
 **💡 Obtén acceso al script completo por solo $2 USD**
+
 - 📋 **Incluye:** Todas las tablas, funciones, triggers y configuraciones RLS
 - 🚀 **Setup completo:** Listo para importar en tu proyecto
 - 🛡️ **Seguridad:** Configuraciones de seguridad a nivel de fila implementadas
 
-
 [![☕ Obtener Script BD - $2](https://img.shields.io/badge/💳_Obtener_Script_BD-$2_USD-FF813F?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://buymeacoffee.com/andyisraela)
 
-*Una vez realizada la compra, recibirás el script completo en tu email en menos de 24 horas.*
+_Una vez realizada la compra, recibirás el script completo en tu email en menos de 24 horas._
 
 ---
 
@@ -275,14 +286,15 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 <div align="center">
 
 ### **Andy Jaramillo**
-*Tecnólogo Full Stack | Especialista en React.js*
+
+_Tecnólogo Full Stack | Especialista en React.js_
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Isracraxcker)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/andyjaramillo)
 [![Portfolio](https://img.shields.io/badge/Portfolio-FF5722?style=for-the-badge&logo=google-chrome&logoColor=white)](https://andy-jaramillo.vercel.app/)
 [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:andyisraeljaramillo@gmail.com)
 
-*"Transformando ideas en experiencias digitales excepcionales"*
+_"Transformando ideas en experiencias digitales excepcionales"_
 
 </div>
 
@@ -292,9 +304,10 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 ### 🌟 **¡Gracias por usar DigiSales Platform!**
 
-*Si este proyecto te resulta útil, no olvides darle una ⭐ en GitHub*
+_Si este proyecto te resulta útil, no olvides darle una ⭐ en GitHub_
 
-**¿Te gusta el proyecto?** 
+**¿Te gusta el proyecto?**
+
 - ⭐ **Dale una estrella** al repositorio
 - ☕ **Apóyame con un café** en [Buy Me a Coffee](https://buymeacoffee.com/andyisraela)
 - 🗄️ **Obtén el script de BD completo** por solo $2 USD
