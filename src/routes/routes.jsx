@@ -13,6 +13,7 @@ import {
 } from "../index";
 import { BasicosConfig } from "../components/organismos/EmpresaConfigDesign/BasicosConfig";
 import { MonedaConfig } from "../components/organismos/EmpresaConfigDesign/MonedaConfig";
+import { ClientesProveedores } from "../pages/ClientesProveedores";
 
 export function MyRoutes() {
   return (
@@ -91,6 +92,28 @@ export function MyRoutes() {
         }
       />
       <Route path="*" element={<PageNot />} />
+
+       <Route
+        path="/configuracion/clientes"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <ClientesProveedores />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+
+       <Route
+        path="/configuracion/proveedores"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <ClientesProveedores />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }

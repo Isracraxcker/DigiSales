@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Btn1 } from "../../moleculas/Btn1";
 import { TotalPos } from "./TotalPos";
 import { Device } from "../../../styles/breakpoints";
+import { useVentasStore } from "../../../store/VentasStore";
 import { useCartVentasStore } from "../../../store/CartVentasStore";
 export function AreaTecladoPos() {
   const { setStatePantallaCobro } = useCartVentasStore();
@@ -18,28 +19,28 @@ export function AreaTecladoPos() {
             width="100%"
           />
           <Btn1
-            funcion={() => setStatePantallaCobro({ tipocobro: "credito" })}
             bgcolor="#fb81c6"
             width="100%"
             titulo="CREDITO"
             border="0"
+            funcion={() => setStatePantallaCobro({ tipocobro: "credito" })}
           />
         </article>
         <article className="box">
           <Btn1
-            funcion={() => setStatePantallaCobro({ tipocobro: "tarjeta" })}
             bgcolor="#fba259"
             width="100%"
             titulo="TARJETA"
             border="0"
             height="70px"
+            funcion={() => setStatePantallaCobro({ tipocobro: "tarjeta" })}
           />
           <Btn1
-            funcion={() => setStatePantallaCobro({ tipocobro: "mixto" })}
             bgcolor="#919afd"
             width="100%"
             titulo="MIXTO"
             border="0"
+            funcion={() => setStatePantallaCobro({ tipocobro: "mixto" })}
           />
         </article>
       </section>

@@ -2,11 +2,12 @@
 import toast from "react-hot-toast";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { useClientesProveedoresStore } from "./ClientesProveedoresStore";
 const initialState = {
   items: [],
   total: 0,
-  statePantallaCobro:false,
-  tipocobro: ""
+  statePantallaCobro: false,
+  tipocobro: "",
 };
 function calcularTotal(items) {
   return items.reduce(
@@ -50,7 +51,11 @@ export const useCartVentasStore = create(
         set((state) => ({
           items: state.items.filter((item) => item !== p),
         })),
-      resetState: () => set(initialState),
+      resetState: () => {
+        const {selectCliPro} = useClientesProveedoresStore.getState();
+        selectCliPro([]);
+        set(initialState)
+      },
       addcantidadItem: (p) =>
         set((state) => {
           const updatedItems = state.items.map((item) => {
@@ -87,19 +92,20 @@ export const useCartVentasStore = create(
             .filter(Boolean); //Filtlar elementos nulos
           return { items: updatedItems, total: calcularTotal(updatedItems) };
         }),
-        setStatePantallaCobro:(p)=>set((state)=>{
-           if(state.items.length===0){
-              toast.error("No hay productos en el carrito");
-              return {
-                state
-              }
-           } else {
-              return {
-                statePantallaCobro:!state.statePantallaCobro,
-                tipocobro:p.tipocobro
-              }
-           }
-        })
+      setStatePantallaCobro: (p) =>
+        set((state) => {
+          if (state.items.length === 0) {
+            toast.error("No hay productos en el carrito");
+            return {
+              state,
+            };
+          } else {
+            return {
+              statePantallaCobro: !state.statePantallaCobro,
+              tipocobro: p.tipocobro,
+            };
+          }
+        }),
     }),
     {
       name: "cart-ventas-storage",

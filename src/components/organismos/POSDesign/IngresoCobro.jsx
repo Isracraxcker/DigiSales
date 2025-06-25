@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import { useCartVentasStore } from "../../../store/CartVentasStore";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -14,14 +12,13 @@ import { useVentasStore } from "../../../store/VentasStore";
 import { useDetalleVentasStore } from "../../../store/DetalleVentasStore";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
-
+import { PanelBuscador } from "./PanelBuscador";
+import { useClientesProveedoresStore } from "../../../store/ClientesProveedoresStore";
 import toast from "react-hot-toast";
 import { UserSearch } from "lucide-react";
-
 export const IngresoCobro = forwardRef((props, ref) => {
   const { tipocobro, total, items, setStatePantallaCobro, resetState } =
     useCartVentasStore();
-
   //Valores a calcular
   const [stateBuscadorClientes, setStateBuscadorClientes] = useState(false);
   const [precioVenta, setPrecioVenta] = useState(total);
@@ -34,41 +31,35 @@ export const IngresoCobro = forwardRef((props, ref) => {
   const [valorCredito, setValorCredito] = useState(
     tipocobro === "credito" ? total : 0
   );
-
-
   //Valores a mostrar
   const [vuelto, setVuelto] = useState(0);
   const [restante, setRestante] = useState(0);
-
-
   //datos de la store
   const { datausuarios } = useUsuariosStore();
   const { sucursalesItemSelectAsignadas } = useSucursalesStore();
   const { dataempresa } = useEmpresaStore();
   const { idventa, insertarVentas, resetearventas } = useVentasStore();
   const { insertarDetalleVentas } = useDetalleVentasStore();
-
-
   //#region Clientes
-  // const {
-  //   buscarCliPro,
-  //   setBuscador,
-  //   buscador,
-  //   selectCliPro,
-  //   cliproItemSelect,
-  // } = useClientesProveedoresStore();
-  // const { data: dataBuscadorcliente, isLoading: isloadingBuscadorCliente } =
-  //   useQuery({
-  //     queryKey: ["buscar cliente", [dataempresa?.id, "cliente", buscador]],
-  //     queryFn: () =>
-  //       buscarCliPro({
-  //         id_empresa: dataempresa?.id,
-  //         tipo: "cliente",
-  //         buscador: buscador,
-  //       }),
-  //     enabled: !!dataempresa,
-  //     refetchOnWindowFocus: false,
-  //   });
+  const {
+    buscarCliPro,
+    setBuscador,
+    buscador,
+    selectCliPro,
+    cliproItemSelect,
+  } = useClientesProveedoresStore();
+  const { data: dataBuscadorcliente, isLoading: isloadingBuscadorCliente } =
+    useQuery({
+      queryKey: ["buscar cliente", [dataempresa?.id, "cliente", buscador]],
+      queryFn: () =>
+        buscarCliPro({
+          id_empresa: dataempresa?.id,
+          tipo: "cliente",
+          buscador: buscador,
+        }),
+      enabled: !!dataempresa,
+      refetchOnWindowFocus: false,
+    });
   //#endregion
 
   // Función para calcular vuelto y restante
@@ -95,14 +86,10 @@ export const IngresoCobro = forwardRef((props, ref) => {
     const value = parseFloat(event.target.value) || 0;
     setValorTarjeta(value);
   };
-
-
   // Exponiendo la función mutation a través de ref
   useImperativeHandle(ref, () => ({
     mutateAsync: mutation.mutateAsync,
   }));
-
-
   //Funcion para realizar la venta
   const mutation = useMutation({
     mutationKey: "insertar ventas",
@@ -114,13 +101,13 @@ export const IngresoCobro = forwardRef((props, ref) => {
       setStatePantallaCobro({ tipocobro: "" });
       resetState();
       resetearventas();
-      toast.success("Venta realizada correctamente!");
+      toast.success("Venta generada correctamente!!!");
     },
   });
   async function insertarventas() {
     if (restante === 0) {
       const pventas = {
-        // id_cliente:cliproItemSelect?.id,
+        id_cliente:cliproItemSelect?.id,
         id_usuario: datausuarios?.id,
         id_sucursal: sucursalesItemSelectAsignadas?.id_sucursal,
         id_empresa: dataempresa?.id,
@@ -142,7 +129,7 @@ export const IngresoCobro = forwardRef((props, ref) => {
         });
       }
     } else {
-      toast.error("Falta completar el pago, el restante tiene que ser 0.");
+      toast.error("Falta completar el pago, el restante tiene que ser 0");
     }
   }
   //useEffect para recalcular cuando los valores cambian
@@ -158,14 +145,14 @@ export const IngresoCobro = forwardRef((props, ref) => {
           {mutation.isError && <span>error: {mutation.error.message}</span>}
           <section className="area1">
             <span className="tipocobro">{tipocobro}</span>
-            <UserSearch />
+             <UserSearch />
             <span>Cliente</span>
             <EditButton
               onClick={() => setStateBuscadorClientes(!stateBuscadorClientes)}
             >
               <Icon className=" icono" icon="lets-icons:edit-fill" />
             </EditButton>
-            {/* <span className="cliente">{cliproItemSelect?.nombres}</span> */}
+            <span className="cliente">{cliproItemSelect?.nombres}</span>
           </section>
           <Linea />
           <section className="area2">
@@ -229,13 +216,13 @@ export const IngresoCobro = forwardRef((props, ref) => {
               width="100%"
             />
           </section>
-          {/* {stateBuscadorClientes && (
+          {stateBuscadorClientes && (
             <PanelBuscador selector={selectCliPro} setBuscador={setBuscador} displayField="nombres" data={dataBuscadorcliente} 
               setStateBuscador={() =>
                 setStateBuscadorClientes(!stateBuscadorClientes)
               }
             />
-          )} */}
+          )}
         </>
       )}
     </Container>

@@ -22,7 +22,8 @@ export const useDetalleVentasStore = create((set, get) => ({
     return response;
   },
   insertarDetalleVentas: async (p) => {
-    await InsertarDetalleVentas(p);  
+    await InsertarDetalleVentas(p);
+   
   },
   eliminardetalleventa: async (p) => {
     await EliminarDetalleVentas(p);

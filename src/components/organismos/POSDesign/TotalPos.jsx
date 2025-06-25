@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { Btn1 } from "../../moleculas/Btn1";
 import { Device } from "../../../styles/breakpoints";
 import { Icon } from "@iconify/react";
-import { useCartVentasStore, useDetalleVentasStore } from "../../..";
+import { useCartVentasStore, useEmpresaStore } from "../../..";
 import { FormatearNumeroDinero } from "../../../utils/Conversiones";
 import { HandCoins } from "lucide-react";
 export function TotalPos() {
   const { total, setStatePantallaCobro } = useCartVentasStore();
+  const { dataempresa } = useEmpresaStore();
   return (
     <Container>
       <section className="imagen">
@@ -30,7 +31,7 @@ export function TotalPos() {
             icono={<Icon icon="fluent-emoji:safety-vest" />}
           />
         </section>
-        <span>{FormatearNumeroDinero(total)}</span>
+        <span>{FormatearNumeroDinero(total,dataempresa?.currency,dataempresa?.iso)}</span>
       </section>
     </Container>
   );

@@ -1,6 +1,8 @@
 import { supabase } from "../index";
 import toast from "react-hot-toast";
 const tabla = "detalle_venta";
+
+
 export async function InsertarDetalleVentas(p) {
   const { error } = await supabase.rpc("insertardetalleventa", p);
   if (error) {

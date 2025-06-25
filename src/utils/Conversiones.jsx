@@ -4,10 +4,15 @@ export function ConvertirCapitalize(input) {
 export function ConvertirMinusculas(input) {
   return input.toLowerCase();
 }
-export function FormatearNumeroDinero(numero) {
-  const numeroconvertido = numero.toLocaleString("es-EC", {
+export function FormatearNumeroDinero(numero, currency,iso) {
+
+  if(currency === undefined){
+    return;
+  }
+  const esiso = "es-" + iso;
+  const numeroconvertido = numero.toLocaleString(esiso, {
     style: "currency",
-    currency: "USD",
+    currency: `${currency}`,
   });
   return numeroconvertido;
 }

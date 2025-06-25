@@ -44,12 +44,12 @@ export function Layout({ children }) {
   if (datausuarios == null) {
     refetchUsuarios();
   }
-  if (isLoading) {
-    return <Spinner1 />;
-  }
-  if (error) {
-    return toast.error(error.message || "Ocurrio un error");
-  }
+  // if (isLoading) {
+  //   return <Spinner1 />;
+  // }
+  // if (error) {
+  //   return toast.error(error.message || "Ocurrio un error");
+  // }
   return (
     <Container className={sidebarOpen ? "active" : ""}>
       <section className="contentSidebar">
