@@ -2,37 +2,34 @@ import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { Btn1 } from "../moleculas/Btn1";
 
-export const EmpresaTemplate = () => (
-  <Main>
-    {/* <Toaster richColors   position="bottom-center"/> */}
-    <PageContainer>
-      <Content>
-        <Outlet />
-      </Content>
-      <Sidebar>
-        <SidebarSection>
-          <SidebarTitle>Empresa</SidebarTitle>
-          <SidebarItem to="empresabasicos">Básico</SidebarItem>
-          <SidebarItem to="moneda">Moneda</SidebarItem>
-        </SidebarSection>
+import { useAuthStore } from "../../store/AuthStore";
 
-        <SidebarSection>
-          <SidebarTitle>Esquemas</SidebarTitle>
-          <SidebarItem to="macroprocesos">Macroprocesos</SidebarItem>
-        </SidebarSection>
-        <SidebarSection>
-          <SidebarTitle to="ss">Soporte</SidebarTitle>
-          <SidebarItem to="ss">Centro de ayuda</SidebarItem>
-        </SidebarSection>
-        <Btn1
-          bgcolor="transparent"
-          color={({ theme }) => theme.text}
-          titulo="cerrar sesión"
-        />
-      </Sidebar>
-    </PageContainer>
-  </Main>
-);
+export const EmpresaTemplate = () => {
+  const { cerrarSesion } = useAuthStore();
+  return (
+    <Main>
+      <PageContainer>
+        <Content>
+          <Outlet />
+        </Content>
+        <Sidebar>
+          <SidebarSection>
+            <SidebarTitle>Empresa</SidebarTitle>
+            <SidebarItem to="empresabasicos">Básico</SidebarItem>
+            <SidebarItem to="monedaconfig">Moneda</SidebarItem>
+          </SidebarSection>
+
+          <Btn1
+            funcion={cerrarSesion}
+            bgcolor="transparent"
+            color={({ theme }) => theme.text}
+            titulo="cerrar sesión"
+          />
+        </Sidebar>
+      </PageContainer>
+    </Main>
+  );
+};
 
 const Main = styled.div`
   justify-content: center;
@@ -91,7 +88,6 @@ const SidebarItem = styled(NavLink)`
 
 const Content = styled.div`
   flex: 1;
-
   padding: 20px;
   border-radius: 8px;
   margin: 20px;

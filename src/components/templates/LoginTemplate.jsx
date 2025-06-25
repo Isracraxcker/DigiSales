@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {
-  Btnsave,
+  Btn1,
   Footer,
   InputText2,
   Linea,
@@ -11,13 +11,12 @@ import { v } from "../../styles/variables";
 import { Device } from "../../styles/breakpoints";
 export function LoginTemplate() {
   const { loginGoogle } = useAuthStore();
-
   return (
     <Container>
       <div className="card">
         <ContentLogo>
           <img src={v.logo} />
-          <span>DigiSales - Sistema de Venta</span>
+          <span>DigiSales</span>
         </ContentLogo>
         <Title $paddingbottom="40px">Ingresar</Title>
 
@@ -32,7 +31,7 @@ export function LoginTemplate() {
               type="password"
             />
           </InputText2>
-          <Btnsave
+          <Btn1 border="2px"
             titulo="INGRESAR"
             bgcolor="#1CB0F6"
             color="255,255,255"
@@ -42,7 +41,7 @@ export function LoginTemplate() {
         <Linea>
           <span>0</span>
         </Linea>
-        <Btnsave
+        <Btn1 border="2px"
           funcion={loginGoogle}
           titulo="Google"
           bgcolor="#fff"
@@ -71,6 +70,11 @@ const Container = styled.div`
     margin: 20px;
     @media ${Device.tablet} {
       width: 400px;
+    }
+    form{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
   }
 `;

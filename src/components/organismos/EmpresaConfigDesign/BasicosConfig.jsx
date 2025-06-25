@@ -7,12 +7,15 @@ import { Btn1 } from "../../moleculas/Btn1";
 import { useForm } from "react-hook-form";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 import { slideBackground } from "../../../styles/keyframes";
+import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { SpinnerSecundario } from "../../moleculas/SpinnerSecundario";
 export const BasicosConfig = () => {
   const [file, setFile] = useState([]);
   const ref = useRef(null);
   const [fileurl, setFileurl] = useState("-");
   const { dataempresa, editarEmpresa } = useEmpresaStore();
-
+  const queryClient = useQueryClient();
   const {
     register,
     formState: { errors },
@@ -36,101 +39,134 @@ export const BasicosConfig = () => {
     }
   }
 
+  const { mutate: doEditar, isPending } = useMutation({
+    mutationKey: "editar empresa",
+    mutationFn: editar,
+    onError: (error) => {
+      toast.error("Ocurrio un error  " + error.message);
+    },
+    onSuccess: () => {
+      toast.success("Datos guardados correctamente!");
+      queryClient.invalidateQueries("mostrar empresa");
+    },
+  });
+  const llamadoafuncioneditar = (data) => {
+    doEditar(data);
+  };
+  async function editar(data) {
+    const p = {
+      id: dataempresa?.id,
+      nombre: data.nombre,
+      direccion_fiscal: data.direccion,
+      impuesto: data.impuesto,
+      valor_impuesto: parseFloat(data.valor_impuesto),
+    };
+    await editarEmpresa(p, dataempresa?.logo, file);
+  }
+
   return (
     <Container>
-      <Title>Básico</Title>
+      {isPending ? (
+        <SpinnerSecundario texto="Guardando..." />
+      ) : (
+        <>
+          <Title>Básico</Title>
 
-      <Avatar>
-        <span className="nombre">Empresa nombre</span>
-        {fileurl != "-" ? (
-          <div className="ContentImage">
-            <AvatarImage src={fileurl} alt="Avatar" />
-          </div>
-        ) : dataempresa?.logo != "-" ? (
-          <div className="ContentImage">
-            <AvatarImage src={dataempresa?.logo} alt="Avatar" />
-          </div>
-        ) : (
-          <AvatarImage
-            src="https://i.ibb.co/JjqNqnz/cerdosolo.png"
-            alt="Avatar"
-          />
-        )}
+          <Avatar>
+            <span className="nombre">{dataempresa?.nombre}</span>
+            {fileurl != "-" ? (
+              <div className="ContentImage">
+                <AvatarImage src={fileurl} alt="Avatar" />
+              </div>
+            ) : dataempresa?.logo != "-" ? (
+              <div className="ContentImage">
+                <AvatarImage src={dataempresa?.logo} alt="Avatar" />
+              </div>
+            ) : (
+              <AvatarImage
+                src="https://i.ibb.co/JjqNqnz/cerdosolo.png"
+                alt="Avatar"
+              />
+            )}
 
-        <EditButton onClick={abrirImagenes}>
-          <Icon className=" icono" icon="lets-icons:edit-fill" />
-        </EditButton>
-        <input
-          accept="image/jpeg, image/png"
-          type="file"
-          ref={ref}
-          onChange={(e) => prepararImagen(e)}
-        ></input>
-      </Avatar>
-      <form>
-        <Label>Nombre</Label>
-        <InputText2>
-          <input
-            className="form__field"
-            placeholder="nombre"
-            type="text"
-            defaultValue={dataempresa?.nombre}
-            {...register("nombre", {
-              required: true,
-            })}
-          />
-          {errors.nombre?.type === "required" && <p>Campo requerido</p>}
-        </InputText2>
-        <Label>Dirección</Label>
-        <InputText2>
-          <input
-            defaultValue={dataempresa?.direccion_fiscal}
-            className="form__field"
-            placeholder="direccion"
-            type="text"
-            {...register("direccion", {
-              required: true,
-            })}
-          />
-          {errors.direccion?.type === "required" && <p>Campo requerido</p>}
-        </InputText2>
-        <Label>Impuesto</Label>
-        <InputText2>
-          <input
-            defaultValue={dataempresa?.impuesto}
-            className="form__field"
-            placeholder="impuesto"
-            type="text"
-            {...register("impuesto", {
-              required: true,
-            })}
-          />
-          {errors.impuesto?.type === "required" && <p>Campo requerido</p>}
-        </InputText2>
-        <Label>Valor impuesto</Label>
-        <InputText2>
-          <input
-            step="0.01"
-            defaultValue={dataempresa?.valor_impuesto}
-            className="form__field"
-            placeholder="valor impuesto"
-            type="number"
-            {...register("valor_impuesto", {
-              required: true,
-            })}
-          />
-          {errors.valor_impuesto?.type === "required" && <p>Campo requerido</p>}
-        </InputText2>
-        <br></br>
-        <Btn1 bgcolor="#0930bb" color="#fff" titulo="GUARDAR CAMBIOS" />
-      </form>
-      <br></br>
-      <section className="advertencia">
-        <Icon className="icono" icon="svg-spinners:clock" />
-        <span>
-          Los cambios de logo se ven reflejados en el lapso de 10 segundos.
-        </span>
-      </section>
+            <EditButton onClick={abrirImagenes}>
+              <Icon className=" icono" icon="lets-icons:edit-fill" />
+            </EditButton>
+            <input
+              accept="image/jpeg, image/png"
+              type="file"
+              ref={ref}
+              onChange={(e) => prepararImagen(e)}
+            ></input>
+          </Avatar>
+          <form onSubmit={handleSubmit(llamadoafuncioneditar)}>
+            <Label>Nombre</Label>
+            <InputText2>
+              <input
+                className="form__field"
+                placeholder="nombre"
+                type="text"
+                defaultValue={dataempresa?.nombre}
+                {...register("nombre", {
+                  required: true,
+                })}
+              />
+              {errors.nombre?.type === "required" && <p>Campo requerido</p>}
+            </InputText2>
+            <Label>Dirección</Label>
+            <InputText2>
+              <input
+                defaultValue={dataempresa?.direccion_fiscal}
+                className="form__field"
+                placeholder="direccion"
+                type="text"
+                {...register("direccion", {
+                  required: true,
+                })}
+              />
+              {errors.direccion?.type === "required" && <p>Campo requerido</p>}
+            </InputText2>
+            <Label>Impuesto</Label>
+            <InputText2>
+              <input
+                defaultValue={dataempresa?.impuesto}
+                className="form__field"
+                placeholder="impuesto"
+                type="text"
+                {...register("impuesto", {
+                  required: true,
+                })}
+              />
+              {errors.impuesto?.type === "required" && <p>Campo requerido</p>}
+            </InputText2>
+            <Label>Valor impuesto</Label>
+            <InputText2>
+              <input
+                step="0.01"
+                defaultValue={dataempresa?.valor_impuesto}
+                className="form__field"
+                placeholder="valor impuesto"
+                type="number"
+                {...register("valor_impuesto", {
+                  required: true,
+                })}
+              />
+              {errors.valor_impuesto?.type === "required" && (
+                <p>Campo requerido</p>
+              )}
+            </InputText2>
+            <br></br>
+            <Btn1 bgcolor="#0930bb" color="#fff" titulo="GUARDAR CAMBIOS" />
+          </form>
+          <br></br>
+          <section className="advertencia">
+            <Icon className="icono" icon="svg-spinners:clock" />
+            <span>
+              Los cambios de logo se ven reflejados en el lapso de 10 segundos.
+            </span>
+          </section>
+        </>
+      )}
     </Container>
   );
 };

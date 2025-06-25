@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import {
   Categorias,
   Configuraciones,
@@ -12,6 +12,7 @@ import {
   Empresa,
 } from "../index";
 import { BasicosConfig } from "../components/organismos/EmpresaConfigDesign/BasicosConfig";
+import { MonedaConfig } from "../components/organismos/EmpresaConfigDesign/MonedaConfig";
 
 export function MyRoutes() {
   return (
@@ -65,7 +66,6 @@ export function MyRoutes() {
           </ProtectedRoute>
         }
       />
-
       <Route
         path="/configuracion/empresa"
         element={
@@ -76,9 +76,10 @@ export function MyRoutes() {
           </ProtectedRoute>
         }
       >
+        <Route index element={<Navigate to="empresabasicos" />} />
         <Route path="empresabasicos" element={<BasicosConfig />} />
+        <Route path="monedaconfig" element={<MonedaConfig />} />
       </Route>
-
       <Route
         path="/pos"
         element={
