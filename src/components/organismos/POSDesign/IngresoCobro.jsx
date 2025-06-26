@@ -101,7 +101,7 @@ export const IngresoCobro = forwardRef((props, ref) => {
       setStatePantallaCobro({ tipocobro: "" });
       resetState();
       resetearventas();
-      toast.success("Venta generada correctamente!!!");
+      toast.success("¡Venta generada correctamente!");
     },
   });
   async function insertarventas() {
@@ -139,13 +139,14 @@ export const IngresoCobro = forwardRef((props, ref) => {
   return (
     <Container>
       {mutation.isPending ? (
-        <span>Guardando...🐖</span>
+        <span>Guardando...</span>
       ) : (
         <>
           {mutation.isError && <span>error: {mutation.error.message}</span>}
           <section className="area1">
             <span className="tipocobro">{tipocobro}</span>
-             <UserSearch />
+           
+           
             <span>Cliente</span>
             <EditButton
               onClick={() => setStateBuscadorClientes(!stateBuscadorClientes)}
@@ -200,9 +201,9 @@ export const IngresoCobro = forwardRef((props, ref) => {
               <span>Restante: </span>
             </article>
             <article>
-              <span className="total">{FormatearNumeroDinero(total)}</span>
-              <span>{vuelto}</span>
-              <span>{restante}</span>
+              <span className="total">{FormatearNumeroDinero(total,dataempresa?.currency,dataempresa?.iso)}</span>
+              <span>{FormatearNumeroDinero(vuelto,dataempresa?.currency,dataempresa?.iso)}</span>
+              <span>{FormatearNumeroDinero(restante,dataempresa?.currency,dataempresa?.iso)}</span>
             </article>
           </section>
           <Linea />

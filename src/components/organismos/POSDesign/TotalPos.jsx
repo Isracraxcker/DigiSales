@@ -1,38 +1,35 @@
-/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import { Btn1 } from "../../moleculas/Btn1";
 import { Device } from "../../../styles/breakpoints";
 import { Icon } from "@iconify/react";
-import { useCartVentasStore, useEmpresaStore } from "../../..";
-import { FormatearNumeroDinero } from "../../../utils/Conversiones";
-import { HandCoins } from "lucide-react";
+import { useCartVentasStore, useDetalleVentasStore, useEmpresaStore } from "../../..";
+import {FormatearNumeroDinero} from "../../../utils/Conversiones"
 export function TotalPos() {
-  const { total, setStatePantallaCobro } = useCartVentasStore();
-  const { dataempresa } = useEmpresaStore();
+  const {total,setStatePantallaCobro} = useCartVentasStore()
+  const {dataempresa} = useEmpresaStore()
+  // const textLength = total.length;
+  // // Definir las clases CSS para diferentes longitudes de texto
+  // let textSizeClass = 'medium-text';
+  // if (textLength < 10) {
+  //   textSizeClass = 'large-text';
+  // } else if (textLength < 20) {
+  //   textSizeClass = 'medium-text';
+  // } else {
+  //   textSizeClass = 'small-text';
+  // }
   return (
     <Container>
-      <section className="imagen">
+    <section className="imagen">
         <img src="https://i.ibb.co/HdYgDdp/corazon-2.png" />
       </section>
       <section className="contentTotal">
         <section className="contentTituloTotal">
-          <Btn1
-            funcion={() => setStatePantallaCobro({ tipocobro: "efectivo" })}
-            border="2px"
-            bgcolor="#ffffff"
-            color="#207c33"
-            titulo="COBRAR"
-            icono={<HandCoins size={20} />}
-          />
-          <Btn1
-            border="2px"
-            bgcolor="#3FF563"
-            titulo="..."
-            icono={<Icon icon="fluent-emoji:safety-vest" />}
-          />
+          <Btn1 border="2px"  bgcolor="#ffffff"   color="#207c33" funcion={()=>setStatePantallaCobro({tipocobro:"mixto"})} titulo="COBRAR" icono={<Icon icon="fluent-emoji:money-with-wings" />} />
+          <Btn1 border="2px"  bgcolor="#3FF563" titulo="..." icono={<Icon icon="fluent-emoji:safety-vest" />}/>
         </section>
         <span>{FormatearNumeroDinero(total,dataempresa?.currency,dataempresa?.iso)}</span>
-      </section>
+      
+      </section> 
     </Container>
   );
 }
@@ -42,7 +39,7 @@ const Container = styled.div`
   justify-content: space-between;
   border-radius: 15px;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 38px;
   background-color: #3ff563;
   padding: 10px;
   color: #207c33;
@@ -73,7 +70,7 @@ const Container = styled.div`
   .imagen {
     z-index: 1;
     width: 55px;
-
+   
     position: relative;
     @media ${Device.desktop} {
       bottom: initial;
@@ -83,6 +80,7 @@ const Container = styled.div`
     }
   }
   .contentTotal {
+    z-index:10;
     margin-top: 10px;
     display: flex;
     flex-direction: column;

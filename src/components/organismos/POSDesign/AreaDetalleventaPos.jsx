@@ -28,8 +28,8 @@ export function AreaDetalleventaPos() {
                    {item._descripcion}
                 </span>
                 <span className="importe">
-                  <strong>P.Unitario: </strong> 
-                  {FormatearNumeroDinero(item._precio_venta,dataempresa?.currency,dataempresa?.iso)}
+                  <strong>P.Unitario:</strong> 
+                {FormatearNumeroDinero(item._precio_venta,dataempresa?.currency,dataempresa?.iso)}
                 </span>
               </article>
               <article className="contentbtn">
@@ -60,7 +60,7 @@ export function AreaDetalleventaPos() {
                   </strong>
                 </span>
                 <span className="delete" onClick={() => removeItem(item)}>
-                  <Trash2 />
+                  <Trash2 size={20} />
                 </span>
               </article>
             </Itemventa>

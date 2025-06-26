@@ -12,6 +12,7 @@ import { v } from "../../../styles/variables";
 import { Device } from "../../../styles/breakpoints";
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
+import { Barcode, Keyboard } from "lucide-react";
 
 export function HeaderPos() {
   const [stateLectora, setStateLectora] = useState(true);
@@ -118,7 +119,7 @@ export function HeaderPos() {
             color={stateLectora ? "#fff" : ({ theme }) => theme.text}
             border="2px"
             titulo="Lectora"
-            icono={<Icon icon="material-symbols:barcode-reader-outline" />}
+            icono={ <Barcode />}
           />
           <Btn1
             funcion={() => {
@@ -130,7 +131,7 @@ export function HeaderPos() {
             color={stateTeclado ? "#fff" : ({ theme }) => theme.text}
             border="2px"
             titulo="Teclado"
-            icono={<Icon icon="icon-park:enter-the-keyboard" />}
+            icono={<Keyboard />}
           />
         </article>
       </section>

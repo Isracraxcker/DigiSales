@@ -1,4 +1,3 @@
-
 import { ChevronLeft, Eye, EyeOff, Trash2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
@@ -21,8 +20,8 @@ export function PantallaCobro() {
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-    }
-  },[])
+    };
+  }, []);
   return (
     <Container>
       <section className="contentingresocobro">
