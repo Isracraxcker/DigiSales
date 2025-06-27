@@ -3,24 +3,90 @@ import { VolverBtn } from "../../../moleculas/VolverBtn";
 import { Btn1 } from "../../../moleculas/Btn1";
 import { Device } from "../../../../styles/breakpoints";
 import { useCierreCajaStore } from "../../../../store/CierreCajaStore";
+import { useFormattedDate } from "../../../../hooks/useFormattedDate";
+import { format } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
+import { useMovCajaStore } from "../../../../store/MovCajaStore";
+import { FormatearNumeroDinero } from "../../../../utils/Conversiones";
+import { useEmpresaStore } from "../../../../store/EmpresaStore";
+import { PantallaConteoCaja } from "./PantallaConteoCaja";
 export function PantallaCierreCaja() {
-  const { stateCierreCaja, setStateCierraCaja } = useCierreCajaStore();
-  if (!stateCierreCaja) {
-    return;
+  const { setStateCierraCaja, dataCierreCaja,stateConteoCaja,setStateConteoCaja } = useCierreCajaStore();
+  const {
+    mostrarEfectivoSinVentasMovcierrecaja,
+    mostrarVentasMetodoPagoMovCaja,
+    totalVentasMetodoPago,
+    totalVentasEfectivo,
+    totalAperturaCaja,
+    totalGastosVariosCaja,
+    totalIngresosVariosCaja,
+    totalEfectivoCajaSinVentas,
+    totalEfectivoTotalCaja,
+  } = useMovCajaStore();
+  const { dataempresa } = useEmpresaStore();
+  const fechaactual = useFormattedDate();
+  const fechaInicioFormateada = format(
+    new Date(dataCierreCaja?.fechainicio),
+    "dd/MM/yyyy HH:mm:ss"
+  );
+  const {
+    isLoading: isloading1,
+    isError: iserror1,
+    error: error1,
+  } = useQuery({
+    queryKey: ["mostrar efectivo sin ventas movCaja"],
+    queryFn: () =>
+      mostrarEfectivoSinVentasMovcierrecaja({
+        _id_cierre_caja: dataCierreCaja?.id,
+      }),
+  });
+  const {
+    data: dataventasmetodopago,
+    isLoading: isloading2,
+    isError: iserror2,
+    error: error2,
+  } = useQuery({
+    queryKey: ["mostrar ventas metodoPago movCaja"],
+    queryFn: () =>
+      mostrarVentasMetodoPagoMovCaja({ _id_cierre_caja: dataCierreCaja?.id }),
+  });
+  const isLoading = isloading1 || isloading2;
+  const isError = iserror1 || iserror2;
+  const error = error1 || error2;
+  if (isloading1) {
+    return <span>Cargando datos...</span>;
   }
+  if (isError) {
+    return <span>error...{error.message} </span>;
+  }
+
   return (
     <Container>
-      <VolverBtn funcion={setStateCierraCaja} />
+      <VolverBtn funcion={()=>setStateCierraCaja(false)} />
 
       <Fechas>
-        Corte de caja desde: 12/10/2024 09:27:18 Hasta: 21/10/2024 07:37:17
+        Apertura de caja: {fechaInicioFormateada} Hasta: {fechaactual}
       </Fechas>
       <Datos>
         <section>
-          Ventas Totales: <span>23</span>
+          Ventas Totales:{" "}
+          <span>
+            {FormatearNumeroDinero(
+              totalVentasMetodoPago,
+              dataempresa?.currency,
+              dataempresa?.iso
+            )}{" "}
+          </span>
         </section>
         <section>
-          Efectivo en CAJA: <span>23</span>
+          Efectivo en CAJA:{" "}
+          <span>
+            {FormatearNumeroDinero(
+              totalEfectivoTotalCaja,
+              dataempresa?.currency,
+              dataempresa?.iso
+            )}{" "}
+          </span>
         </section>
       </Datos>
       <Division></Division>
@@ -31,29 +97,54 @@ export function PantallaCierreCaja() {
             <h4>Dinero en CAJA</h4>
             <ul>
               <li>
-                Fondo de caja: <span>0</span>
+                Fondo de caja:{" "}
+                <span>
+                  {FormatearNumeroDinero(
+                    totalAperturaCaja,
+                    dataempresa?.currency,
+                    dataempresa?.iso
+                  )}
+                </span>
               </li>
               <li>
-                Ventas en efectivo: <span>23</span>
+                Ventas en efectivo:{" "}
+                <span>
+                  {" "}
+                  {FormatearNumeroDinero(
+                    totalVentasEfectivo,
+                    dataempresa?.currency,
+                    dataempresa?.iso
+                  )}
+                </span>
+              </li>
+
+              <li>
+                Ingresos varios:{" "}
+                <span>
+                  {FormatearNumeroDinero(
+                    totalIngresosVariosCaja,
+                    dataempresa?.currency,
+                    dataempresa?.iso
+                  )}
+                </span>
               </li>
               <li>
-                Cobros en efectivo: <span>0</span>
-              </li>
-              <li>
-                Cobros con Tarjeta: <span>0</span>
-              </li>
-              <li>
-                Pagos en efectivo: <span>0</span>
-              </li>
-              <li>
-                Ingresos varios: <span>0</span>
-              </li>
-              <li>
-                Gastos varios: <span>0</span>
+                Gastos varios:{" "}
+                <span style={{ color: "#f15050", fontWeight: "bold" }}>-
+                  {FormatearNumeroDinero(
+                    totalGastosVariosCaja,
+                    dataempresa?.currency,
+                    dataempresa?.iso
+                  )}
+                </span>
               </li>
               <li className="total">
                 <Divider />
-                23
+                {FormatearNumeroDinero(
+                  totalEfectivoTotalCaja,
+                  dataempresa?.currency,
+                  dataempresa?.iso
+                )}
               </li>
             </ul>
           </Tabla>
@@ -61,41 +152,43 @@ export function PantallaCierreCaja() {
           <Tabla>
             <h4>Ventas Totales</h4>
             <ul>
-              <li>
-                En Efectivo: <span>23</span>
-              </li>
-              <li>
-                Con Tarjeta: <span>0</span>
-              </li>
-              <li>
-                A Crédito: <span>0</span>
-              </li>
+              {dataventasmetodopago?.map((item, index) => {
+                return (
+                  <li key={index}>
+                    En {item?.metodo_pago}:{" "}
+                    <span>
+                      {FormatearNumeroDinero(
+                        item?.monto,
+                        dataempresa?.currency,
+                        dataempresa?.iso
+                      )}{" "}
+                    </span>
+                  </li>
+                );
+              })}
               <li className="total">
                 <Divider />
-                23
+                {FormatearNumeroDinero(
+                  totalVentasMetodoPago,
+                  dataempresa?.currency,
+                  dataempresa?.iso
+                )}
               </li>
             </ul>
           </Tabla>
           <DivisionY />
-          <Tabla>
-            <h4>Créditos Aperturados</h4>
-            <ul>
-              <li>
-                Por Cobrar: <span>0</span>
-              </li>
-              <li>
-                Por Pagar: <span>0</span>
-              </li>
-            </ul>
-          </Tabla>
         </Tablas>
       </Resumen>
-      <Btn1
+      <Btn1 funcion={()=>setStateConteoCaja(true)}
         titulo={"CERRAR CAJA"}
         color="#ffffff"
         border="2px"
         bgcolor="#e88018"
       />
+{
+  stateConteoCaja && <PantallaConteoCaja/>
+}
+      
     </Container>
   );
 }
