@@ -28,7 +28,7 @@ export async function InsertarMetodosPago(p, file) {
     };
     await EditarIconoMetodosPago(piconoeditar);
   }
-  toast.success("Metodo de pago insertado correctamente!");
+  toast.success("¡Metodo de pago insertado correctamente!");      
 }
 
 async function subirImagen(idmetodopago, file) {
@@ -80,7 +80,6 @@ export async function EditarMetodosPago(p, fileold, filenew) {
       await EditarIconoMetodosPago(piconoeditar);
     }
   }
-  toast.success("Metodo de pago editado correctamente!");
 }
 
 export async function EliminarMetodosPago(p) {

@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { Btn1 } from "../../moleculas/Btn1";
 import { TotalPos } from "./TotalPos";
-import { Device } from "../../../styles/breakpoints";
-import { useVentasStore } from "../../../store/VentasStore";
+import { Device } from "../../../styles/breakpoints";;
 import { useCartVentasStore } from "../../../store/CartVentasStore";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 import { useMetodosPagoStore } from "../../../store/MetodosPagoStore";
-import { useQuery } from "@tanstack/react-query";
+
 export function AreaTecladoPos() {
   const { setStatePantallaCobro,stateMetodosPago } = useCartVentasStore();
   const { dataempresa } = useEmpresaStore();

@@ -116,7 +116,7 @@ export const useCartVentasStore = create(
       setStatePantallaCobro: (p) =>
         set((state) => {
           if (state.items.length === 0) {
-            toast.error("Agrega productos al carrito para realizar la venta");
+            toast.error("Agrega productos para poder realizar la venta");
             return {
               state,
             };
