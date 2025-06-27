@@ -2,17 +2,24 @@ import styled from "styled-components";
 import { Btn1 } from "../../moleculas/Btn1";
 import { TotalPos } from "./TotalPos";
 import { Device } from "../../../styles/breakpoints";
+import { useVentasStore } from "../../../store/VentasStore";
 import { useCartVentasStore } from "../../../store/CartVentasStore";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 import { useMetodosPagoStore } from "../../../store/MetodosPagoStore";
-
+import { useQuery } from "@tanstack/react-query";
 export function AreaTecladoPos() {
-  const { setStatePantallaCobro, stateMetodosPago } = useCartVentasStore();
+  const { setStatePantallaCobro,stateMetodosPago } = useCartVentasStore();
   const { dataempresa } = useEmpresaStore();
   const { dataMetodosPago: datametodospago } = useMetodosPagoStore();
+  // const { data: datametodospago } = useQuery({
+  //   queryKey: ["mostrar metodos de pago"],
+  //   queryFn: () => mostrarMetodosPago({ id_empresa: dataempresa?.id }),
+  //   enabled: !!dataempresa,
+  // });
 
   return (
     <Container stateMetodosPago={stateMetodosPago}>
+     
       <section className="areatipopago">
         {datametodospago?.map((item, index) => {
           return (
@@ -30,6 +37,7 @@ export function AreaTecladoPos() {
             </article>
           );
         })}
+        
       </section>
       <section className="totales">
         {/* <div className="subtotal">
