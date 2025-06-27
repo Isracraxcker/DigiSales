@@ -10,18 +10,23 @@ import { useSucursalesStore } from "../../../store/SucursalesStore";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 import { useVentasStore } from "../../../store/VentasStore";
 import { useDetalleVentasStore } from "../../../store/DetalleVentasStore";
-
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { PanelBuscador } from "./PanelBuscador";
 import { useClientesProveedoresStore } from "../../../store/ClientesProveedoresStore";
+import { useMetodosPagoStore } from "../../../store/MetodosPagoStore";
+import { useCierreCajaStore } from "../../../store/CierreCajaStore";
+import { useMovCajaStore } from "../../../store/MovCajaStore";
+import { useFormattedDate } from "../../../hooks/useFormattedDate";
 import toast from "react-hot-toast";
-import { UserSearch } from "lucide-react";
+
 export const IngresoCobro = forwardRef((props, ref) => {
+  const fechaActual = useFormattedDate();
   const { tipocobro, total, items, setStatePantallaCobro, resetState } =
     useCartVentasStore();
   //Valores a calcular
   const [stateBuscadorClientes, setStateBuscadorClientes] = useState(false);
   const [precioVenta, setPrecioVenta] = useState(total);
+  const [valoresPago, setValoresPago] = useState({});
   const [valorTarjeta, setValorTarjeta] = useState(
     tipocobro === "tarjeta" ? total : 0
   );
@@ -34,6 +39,8 @@ export const IngresoCobro = forwardRef((props, ref) => {
   //Valores a mostrar
   const [vuelto, setVuelto] = useState(0);
   const [restante, setRestante] = useState(0);
+  //datos de tipos de pago
+  const { dataMetodosPago } = useMetodosPagoStore();
   //datos de la store
   const { datausuarios } = useUsuariosStore();
   const { sucursalesItemSelectAsignadas } = useSucursalesStore();
@@ -61,31 +68,43 @@ export const IngresoCobro = forwardRef((props, ref) => {
       refetchOnWindowFocus: false,
     });
   //#endregion
-
+  
+  //Mostrar cierres de caja
+  const { dataCierreCaja } = useCierreCajaStore();
   // Función para calcular vuelto y restante
+  //Movientos de caja
+  const { insertarMovCaja } = useMovCajaStore();
   const calcularVueltoYRestante = () => {
-    const totalPagado = valorTarjeta + valorEfectivo + valorCredito;
-    if (totalPagado >= precioVenta) {
-      setVuelto(totalPagado - precioVenta);
-      setRestante(0);
-    } else {
+    const totalPagado = Object.values(valoresPago).reduce(
+      (acc, curr) => acc + curr,
+      0
+    );
+    const totalSinEfectivo = totalPagado - (valoresPago["Efectivo"] || 0);
+    // Si el total sin efectivo excede el precio de venta, no permitir el exceso
+    if (totalSinEfectivo > precioVenta) {
       setVuelto(0);
-      setRestante(precioVenta - totalPagado);
+      setRestante(precioVenta - totalSinEfectivo); //Restante negativo para indicar que se excede sin efectivo
+    } else {
+      // Permitir el exceso solo si es en efectivo
+      if (totalPagado >= precioVenta) {
+        const exceso = totalPagado - precioVenta;
+        setVuelto(valoresPago["Efectivo"] ? exceso : 0);
+        setRestante(0);
+      } else {
+        // Si el total pagado no cubre el precio de venta, calcular el restante
+        setVuelto(0);
+        setRestante(precioVenta - totalPagado);
+      }
     }
   };
   //Manejadores de cambio
-  const handleChangeValorEfectivo = (event) => {
-    const value = parseFloat(event.target.value) || 0;
-    setValorEfectivo(value);
+  const handleChangePago = (tipo, valor) => {
+    setValoresPago((prev) => ({
+      ...prev,
+      [tipo]: parseFloat(valor) || 0,
+    }));
   };
-  const handleChangeValorCredito = (event) => {
-    const value = parseFloat(event.target.value) || 0;
-    setValorCredito(value);
-  };
-  const handleChangeValorTarjeta = (event) => {
-    const value = parseFloat(event.target.value) || 0;
-    setValorTarjeta(value);
-  };
+
   // Exponiendo la función mutation a través de ref
   useImperativeHandle(ref, () => ({
     mutateAsync: mutation.mutateAsync,
@@ -101,23 +120,21 @@ export const IngresoCobro = forwardRef((props, ref) => {
       setStatePantallaCobro({ tipocobro: "" });
       resetState();
       resetearventas();
-      toast.success("¡Venta generada correctamente!");
+      toast.success("Venta generada correctamente");
     },
   });
   async function insertarventas() {
     if (restante === 0) {
       const pventas = {
-        id_cliente:cliproItemSelect?.id,
+        fecha: fechaActual,
+        id_cliente: cliproItemSelect?.id,
         id_usuario: datausuarios?.id,
         id_sucursal: sucursalesItemSelectAsignadas?.id_sucursal,
         id_empresa: dataempresa?.id,
         estado: "confirmada",
         vuelto: vuelto,
-        efectivo: parseFloat(valorEfectivo),
-        credito: parseFloat(valorCredito),
-        tarjeta: parseFloat(valorTarjeta),
         monto_total: total,
-        tipo_de_pago: tipocobro,
+        id_cierre_caja: dataCierreCaja?.id,
       };
       if (idventa === 0) {
         const result = await insertarVentas(pventas);
@@ -127,6 +144,27 @@ export const IngresoCobro = forwardRef((props, ref) => {
             await insertarDetalleVentas(item);
           }
         });
+        if (result?.id > 0) {
+          // Insertar en MovCaja solo los métodos de pago con monto mayor a 0
+          for (const [tipo, monto] of Object.entries(valoresPago)) {
+            if (monto > 0) {
+              const metodoPago = dataMetodosPago.find(
+                (item) => item.nombre === tipo
+              );
+              const pmovcaja = {
+                tipo_movimiento: "ingreso",
+                monto: monto,
+                id_metodo_pago: metodoPago?.id,
+                descripcion: `Pago de venta con ${tipo}`,
+                id_usuario: datausuarios?.id,
+                id_cierre_caja: dataCierreCaja?.id,
+                id_ventas: result?.id,
+                vuelto: tipo === "Efectivo" ? vuelto : 0,
+              };
+              await insertarMovCaja(pmovcaja);
+            }
+          }
+        }
       }
     } else {
       toast.error("Falta completar el pago, el restante tiene que ser 0");
@@ -134,8 +172,16 @@ export const IngresoCobro = forwardRef((props, ref) => {
   }
   //useEffect para recalcular cuando los valores cambian
   useEffect(() => {
+    if (tipocobro !== "Mixto" && valoresPago[tipocobro] != total) {
+      setValoresPago((prev) => ({
+        ...prev,
+        [tipocobro]: total,
+      }));
+    }
+  }, [tipocobro, total]);
+  useEffect(() => {
     calcularVueltoYRestante();
-  }, [precioVenta, valorTarjeta, valorEfectivo, valorCredito]);
+  }, [precioVenta, tipocobro, valoresPago]);
   return (
     <Container>
       {mutation.isPending ? (
@@ -145,8 +191,6 @@ export const IngresoCobro = forwardRef((props, ref) => {
           {mutation.isError && <span>error: {mutation.error.message}</span>}
           <section className="area1">
             <span className="tipocobro">{tipocobro}</span>
-           
-           
             <span>Cliente</span>
             <EditButton
               onClick={() => setStateBuscadorClientes(!stateBuscadorClientes)}
@@ -157,41 +201,27 @@ export const IngresoCobro = forwardRef((props, ref) => {
           </section>
           <Linea />
           <section className="area2">
-            {tipocobro != "efectivo" && tipocobro != "mixto" ? null : (
-              <InputText textalign="center">
-                <input
-                  onChange={handleChangeValorEfectivo}
-                  defaultValue={tipocobro === "mixto" ? "" : total}
-                  className="form__field"
-                  type="number"
-                />
-                <label className="form__label">efectivo</label>
-              </InputText>
-            )}
-            {tipocobro != "tarjeta" && tipocobro != "mixto" ? null : (
-              <InputText textalign="center">
-                <input
-                  onChange={handleChangeValorTarjeta}
-                  defaultValue={tipocobro === "mixto" ? "" : total}
-                  disabled={tipocobro === "mixto" ? false : true}
-                  className="form__field"
-                  type="number"
-                />
-                <label className="form__label">tarjeta</label>
-              </InputText>
-            )}
-            {tipocobro != "credito" && tipocobro != "mixto" ? null : (
-              <InputText textalign="center">
-                <input
-                  onChange={handleChangeValorCredito}
-                  defaultValue={tipocobro === "mixto" ? "" : total}
-                  disabled={tipocobro === "mixto" ? false : true}
-                  className="form__field"
-                  type="number"
-                />
-                <label className="form__label">credito</label>
-              </InputText>
-            )}
+            {dataMetodosPago?.map((item, index) => {
+              return (tipocobro === "Mixto" && item.nombre !== "Mixto") ||
+                (tipocobro === item.nombre && item.nombre !== "Mixto") ? (
+                <InputText textalign="center" key={index}>
+                  <input
+                    onChange={(e) =>
+                      handleChangePago(item.nombre, e.target.value)
+                    }
+                    defaultValue={tipocobro === item.nombre ? total : ""}
+                    className="form__field"
+                    type="number"
+                    disabled={
+                      tipocobro === "Mixto" || tipocobro === "Efectivo"
+                        ? false
+                        : true
+                    }
+                  />
+                  <label className="form__label">{item.nombre} </label>
+                </InputText>
+              ) : null;
+            })}
           </section>
           <Linea />
           <section className="area3">
@@ -201,9 +231,27 @@ export const IngresoCobro = forwardRef((props, ref) => {
               <span>Restante: </span>
             </article>
             <article>
-              <span className="total">{FormatearNumeroDinero(total,dataempresa?.currency,dataempresa?.iso)}</span>
-              <span>{FormatearNumeroDinero(vuelto,dataempresa?.currency,dataempresa?.iso)}</span>
-              <span>{FormatearNumeroDinero(restante,dataempresa?.currency,dataempresa?.iso)}</span>
+              <span className="total">
+                {FormatearNumeroDinero(
+                  total,
+                  dataempresa?.currency,
+                  dataempresa?.iso
+                )}
+              </span>
+              <span>
+                {FormatearNumeroDinero(
+                  vuelto,
+                  dataempresa?.currency,
+                  dataempresa?.iso
+                )}
+              </span>
+              <span>
+                {FormatearNumeroDinero(
+                  restante,
+                  dataempresa?.currency,
+                  dataempresa?.iso
+                )}
+              </span>
             </article>
           </section>
           <Linea />
@@ -218,7 +266,11 @@ export const IngresoCobro = forwardRef((props, ref) => {
             />
           </section>
           {stateBuscadorClientes && (
-            <PanelBuscador selector={selectCliPro} setBuscador={setBuscador} displayField="nombres" data={dataBuscadorcliente} 
+            <PanelBuscador
+              selector={selectCliPro}
+              setBuscador={setBuscador}
+              displayField="nombres"
+              data={dataBuscadorcliente}
               setStateBuscador={() =>
                 setStateBuscadorClientes(!stateBuscadorClientes)
               }

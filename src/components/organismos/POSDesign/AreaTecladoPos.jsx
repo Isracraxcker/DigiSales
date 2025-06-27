@@ -2,50 +2,37 @@ import styled from "styled-components";
 import { Btn1 } from "../../moleculas/Btn1";
 import { TotalPos } from "./TotalPos";
 import { Device } from "../../../styles/breakpoints";
-import { useVentasStore } from "../../../store/VentasStore";
 import { useCartVentasStore } from "../../../store/CartVentasStore";
+import { useEmpresaStore } from "../../../store/EmpresaStore";
+import { useMetodosPagoStore } from "../../../store/MetodosPagoStore";
+
 export function AreaTecladoPos() {
-  const { setStatePantallaCobro } = useCartVentasStore();
+  const { setStatePantallaCobro, stateMetodosPago } = useCartVentasStore();
+  const { dataempresa } = useEmpresaStore();
+  const { dataMetodosPago: datametodospago } = useMetodosPagoStore();
+
   return (
-    <Container>
+    <Container stateMetodosPago={stateMetodosPago}>
       <section className="areatipopago">
-        <article className="box">
-          <Btn1
-            funcion={() => setStatePantallaCobro({ tipocobro: "efectivo" })}
-            bgcolor="#a6f868"
-            titulo="EFECTIVO"
-            border="0"
-            height="70px"
-            width="100%"
-          />
-          <Btn1
-            bgcolor="#fb81c6"
-            width="100%"
-            titulo="CREDITO"
-            border="0"
-            funcion={() => setStatePantallaCobro({ tipocobro: "credito" })}
-          />
-        </article>
-        <article className="box">
-          <Btn1
-            bgcolor="#fba259"
-            width="100%"
-            titulo="TARJETA"
-            border="0"
-            height="70px"
-            funcion={() => setStatePantallaCobro({ tipocobro: "tarjeta" })}
-          />
-          <Btn1
-            bgcolor="#919afd"
-            width="100%"
-            titulo="MIXTO"
-            border="0"
-            funcion={() => setStatePantallaCobro({ tipocobro: "mixto" })}
-          />
-        </article>
+        {datametodospago?.map((item, index) => {
+          return (
+            <article className="box" key={index}>
+              <Btn1
+                imagen={item.icono != "-" ? item.icono : null}
+                funcion={() =>
+                  setStatePantallaCobro({ tipocobro: item.nombre })
+                }
+                titulo={item.nombre}
+                border="0"
+                height="70px"
+                width="100%"
+              />
+            </article>
+          );
+        })}
       </section>
       <section className="totales">
-        <div className="subtotal">
+        {/* <div className="subtotal">
           <span>
             Sub total: <strong>$ 9.99</strong>{" "}
           </span>
@@ -53,7 +40,7 @@ export function AreaTecladoPos() {
           <span>
             Sub total: <strong>$ 9.99</strong>{" "}
           </span>
-        </div>
+        </div> */}
         <TotalPos />
       </section>
     </Container>
@@ -70,18 +57,24 @@ const Container = styled.div`
   border-radius: 15px;
   @media ${Device.desktop} {
     position: relative;
-    width: auto;
+    width: 450px;
     bottom: initial;
   }
   .areatipopago {
-    display: none;
+    display: ${({ stateMetodosPago }) => (stateMetodosPago ? "flex" : "none")};
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
     @media ${Device.desktop} {
-      display: initial;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
     }
     .box {
+      flex: 1 1 40%;
       display: flex;
-      gap: 20px;
-      margin: 10px;
+      gap: 10px;
     }
   }
   .totales {

@@ -1,18 +1,26 @@
-/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import { Device } from "../../styles/breakpoints";
 import { blur_in } from "../../styles/keyframes";
 import { v } from "../../styles/variables";
+import { PantallaCierreCaja } from "../organismos/POSDesign/CajaDesign/PantallaCierreCaja";
 import {
   AreaDetalleventaPos,
   AreaTecladoPos,
+  Btn1,
   FooterPos,
   HeaderPos,
+  InputText2,
+  Reloj,
   useCartVentasStore,
 } from "../../index";
 import { PantallaCobro } from "../organismos/POSDesign/PantallaCobro";
+
+import { PantallaIngresoSalidaDinero } from "../organismos/POSDesign/CajaDesign/PantallaIngresoSalidaDinero";
+import { useCierreCajaStore } from "../../store/CierreCajaStore";
+import { MenuFlotante } from "../organismos/POSDesign/MenuFlotante";
 export function POSTemplate() {
   const { statePantallaCobro } = useCartVentasStore();
+  const { stateIngresoSalida, stateCierreCaja } = useCierreCajaStore();
   return (
     <Container>
       {statePantallaCobro && <PantallaCobro />}
@@ -23,6 +31,9 @@ export function POSTemplate() {
         <AreaTecladoPos />
       </Main>
       <FooterPos />
+      <MenuFlotante />
+      {stateIngresoSalida && <PantallaIngresoSalidaDinero />}
+      {stateCierreCaja && <PantallaCierreCaja />}
     </Container>
   );
 }

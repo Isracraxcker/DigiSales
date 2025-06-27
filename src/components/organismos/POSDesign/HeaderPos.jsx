@@ -12,15 +12,17 @@ import { v } from "../../../styles/variables";
 import { Device } from "../../../styles/breakpoints";
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
-import { Barcode, Keyboard } from "lucide-react";
 
 export function HeaderPos() {
   const [stateLectora, setStateLectora] = useState(true);
+  const [cantidadInput, setCantidadInput] = useState(1);
   const [stateTeclado, setStateTeclado] = useState(false);
   const [stateListaproductos, setStateListaproductos] = useState(false);
   const { setBuscador, dataProductos, selectProductos, buscador } =
     useProductosStore();
+
   const { sucursalesItemSelectAsignadas } = useSucursalesStore();
+
   const { addItem } = useCartVentasStore();
   const buscadorRef = useRef(null);
 
@@ -44,7 +46,7 @@ export function HeaderPos() {
       useProductosStore.getState().productosItemSelect;
     const pDetalleVentas = {
       _id_venta: 1,
-      _cantidad: 1,
+      _cantidad: parseFloat(cantidadInput)|| 1,
       _precio_venta: productosItemSelect.precio_venta,
       _total: 1 * productosItemSelect.precio_venta,
       _descripcion: productosItemSelect.nombre,
@@ -52,14 +54,19 @@ export function HeaderPos() {
       _precio_compra: productosItemSelect.precio_compra,
       _id_sucursal: sucursalesItemSelectAsignadas.id_sucursal,
     };
-
     addItem(pDetalleVentas);
     setBuscador("");
     buscadorRef.current.focus();
+    setCantidadInput(1)
   }
-
+  //validar cantidad
+  const ValidarCantidad = (e) => {
+    const value = Math.max(0, parseFloat(e.target.value));
+    setCantidadInput(value);
+  };
   useEffect(() => {
-    buscadorRef.current?.focus();
+    buscadorRef.current.focus();
+    // eliminarventasIncompletas({ id_usuario: datausuarios?.id });
   }, []);
   return (
     <Header>
@@ -88,6 +95,18 @@ export function HeaderPos() {
       </section>
       <section className="contentbuscador">
         <article className="area1">
+          <div className="contentCantidad">
+            <InputText2>
+              <input
+                type="number"
+                min="1"
+                value={cantidadInput}
+                onChange={ValidarCantidad}
+                placeholder="cantidad..."
+                className="form__field"
+              />
+            </InputText2>
+          </div>
           <InputText2>
             <input
               value={buscador}
@@ -96,6 +115,13 @@ export function HeaderPos() {
               className="form__field"
               type="search"
               placeholder="Buscar..."
+              onKeyDown={(e)=>{
+                if(e.key==="ArrowDown" && stateListaproductos){
+                  e.preventDefault()// Evita que el input capture el foco
+                  document.querySelector("[tabindex='0'").focus()//mandar el foco a la lista
+                }
+              }}
+              
             />
             <ListaDesplegable
               funcioncrud={funcion_insertarventas}
@@ -119,7 +145,7 @@ export function HeaderPos() {
             color={stateLectora ? "#fff" : ({ theme }) => theme.text}
             border="2px"
             titulo="Lectora"
-            icono={ <Barcode />}
+            icono={<Icon icon="material-symbols:barcode-reader-outline" />}
           />
           <Btn1
             funcion={() => {
@@ -131,7 +157,7 @@ export function HeaderPos() {
             color={stateTeclado ? "#fff" : ({ theme }) => theme.text}
             border="2px"
             titulo="Teclado"
-            icono={<Keyboard />}
+            icono={<Icon icon="icon-park:enter-the-keyboard" />}
           />
         </article>
       </section>
@@ -192,6 +218,11 @@ const Header = styled.div`
 
     .area1 {
       grid-area: area1;
+      display: flex;
+      gap: 30px;
+      .contentCantidad {
+        width: 150px;
+      }
       /* background-color: #ff00ae; */
     }
     .area2 {

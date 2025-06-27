@@ -1,13 +1,14 @@
-/* eslint-disable no-unused-vars */
-import toast from "react-hot-toast";
+
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { useClientesProveedoresStore } from "./ClientesProveedoresStore";
+import toast from "react-hot-toast";
 const initialState = {
   items: [],
   total: 0,
   statePantallaCobro: false,
   tipocobro: "",
+  stateMetodosPago: false,
 };
 function calcularTotal(items) {
   return items.reduce(
@@ -30,10 +31,11 @@ export const useCartVentasStore = create(
             // Si el producto ya está en el carrito, aumentar la cantidad
             const updatedItems = state.items.map((item) => {
               if (item._id_producto === p._id_producto) {
+                const newQuantity = item._cantidad + (p._cantidad || 1);
                 return {
                   ...item,
-                  _cantidad: item._cantidad + 1,
-                  _total: item._total + p._cantidad * p._precio_venta,
+                  _cantidad: newQuantity,
+                  _total: newQuantity * item._precio_venta,
                 };
               }
               return item;
@@ -48,13 +50,17 @@ export const useCartVentasStore = create(
           }
         }),
       removeItem: (p) =>
-        set((state) => ({
-          items: state.items.filter((item) => item !== p),
-        })),
+        set((state) => {
+          const updatedItems = state.items.filter((item) => item !== p);
+          return {
+            items: updatedItems,
+            total: calcularTotal(updatedItems),
+          };
+        }),
       resetState: () => {
-        const {selectCliPro} = useClientesProveedoresStore.getState();
+        const { selectCliPro } = useClientesProveedoresStore.getState();
         selectCliPro([]);
-        set(initialState)
+        set(initialState);
       },
       addcantidadItem: (p) =>
         set((state) => {
@@ -92,10 +98,25 @@ export const useCartVentasStore = create(
             .filter(Boolean); //Filtlar elementos nulos
           return { items: updatedItems, total: calcularTotal(updatedItems) };
         }),
+      updateCantidadItem: (p, cantidad) =>
+        set((state) => {
+          const updatedItems = state.items.map((item) => {
+            if (item._id_producto === p._id_producto) {
+              const updatedItem = {
+                ...item,
+                _cantidad: cantidad,
+                _total: cantidad * item._precio_venta,
+              };
+              return updatedItem;
+            }
+            return item;
+          });
+          return { items: updatedItems, total: calcularTotal(updatedItems) };
+        }),
       setStatePantallaCobro: (p) =>
         set((state) => {
           if (state.items.length === 0) {
-            toast.error("No hay productos en el carrito");
+            toast.error("Agrega productos, no seas puerco");
             return {
               state,
             };
@@ -106,6 +127,8 @@ export const useCartVentasStore = create(
             };
           }
         }),
+      setStateMetodosPago: () =>
+        set((state) => ({ stateMetodosPago: !state.stateMetodosPago })),
     }),
     {
       name: "cart-ventas-storage",

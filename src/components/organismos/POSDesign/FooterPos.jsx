@@ -1,16 +1,56 @@
 import styled from "styled-components";
 import { Device } from "../../../styles/breakpoints";
 import { Btn1 } from "../../moleculas/Btn1";
-import { Trash2 } from "lucide-react";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { useCartVentasStore } from "../../../store/CartVentasStore";
+import { useCierreCajaStore } from "../../../store/CierreCajaStore";
 export function FooterPos() {
-
- const {resetState} = useCartVentasStore()
+  const { resetState } = useCartVentasStore();
+  const { setStateIngresoSalida, setTipoRegistro, setStateCierraCaja } =
+    useCierreCajaStore();
   return (
     <Footer>
       <article className="content">
-        <Btn1 bgcolor={"#ff0000"} color={"255,255,255"} funcion={resetState} titulo="Eliminar venta" icono={<Trash2 size={20} />} />
-        <Btn1 titulo="Ver ventas del día y Devoluciones" />
+        <Btn1
+          bgcolor="#f44141"
+          color="#fff"
+          funcion={resetState}
+          icono={<Icon icon="fluent-emoji-flat:skull" />}
+          titulo="Eliminar venta"
+        />
+        <Btn1
+          bgcolor="#fff"
+          color="#2d2d2d"
+          funcion={() => setStateCierraCaja(true)}
+          icono={<Icon icon="emojione:card-file-box" />}
+          titulo="Cerrar caja"
+        />
+        <Btn1
+          bgcolor="#fff"
+          color="#2d2d2d"
+          funcion={() => {
+            setStateIngresoSalida(true);
+            setTipoRegistro("ingreso");
+          }}
+          icono={<Icon icon="fluent-emoji:dollar-banknote" />}
+          titulo="Ingresar dinero"
+        />
+        <Btn1
+          bgcolor="#fff"
+          color="#2d2d2d"
+          funcion={() => {
+            setStateIngresoSalida(true);
+            setTipoRegistro("salida");
+          }}
+          icono={<Icon icon="noto-v1:money-bag" />}
+          titulo="Retirar dinero"
+        />
+        {/* <Btn1
+          bgcolor="#fff"
+          color="#2d2d2d"
+          icono={<Icon icon="icon-park:preview-open" />}
+          titulo="Ver ventas del día"
+        /> */}
       </article>
     </Footer>
   );

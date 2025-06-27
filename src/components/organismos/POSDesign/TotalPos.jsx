@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import { useCartVentasStore, useDetalleVentasStore, useEmpresaStore } from "../../..";
 import {FormatearNumeroDinero} from "../../../utils/Conversiones"
 export function TotalPos() {
-  const {total,setStatePantallaCobro} = useCartVentasStore()
+  const {total,setStateMetodosPago} = useCartVentasStore()
   const {dataempresa} = useEmpresaStore()
   // const textLength = total.length;
   // // Definir las clases CSS para diferentes longitudes de texto
@@ -24,8 +24,8 @@ export function TotalPos() {
       </section>
       <section className="contentTotal">
         <section className="contentTituloTotal">
-          <Btn1 border="2px"  bgcolor="#ffffff"   color="#207c33" funcion={()=>setStatePantallaCobro({tipocobro:"mixto"})} titulo="COBRAR" icono={<Icon icon="fluent-emoji:money-with-wings" />} />
-          <Btn1 border="2px"  bgcolor="#3FF563" titulo="..." icono={<Icon icon="fluent-emoji:safety-vest" />}/>
+          <Btn1 border="2px"  bgcolor="#ffffff"   color="#207c33" funcion={setStateMetodosPago} titulo="COBRAR" icono={<Icon icon="fluent-emoji:money-with-wings" />} />
+         
         </section>
         <span>{FormatearNumeroDinero(total,dataempresa?.currency,dataempresa?.iso)}</span>
       
@@ -87,8 +87,9 @@ const Container = styled.div`
     .contentTituloTotal {
       display: flex;
       align-items: center;
+      position: relative;
       margin-top: 30px;
-      gap: 10px;
+     
       @media ${Device.desktop} {
         display: none;
       }
