@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { supabase } from "./supabase.config";
 const tabla = "metodos_pago";
 export async function MostrarMetodosPago(p) {
@@ -27,6 +28,7 @@ export async function InsertarMetodosPago(p, file) {
     };
     await EditarIconoMetodosPago(piconoeditar);
   }
+  toast.success("Metodo de pago insertado correctamente!");
 }
 
 async function subirImagen(idmetodopago, file) {
@@ -78,6 +80,7 @@ export async function EditarMetodosPago(p, fileold, filenew) {
       await EditarIconoMetodosPago(piconoeditar);
     }
   }
+  toast.success("Metodo de pago editado correctamente!");
 }
 
 export async function EliminarMetodosPago(p) {
@@ -89,4 +92,5 @@ export async function EliminarMetodosPago(p) {
     const ruta = "metodospago/" + p.id;
     await supabase.storage.from("imagenes").remove([ruta]);
   }
+  toast.success("Metodo de pago eliminado correctamente!");
 }

@@ -14,6 +14,7 @@ import {
 import { BasicosConfig } from "../components/organismos/EmpresaConfigDesign/BasicosConfig";
 import { MonedaConfig } from "../components/organismos/EmpresaConfigDesign/MonedaConfig";
 import { ClientesProveedores } from "../pages/ClientesProveedores";
+import { MetodosPago } from "../pages/MetodosPago";
 
 export function MyRoutes() {
   return (
@@ -110,6 +111,17 @@ export function MyRoutes() {
           <ProtectedRoute accessBy="authenticated">
             <Layout>
               <ClientesProveedores />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/configuracion/metodospago"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <MetodosPago />
             </Layout>
           </ProtectedRoute>
         }
