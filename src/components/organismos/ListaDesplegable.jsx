@@ -40,9 +40,9 @@ export function ListaDesplegable({
       );
     }
   };
-  useEffect(() => {
-    dropdownRef.current?.focus();
-  }, []);
+  // useEffect(() => {
+  //   dropdownRef.current?.focus();
+  // }, []);
   return (
     <Container scroll={scroll} $top={top} ref={dropdownRef} tabIndex={0} onKeyDown={handleKeyDown} >
       <section className="contentClose" onClick={setState}>
