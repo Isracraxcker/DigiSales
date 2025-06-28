@@ -35,7 +35,7 @@ export const LinksArray = [
   {
     label: "Dashboard",
     icon: "fluent-color:poll-20",
-    to: "/reportes",
+    to: "/dashboard",
   },
   {
     label: "Vender",

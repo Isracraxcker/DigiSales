@@ -15,6 +15,7 @@ import { BasicosConfig } from "../components/organismos/EmpresaConfigDesign/Basi
 import { MonedaConfig } from "../components/organismos/EmpresaConfigDesign/MonedaConfig";
 import { ClientesProveedores } from "../pages/ClientesProveedores";
 import { MetodosPago } from "../pages/MetodosPago";
+import { Dashboard } from "../pages/Dashboard";
 
 export function MyRoutes() {
   return (
@@ -122,6 +123,17 @@ export function MyRoutes() {
           <ProtectedRoute accessBy="authenticated">
             <Layout>
               <MetodosPago />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+
+        <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Dashboard />
             </Layout>
           </ProtectedRoute>
         }
