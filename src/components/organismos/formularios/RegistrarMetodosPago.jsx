@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
@@ -19,7 +19,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMetodosPagoStore } from "../../../store/MetodosPagoStore";
 import toast from "react-hot-toast";
 
-export function RegistrarMetodosPago({ onClose, dataSelect, accion }) {
+
+export function RegistrarMetodosPago({
+  onClose,
+  dataSelect,
+  accion,
+
+}) {
   const { insertarMetodosPago, editarMetodosPago } = useMetodosPagoStore();
   const { dataempresa } = useEmpresaStore();
   const [currentColor, setColor] = useState("#F44336");
@@ -39,7 +45,7 @@ export function RegistrarMetodosPago({ onClose, dataSelect, accion }) {
       toast.error(`Error: ${error.message}`);
     },
     onSuccess: () => {
-      // toast.success("Metodo de pago guardado exitosamente");
+      toast.success("Metodo de pago guardado exitosamente");
       queryClient.invalidateQueries(["mostrar metodos pago"]);
       cerrarFormulario();
     },
@@ -49,6 +55,7 @@ export function RegistrarMetodosPago({ onClose, dataSelect, accion }) {
   };
   const cerrarFormulario = () => {
     onClose();
+
   };
   async function insertar(data) {
     if (accion === "Editar") {
@@ -92,17 +99,13 @@ export function RegistrarMetodosPago({ onClose, dataSelect, accion }) {
     <Container>
       {isPending ? (
         <LoadingContainer>
-          <Spinner1 />
+           <Spinner1 />
         </LoadingContainer>
       ) : (
         <CardContainer className="card-contenedor">
           <CardHeader className="headers">
             <section>
-              <h1>
-                {accion == "Editar"
-                  ? "Editar Método de pago"
-                  : "Registrar Nuevo Método de pago"}
-              </h1>
+              <h1>{accion == "Editar" ? "Editar Método de pago" : "Registrar Nuevo Método de pago"}</h1>
             </section>
             <CloseButton onClick={onClose}>✕</CloseButton>
           </CardHeader>
@@ -131,19 +134,14 @@ export function RegistrarMetodosPago({ onClose, dataSelect, accion }) {
                   bgcolor="rgb(183, 183, 182)"
                   icono={<v.iconosupabase />}
                 />
-                <input
-                  type="file"
-                  ref={ref}
-                  onChange={(e) => prepararImagen(e)}
-                  accept="image/*"
-                />
+                <input type="file" ref={ref} onChange={(e) => prepararImagen(e)} accept="image/*" />
               </ImageUploadButton>
             </PictureContainer>
 
             <form className="formulario" onSubmit={handleSubmit(handlesub)}>
               <div className="form-subcontainer">
                 <SectionTitle>📝 Información del Método de pago </SectionTitle>
-
+ 
                 <article>
                   <InputText icono={<v.iconoflechaderecha />}>
                     <input
@@ -156,18 +154,14 @@ export function RegistrarMetodosPago({ onClose, dataSelect, accion }) {
                       })}
                     />
                     <label className="form__label">Método de pago</label>
-                    {errors.nombre?.type === "required" && (
-                      <ErrorMessage>Campo requerido</ErrorMessage>
-                    )}
+                    {errors.nombre?.type === "required" && <ErrorMessage>Campo requerido</ErrorMessage>}
                   </InputText>
                 </article>
 
+                
+
                 <ButtonContainer>
-                  <Btn1
-                    icono={<v.iconoguardar />}
-                    titulo="Guardar"
-                    bgcolor="#F9D70B"
-                  />
+                  <Btn1 icono={<v.iconoguardar />} titulo="Guardar" bgcolor="#F9D70B" />
                 </ButtonContainer>
               </div>
             </form>
@@ -175,7 +169,7 @@ export function RegistrarMetodosPago({ onClose, dataSelect, accion }) {
         </CardContainer>
       )}
     </Container>
-  );
+  )
 }
 
 // Styled Components actualizados para formato Card
@@ -192,7 +186,7 @@ const Container = styled.div`
   z-index: 1000;
   padding: 20px;
   backdrop-filter: blur(2px);
-`;
+`
 
 const LoadingContainer = styled.div`
   display: flex;
@@ -224,7 +218,7 @@ const CardContainer = styled.div`
       transform: translateY(0) scale(1);
     }
   }
-`;
+`
 
 const CardHeader = styled.div`
   display: flex;
@@ -232,11 +226,7 @@ const CardHeader = styled.div`
   align-items: center;
   padding: 24px 32px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(
-    135deg,
-    rgba(252, 96, 39, 0.1),
-    rgba(249, 215, 11, 0.1)
-  );
+  background: linear-gradient(135deg, rgba(252, 96, 39, 0.1), rgba(249, 215, 11, 0.1));
 
   h1 {
     font-size: 24px;
@@ -244,7 +234,7 @@ const CardHeader = styled.div`
     margin: 0;
     color: ${({ theme }) => theme.text};
   }
-`;
+`
 
 const CloseButton = styled.button`
   background: none;
@@ -264,7 +254,7 @@ const CloseButton = styled.button`
     background-color: rgba(255, 255, 255, 0.1);
     transform: rotate(90deg);
   }
-`;
+`
 
 const CardContent = styled.div`
   padding: 32px;
@@ -276,7 +266,7 @@ const CardContent = styled.div`
       gap: 24px;
       display: flex;
       flex-direction: column;
-
+      
       .colorContainer {
         .colorPickerContent {
           padding-top: 15px;
@@ -285,7 +275,7 @@ const CardContent = styled.div`
       }
     }
   }
-`;
+`
 
 const SectionTitle = styled.h3`
   font-size: 18px;
@@ -294,7 +284,7 @@ const SectionTitle = styled.h3`
   color: ${({ theme }) => theme.text};
   padding-bottom: 8px;
   border-bottom: 2px solid rgba(252, 96, 39, 0.3);
-`;
+`
 
 const PictureContainer = styled.div`
   display: flex;
@@ -305,7 +295,7 @@ const PictureContainer = styled.div`
   background-color: rgba(249, 215, 11, 0.1);
   padding: 20px;
   margin-bottom: 24px;
-`;
+`
 
 const ImagePreview = styled.div`
   display: flex;
@@ -320,14 +310,14 @@ const ImagePreview = styled.div`
     border-radius: 10px;
     max-width: 200px;
     max-height: 120px;
-
+    
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
-`;
+`
 
 const EmptyImageContainer = styled.div`
   display: flex;
@@ -340,7 +330,7 @@ const EmptyImageContainer = styled.div`
   span {
     font-size: 14px;
   }
-`;
+`
 
 const ImageUploadButton = styled.div`
   display: flex;
@@ -349,7 +339,7 @@ const ImageUploadButton = styled.div`
   input {
     display: none;
   }
-`;
+`
 
 const ContentTitle = styled.div`
   display: flex;
@@ -362,19 +352,19 @@ const ContentTitle = styled.div`
     font-size: 25px;
     color: ${({ theme }) => theme.text};
   }
-
+  
   span {
     font-size: 16px;
     font-weight: 500;
     color: ${({ theme }) => theme.text};
   }
-`;
+`
 
 const ColorPickerContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-
+  
   .colorPickerContent {
     padding: 16px;
     background-color: rgba(255, 255, 255, 0.05);
@@ -382,7 +372,7 @@ const ColorPickerContainer = styled.div`
     display: flex;
     justify-content: center;
   }
-`;
+`
 
 const ColorPreview = styled.div`
   height: 50px;
@@ -394,7 +384,7 @@ const ColorPreview = styled.div`
   font-weight: 600;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   border: 2px solid rgba(255, 255, 255, 0.2);
-`;
+`
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -402,10 +392,10 @@ const ButtonContainer = styled.div`
   margin-top: 24px;
   padding-top: 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-`;
+`
 
 const ErrorMessage = styled.p`
   color: #f9184c;
   font-size: 14px;
   margin-top: 4px;
-`;
+`

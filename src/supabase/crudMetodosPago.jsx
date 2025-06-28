@@ -28,7 +28,6 @@ export async function InsertarMetodosPago(p, file) {
     };
     await EditarIconoMetodosPago(piconoeditar);
   }
-  toast.success("¡Metodo de pago insertado correctamente!");      
 }
 
 async function subirImagen(idmetodopago, file) {
@@ -80,6 +79,7 @@ export async function EditarMetodosPago(p, fileold, filenew) {
       await EditarIconoMetodosPago(piconoeditar);
     }
   }
+  
 }
 
 export async function EliminarMetodosPago(p) {
@@ -91,5 +91,5 @@ export async function EliminarMetodosPago(p) {
     const ruta = "metodospago/" + p.id;
     await supabase.storage.from("imagenes").remove([ruta]);
   }
-  toast.success("Metodo de pago eliminado correctamente!");
+  toast.success("Método de pago eliminado correctamente");
 }

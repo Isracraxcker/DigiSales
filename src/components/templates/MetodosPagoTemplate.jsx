@@ -1,27 +1,36 @@
 import styled from "styled-components";
-import { Btn1, Title } from "../../index";
+import {
+  Btn1,
+  Buscador,
+  RegistrarCategorias,
+  Title,
+  useCategoriasStore,
+} from "../../index";
 import { v } from "../../styles/variables";
+
 import { useState } from "react";
 
 import { RegistrarMetodosPago } from "../organismos/formularios/RegistrarMetodosPago";
 import { TablaMetodosPago } from "../organismos/tablas/TablaMetodosPago";
-import { useMetodosPagoStore } from "../../store/MetodosPagoStore";
 
+import { useMetodosPagoStore } from "../../store/MetodosPagoStore";
 export function MetodosPagoTemplate() {
   const [openRegistro, SetopenRegistro] = useState(false);
   const { dataMetodosPago } = useMetodosPagoStore();
   const [accion, setAccion] = useState("");
   const [dataSelect, setdataSelect] = useState([]);
-
+  
   function nuevoRegistro() {
     SetopenRegistro(!openRegistro);
     setAccion("Nuevo");
     setdataSelect([]);
+    
   }
   return (
     <Container>
+     
       {openRegistro && (
-        <RegistrarMetodosPago
+        <RegistrarMetodosPago 
           onClose={() => SetopenRegistro(!openRegistro)}
           dataSelect={dataSelect}
           accion={accion}
@@ -36,22 +45,19 @@ export function MetodosPagoTemplate() {
           icono={<v.iconoagregar />}
         />
       </section>
+     
 
       <section className="main">
-        <TablaMetodosPago
-          setdataSelect={setdataSelect}
-          setAccion={setAccion}
-          SetopenRegistro={SetopenRegistro}
-          data={dataMetodosPago}
-        />
+       
+        <TablaMetodosPago setdataSelect={setdataSelect} setAccion={setAccion} SetopenRegistro={SetopenRegistro} data={dataMetodosPago} />
       </section>
     </Container>
   );
 }
 const Container = styled.div`
   height: calc(100vh - 80px);
-
-  margin-top: 50px;
+  
+   margin-top:50px;
   padding: 15px;
   display: grid;
   grid-template:
