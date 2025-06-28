@@ -6,11 +6,8 @@ import { PantallaCierreCaja } from "../organismos/POSDesign/CajaDesign/PantallaC
 import {
   AreaDetalleventaPos,
   AreaTecladoPos,
-  Btn1,
   FooterPos,
   HeaderPos,
-  InputText2,
-  Reloj,
   useCartVentasStore,
 } from "../../index";
 import { PantallaCobro } from "../organismos/POSDesign/PantallaCobro";

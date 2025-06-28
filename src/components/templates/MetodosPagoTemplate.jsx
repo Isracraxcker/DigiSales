@@ -19,18 +19,16 @@ export function MetodosPagoTemplate() {
   const { dataMetodosPago } = useMetodosPagoStore();
   const [accion, setAccion] = useState("");
   const [dataSelect, setdataSelect] = useState([]);
-  
+
   function nuevoRegistro() {
     SetopenRegistro(!openRegistro);
     setAccion("Nuevo");
     setdataSelect([]);
-    
   }
   return (
     <Container>
-     
       {openRegistro && (
-        <RegistrarMetodosPago 
+        <RegistrarMetodosPago
           onClose={() => SetopenRegistro(!openRegistro)}
           dataSelect={dataSelect}
           accion={accion}
@@ -45,19 +43,22 @@ export function MetodosPagoTemplate() {
           icono={<v.iconoagregar />}
         />
       </section>
-     
 
       <section className="main">
-       
-        <TablaMetodosPago setdataSelect={setdataSelect} setAccion={setAccion} SetopenRegistro={SetopenRegistro} data={dataMetodosPago} />
+        <TablaMetodosPago
+          setdataSelect={setdataSelect}
+          setAccion={setAccion}
+          SetopenRegistro={SetopenRegistro}
+          data={dataMetodosPago}
+        />
       </section>
     </Container>
   );
 }
 const Container = styled.div`
   height: calc(100vh - 80px);
-  
-   margin-top:50px;
+
+  margin-top: 50px;
   padding: 15px;
   display: grid;
   grid-template:

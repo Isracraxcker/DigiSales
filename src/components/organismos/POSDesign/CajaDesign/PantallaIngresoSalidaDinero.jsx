@@ -8,15 +8,12 @@ import { useEffect, useState } from "react";
 import { Btn1 } from "../../../moleculas/Btn1";
 import { useCajasStore } from "../../../../store/CajasStore";
 import { useMutation } from "@tanstack/react-query";
-
 import { useForm } from "react-hook-form";
 import { useMovCajaStore } from "../../../../store/MovCajaStore";
 import { useMetodosPagoStore } from "../../../../store/MetodosPagoStore";
 import { useUsuariosStore } from "../../../../store/UsuariosStore";
 import { useFormattedDate } from "../../../../hooks/useFormattedDate";
 import toast from "react-hot-toast";
-
-
 export function PantallaIngresoSalidaDinero() {
   const fechaActual = useFormattedDate()
   const { tipoRegistro, setStateIngresoSalida } =
@@ -57,7 +54,7 @@ export function PantallaIngresoSalidaDinero() {
     mutationKey: ["insertar ingresos salidas caja"],
     mutationFn: insertar,
     onSuccess: () => {
-      toast.success("Operación realizada correctamente");
+      toast.success("Operación realizada con éxito");
       setStateIngresoSalida(false)
       reset();
     },
@@ -77,7 +74,6 @@ export function PantallaIngresoSalidaDinero() {
       (item) => item.nombre === "Efectivo"
     );
     if (efectivo) {
-      console.log(efectivo)
       setSelectedMetodo(efectivo);
     }
   }, [dataMetodosPago]);
@@ -123,14 +119,6 @@ export function PantallaIngresoSalidaDinero() {
             {errors.monto?.type === "required" && <p>Campon requerido</p>}
           </InputText2>
 
-          {/* <StyledDatePickerWrapper>
-            <StyledDatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="Seleccionar Fecha"
-            />
-          </StyledDatePickerWrapper> */}
           <span>Motivo (puede estar en blanco)</span>
           <InputText2>
             <textarea

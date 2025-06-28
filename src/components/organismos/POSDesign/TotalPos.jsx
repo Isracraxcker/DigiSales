@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import { useCartVentasStore, useDetalleVentasStore, useEmpresaStore } from "../../..";
 import {FormatearNumeroDinero} from "../../../utils/Conversiones"
 export function TotalPos() {
-  const {total,setStateMetodosPago} = useCartVentasStore()
+  const {total,setStatePantallaCobro,setStateMetodosPago} = useCartVentasStore()
   const {dataempresa} = useEmpresaStore()
   // const textLength = total.length;
   // // Definir las clases CSS para diferentes longitudes de texto
