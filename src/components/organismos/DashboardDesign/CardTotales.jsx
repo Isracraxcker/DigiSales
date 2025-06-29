@@ -14,17 +14,8 @@ export const CardTotales = ({ title, icon, value, percentage }) => {
       </Title>
       <SalesValue>{value} </SalesValue>
       <Percentage isPositive={isPositive} isNeutral={isNeutral}>
-        <Icon
-          icon={
-            isNeutral
-              ? "akar-icons:minus"
-              : isPositive
-              ? "iconamoon:arrow-up-2-fill"
-              : "iconamoon:arrow-down-2-fill"
-          }
-          width="16"
-          height="16"
-        />
+       <Icon icon={isNeutral?"akar-icons:minus":isPositive?"iconamoon:arrow-up-2-fill":"iconamoon:arrow-down-2-fill"}   width="16"
+          height="16"/>
         {percentage}% al periodo anterior
       </Percentage>
     </Container>
@@ -33,10 +24,10 @@ export const CardTotales = ({ title, icon, value, percentage }) => {
 const Container = styled.div`
   height: 100%;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+gap:14px;
 `;
 const Title = styled.div`
   display: flex;
@@ -62,9 +53,9 @@ const SalesValue = styled.span`
 `;
 const Percentage = styled.span`
   color: ${(props) =>
-    props.isNeutral ? "#6b7280" : props.isPositive ? "#0e6e0b" : "#d32f5b"};
-  font-weight: 500;
-  display: flex;
-  align-items: start;
-  font-size: 12px;
+    props.isNeutral ? "#6b7280" : props.isPositive ? "#0a5214" : "#d32f5b"};
+   font-weight: 500;
+   display: flex;
+   align-items: start;
+   font-size: 12px;
 `;

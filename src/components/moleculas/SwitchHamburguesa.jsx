@@ -11,12 +11,12 @@ export function SwitchHamburguesa({ state, setstate }) {
   );
 }
 const Container = styled.div`
-  position: fixed;
+position:fixed;
   display: flex;
   articule {
     display: flex;
   }
-  z-index: 101;
+z-index:101;
   .toggle {
     position: relative;
     width: 40px;

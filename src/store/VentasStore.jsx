@@ -1,16 +1,15 @@
 import { create } from "zustand";
-import {
-  InsertarVentas,
-  MostrarVentasXsucursal,
-} from "../index";
+import { InsertarVentas, MostrarVentasXsucursal } from "../index";
 
 export const useVentasStore = create((set) => ({
+  porcentajeCambio: 0,
   dataventas: [],
   idventa: 0,
   resetearventas: () =>
     set({
       idventa: 0,
     }),
+
   insertarVentas: async (p) => {
     const result = await InsertarVentas(p);
     set({ idventa: result?.id });

@@ -9,7 +9,7 @@ export function Sidebar({ state, setState }) {
     <>
       {/* Overlay para móvil */}
       {state && <Overlay onClick={() => setState(false)} />}
-      
+
       <Main $isopen={state.toString()}>
         <span className="Sidebarbutton" onClick={() => setState(!state)}>
           {<v.iconoflechaderecha />}
@@ -21,7 +21,7 @@ export function Sidebar({ state, setState }) {
             </div>
             <h2>DigiSales</h2>
           </div>
-          
+
           <div className="LinksSection">
             {LinksArray.map(({ icon, label, to }) => (
               <div
@@ -30,7 +30,9 @@ export function Sidebar({ state, setState }) {
               >
                 <NavLink
                   to={to}
-                  className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
+                  className={({ isActive }) =>
+                    `Links${isActive ? ` active` : ``}`
+                  }
                   onClick={() => {
                     // Cerrar sidebar en móvil al hacer click en un link
                     if (window.innerWidth <= 768) {
@@ -47,9 +49,9 @@ export function Sidebar({ state, setState }) {
                 </NavLink>
               </div>
             ))}
-            
+
             <Divider />
-            
+
             {SecondarylinksArray.map(({ icon, label, to, color }) => (
               <div
                 className={state ? "LinkContainer active" : "LinkContainer"}
@@ -57,7 +59,9 @@ export function Sidebar({ state, setState }) {
               >
                 <NavLink
                   to={to}
-                  className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
+                  className={({ isActive }) =>
+                    `Links${isActive ? ` active` : ``}`
+                  }
                   onClick={() => {
                     if (window.innerWidth <= 768) {
                       setState(false);
@@ -73,7 +77,7 @@ export function Sidebar({ state, setState }) {
                 </NavLink>
               </div>
             ))}
-            
+
             <div className={state ? "LinkContainer active" : "LinkContainer"}>
               <div className="Links">
                 <section className={state ? "content open" : "content"}>
@@ -108,7 +112,7 @@ const Overlay = styled.div`
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
-  
+
   @media (min-width: 769px) {
     display: none;
   }
@@ -133,8 +137,8 @@ const Container = styled.div`
 
   /* Scrollbar personalizado */
   &::-webkit-scrollbar {
-  display: none;
-}
+    display: none;
+  }
   &::-webkit-scrollbar-thumb {
     background-color: ${(props) => props.theme.colorScroll};
     border-radius: 10px;
@@ -150,7 +154,7 @@ const Container = styled.div`
     transform: translateX(-100%);
     width: 280px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    
+
     &.active {
       transform: translateX(0);
       width: 280px;
@@ -170,7 +174,7 @@ const Container = styled.div`
     align-items: center;
     padding-bottom: 40px;
     flex-shrink: 0;
-    
+
     .imgcontent {
       display: flex;
       justify-content: center;
@@ -181,19 +185,19 @@ const Container = styled.div`
       transform: ${({ $isopen }) =>
           $isopen === "true" ? `scale(0.7)` : `scale(1.5)`}
         rotate(${({ theme }) => theme.logorotate});
-      
+
       img {
         width: 100%;
         animation: flotar 1.7s ease-in-out infinite alternate;
       }
     }
-    
+
     h2 {
       color: #f88533;
       display: ${({ $isopen }) => ($isopen === "true" ? `block` : `none`)};
       margin-left: 15px;
       font-size: 1.2rem;
-      
+
       @media (max-width: 768px) {
         display: block;
       }
@@ -232,17 +236,18 @@ const Container = styled.div`
     color: ${(props) => props.theme.text};
     height: 60px;
     position: relative;
-    
+
     .content {
       display: flex;
       justify-content: center;
       width: 100%;
       align-items: center;
-      
+
       .Linkicon {
         display: flex;
         font-size: 33px;
         flex-shrink: 0;
+        filter: grayscale(100%);
 
         svg {
           font-size: 25px;
@@ -256,7 +261,7 @@ const Container = styled.div`
         white-space: nowrap;
         font-size: 0.85rem;
       }
-      
+
       .label_oculto {
         opacity: 0;
         display: none;
@@ -266,7 +271,7 @@ const Container = styled.div`
         justify-content: start;
         gap: 20px;
         padding: 20px;
-        
+
         @media (max-width: 768px) {
           gap: 15px;
           padding: 15px;
@@ -283,6 +288,9 @@ const Container = styled.div`
       border: 2px solid ${(props) => props.theme.bg5};
       color: ${(props) => props.theme.color1};
       font-weight: 600;
+      .Linkicon{
+        filter: grayscale(0%);
+      }
     }
   }
 
@@ -334,14 +342,14 @@ const Main = styled.div`
 
     &:hover {
       transform: ${({ $isopen }) =>
-        $isopen === "true" 
-          ? `translateX(173px) rotate(3.142rad) scale(1.1)` 
+        $isopen === "true"
+          ? `translateX(173px) rotate(3.142rad) scale(1.1)`
           : `scale(1.1)`};
-      
+
       @media (max-width: 768px) {
         transform: ${({ $isopen }) =>
-          $isopen === "true" 
-            ? `translateX(200px) rotate(3.142rad) scale(1.1)` 
+          $isopen === "true"
+            ? `translateX(200px) rotate(3.142rad) scale(1.1)`
             : `scale(1.1)`};
       }
     }
