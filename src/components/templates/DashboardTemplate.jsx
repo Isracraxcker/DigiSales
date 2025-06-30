@@ -38,10 +38,10 @@ export const DashboardTemplate = () => {
           </ContentTotales>
         </Area1>
         <Area2>
-         <ChartVentas />
+          <ChartVentas />
         </Area2>
         <Area3>
-          <ChartProductosTop /> 
+          <ChartProductosTop />
         </Area3>
         <Area4>4</Area4>
       </MainContent>
@@ -104,11 +104,11 @@ const Area3 = styled.section`
 const Area4 = styled.section`
   grid-area: area4;
 
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
   @media ${Device.desktop} {
-    flex-wrap:nowrap;
+    flex-wrap: nowrap;
   }
 `;
 const ContentTotales = styled.div`
