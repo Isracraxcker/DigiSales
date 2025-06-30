@@ -16,6 +16,7 @@ import { MonedaConfig } from "../components/organismos/EmpresaConfigDesign/Moned
 import { ClientesProveedores } from "../pages/ClientesProveedores";
 import { MetodosPago } from "../pages/MetodosPago";
 import { Dashboard } from "../pages/Dashboard";
+import { SucursalesCaja } from "../pages/SucursalesCaja";
 
 export function MyRoutes() {
   return (
@@ -95,7 +96,7 @@ export function MyRoutes() {
       />
       <Route path="*" element={<PageNot />} />
 
-       <Route
+      <Route
         path="/configuracion/clientes"
         element={
           <ProtectedRoute accessBy="authenticated">
@@ -106,12 +107,23 @@ export function MyRoutes() {
         }
       />
 
-       <Route
+      <Route
         path="/configuracion/proveedores"
         element={
           <ProtectedRoute accessBy="authenticated">
             <Layout>
               <ClientesProveedores />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/configuracion/sucursalcaja"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <SucursalesCaja />
             </Layout>
           </ProtectedRoute>
         }
@@ -128,7 +140,7 @@ export function MyRoutes() {
         }
       />
 
-        <Route
+      <Route
         path="/dashboard"
         element={
           <ProtectedRoute accessBy="authenticated">
