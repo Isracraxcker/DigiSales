@@ -1,4 +1,4 @@
-# 🛒 DigiSales Platform
+# 🛒 DigiSales - Sistema de Ventas
 
 <div align="center">
 
