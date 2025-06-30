@@ -31,7 +31,8 @@ export function LoginTemplate() {
               type="password"
             />
           </InputText2>
-          <Btn1 border="2px"
+          <Btn1
+            border="2px"
             titulo="INGRESAR"
             bgcolor="#1CB0F6"
             color="255,255,255"
@@ -39,9 +40,10 @@ export function LoginTemplate() {
           />
         </form>
         <Linea>
-          <span>0</span>
+          <span>O</span>
         </Linea>
-        <Btn1 border="2px"
+        <Btn1
+          border="2px"
           funcion={loginGoogle}
           titulo="Google"
           bgcolor="#fff"
@@ -71,10 +73,10 @@ const Container = styled.div`
     @media ${Device.tablet} {
       width: 400px;
     }
-    form{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
   }
 `;
