@@ -17,6 +17,8 @@ import { ClientesProveedores } from "../pages/ClientesProveedores";
 import { MetodosPago } from "../pages/MetodosPago";
 import { Dashboard } from "../pages/Dashboard";
 import { SucursalesCaja } from "../pages/SucursalesCaja";
+import { Privacidad } from "../pages/Privacidad";
+import { Terminos } from "../pages/Terminos";
 
 export function MyRoutes() {
   return (
@@ -29,6 +31,10 @@ export function MyRoutes() {
           </ProtectedRoute>
         }
       />
+
+      <Route path="/privacidad" element={<Privacidad />} />
+
+      <Route path="/terminos" element={<Terminos />} />
 
       <Route
         path="/"

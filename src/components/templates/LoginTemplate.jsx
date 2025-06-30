@@ -9,6 +9,7 @@ import {
 } from "../../index";
 import { v } from "../../styles/variables";
 import { Device } from "../../styles/breakpoints";
+import { AvisoLegal } from "../organismos/AvisoLegal";
 export function LoginTemplate() {
   const { loginGoogle } = useAuthStore();
   return (
@@ -16,7 +17,7 @@ export function LoginTemplate() {
       <div className="card">
         <ContentLogo>
           <img src={v.logo} />
-          <span>DigiSales</span>
+          <span>DigiSales - Sistema de Ventas</span>
         </ContentLogo>
         <Title $paddingbottom="40px">Ingresar</Title>
 
@@ -49,6 +50,8 @@ export function LoginTemplate() {
           bgcolor="#fff"
           icono={<v.iconogoogle />}
         />
+
+        <AvisoLegal />
       </div>
       <Footer />
     </Container>
