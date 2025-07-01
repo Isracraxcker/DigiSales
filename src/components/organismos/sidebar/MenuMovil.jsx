@@ -2,11 +2,7 @@
 /* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import { useState } from "react";
-import {
-  LinksArray,
-  SecondarylinksArray,
-  ToggleTema,
-} from "../../../index";
+import { LinksArray, SecondarylinksArray, ToggleTema } from "../../../index";
 import { v } from "../../../styles/variables";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
@@ -15,14 +11,13 @@ export const MenuMovil = ({ setState }) => {
 
   return (
     <Container>
-        
       <Main $isopen={state.toString()}>
         <Container $isopen={state.toString()} className={state ? "active" : ""}>
           <div className="Logocontent">
             <div className="imgcontent">
               <img src={v.logo} />
             </div>
-            <h2>Ada369 3.0</h2>
+            <h2>DigiSales</h2>
           </div>
           {LinksArray.map(({ icon, label, to }) => (
             <div
@@ -76,10 +71,10 @@ export const MenuMovil = ({ setState }) => {
                 <Icon
                   color="#CE82FF"
                   className="Linkicon"
-                  icon="heroicons:ellipsis-horizontal-circle-solid"
+                  icon="fluent-color:share-ios-20"
                 />
                 <span className={state ? "label_ver" : "label_oculto"}>
-                  MÁS
+                  SALIR
                 </span>
               </section>
             </div>
@@ -165,6 +160,7 @@ const Container = styled.div`
       .Linkicon {
         display: flex;
         font-size: 33px;
+        filter: grayscale(100%);
 
         svg {
           font-size: 25px;
@@ -197,6 +193,9 @@ const Container = styled.div`
       border: 2px solid ${(props) => props.theme.bg5};
       color: ${(props) => props.theme.color1};
       font-weight: 600;
+      .Linkicon {
+        filter: grayscale(0%);
+      }
     }
   }
 `;
