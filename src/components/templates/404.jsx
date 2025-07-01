@@ -2,6 +2,57 @@
 
 import styled, { keyframes, css } from "styled-components";
 
+export function PageNot() {
+  return (
+    <Container>
+      {/* Animated background elements */}
+      <BackgroundEffects>
+        <BgCircle variant="circle1" />
+        <BgCircle variant="circle2" />
+        <BgCircle variant="circle3" />
+      </BackgroundEffects>
+
+      {/* Floating particles */}
+      <ParticlesContainer>
+        {[...Array(20)].map((_, i) => (
+          <Particle
+            key={i}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            delay={Math.random() * 2}
+            duration={2 + Math.random() * 2}
+          />
+        ))}
+      </ParticlesContainer>
+
+      <ContentWrapper>
+        <ContentGrid>
+          {/* Content Section */}
+          <ContentSection>
+            {/* Badge */}
+            <StatusBadge>
+              <WrenchIcon>🔧</WrenchIcon>
+            </StatusBadge>
+
+            {/* Main Title */}
+            <TitleSection>
+              <MainTitle>404</MainTitle>
+              <TitleDecoration></TitleDecoration>
+            </TitleSection>
+
+            {/* Description */}
+            <Description>
+              Esta página no existe <br />
+              <HighlightText>Por favor, vuelve.</HighlightText>
+            </Description>
+          </ContentSection>
+        </ContentGrid>
+      </ContentWrapper>
+    </Container>
+  );
+}
 // Animaciones
 const float = keyframes`
   0%, 100% { transform: translateY(0px); }
@@ -45,6 +96,8 @@ const Container = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap");
 
@@ -166,7 +219,7 @@ const StatusBadge = styled.div`
 
 const WrenchIcon = styled.div`
   animation: ${spin} 2s linear infinite;
-  font-size: 16px;
+  font-size: 26px;
 `;
 
 const TitleSection = styled.div`
@@ -205,19 +258,6 @@ const TitleDecoration = styled.div`
   }
 `;
 
-const Sparkle = styled.span`
-  font-size: 24px;
-  animation: ${pulse} 2s infinite;
-
-  ${(props) =>
-    props.delay &&
-    css`
-      animation-delay: 0.5s;
-    `}
-`;
-
-
-
 const Description = styled.p`
   font-size: 1.25rem;
   background: ${({ theme }) => theme.text};
@@ -247,207 +287,3 @@ const HighlightText = styled.span`
   font-weight: 600;
   animation: ${gradientShift} 2s ease infinite;
 `;
-
-const ButtonContainer = styled.div`
-  margin-bottom: 48px;
-`;
-
-const HomeButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(45deg, #13101a, #0d387e);
-  background-size: 200% 200%;
-  color: white;
-  font-weight: 700;
-  padding: 16px 32px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-size: 1.125rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  animation: ${gradientShift} 3s ease infinite;
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.25);
-
-    .button-icon {
-      transform: translateX(-4px);
-    }
-
-    .heart-icon {
-      transform: scale(1.1);
-    }
-  }
-`;
-
-const ButtonIcon = styled.span`
-  transition: transform 0.3s ease;
-`;
-
-const HeartIcon = styled.span`
-  transition: transform 0.3s ease;
-`;
-
-const ImageSection = styled.div`
-  display: flex;
-  justify-content: center;
-
-  @media (min-width: 1024px) {
-    justify-content: flex-end;
-  }
-`;
-
-const ImageContainer = styled.div`
-  position: relative;
-`;
-
-const ImageGlow = styled.div`
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    45deg,
-    rgba(139, 92, 246, 0.3),
-    rgba(59, 130, 246, 0.3)
-  );
-  border-radius: 50%;
-  filter: blur(60px);
-  transform: scale(1.1);
-  animation: ${pulse} 4s ease-in-out infinite;
-`;
-
-const ImageCard = styled.div`
-  position: relative;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 32px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-`;
-
-const ImageWrapper = styled.div`
-  position: relative;
-`;
-
-const FloatingImage = styled.div`
-  animation: ${float} 3s ease-in-out infinite;
-`;
-
-const MainImage = styled.img`
-  width: 320px;
-  height: auto;
-  filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15));
-
-  @media (min-width: 1024px) {
-    width: 384px;
-  }
-
-  @media (max-width: 768px) {
-    width: 280px;
-  }
-`;
-
-const ImageShadow = styled.div`
-  position: absolute;
-  bottom: -16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 192px;
-  height: 24px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
-  filter: blur(8px);
-  animation: ${shadow} 3s ease-in-out infinite;
-`;
-
-export function PageNot() {
-  return (
-    <Container>
-      {/* Animated background elements */}
-      <BackgroundEffects>
-        <BgCircle variant="circle1" />
-        <BgCircle variant="circle2" />
-        <BgCircle variant="circle3" />
-      </BackgroundEffects>
-
-      {/* Floating particles */}
-      <ParticlesContainer>
-        {[...Array(20)].map((_, i) => (
-          <Particle
-            key={i}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            delay={Math.random() * 2}
-            duration={2 + Math.random() * 2}
-          />
-        ))}
-      </ParticlesContainer>
-
-      <ContentWrapper>
-        <ContentGrid>
-          {/* Content Section */}
-          <ContentSection>
-            {/* Badge */}
-            <StatusBadge>
-              <WrenchIcon>🔧</WrenchIcon>
-              <span>Página en</span>
-            </StatusBadge>
-
-            {/* Main Title */}
-            <TitleSection>
-              <MainTitle>Construcción</MainTitle>
-              <TitleDecoration></TitleDecoration>
-            </TitleSection>
-
-            {/* Description */}
-            <Description>
-              Esta página se encuentra en <br />
-              <HighlightText>construcción, pequeño estupido.</HighlightText>
-            </Description>
-
-            {/* CTA Button */}
-            <ButtonContainer>
-              <HomeButton href="/">
-                <ButtonIcon className="button-icon">←</ButtonIcon>
-                VOLVER A HOME
-                <HeartIcon className="heart-icon">💜</HeartIcon>
-              </HomeButton>
-            </ButtonContainer>
-          </ContentSection>
-
-          {/* Image Section */}
-          <ImageSection>
-            <ImageContainer>
-              {/* Glow effect behind image */}
-              <ImageGlow />
-
-              {/* Main image container */}
-              <ImageCard>
-                <ImageWrapper>
-                  {/* Floating animation container */}
-                  <FloatingImage>
-                    <MainImage
-                      src="https://i.ibb.co/J3ScNtK/roshi.png"
-                      alt="Personaje en construcción"
-                    />
-                  </FloatingImage>
-
-                  {/* Shadow */}
-                  <ImageShadow />
-                </ImageWrapper>
-
-                {/* Decorative elements */}
-              </ImageCard>
-            </ImageContainer>
-          </ImageSection>
-        </ContentGrid>
-      </ContentWrapper>
-    </Container>
-  );
-}
