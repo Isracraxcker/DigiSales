@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { ButtonDashed } from "../ui/buttons/ButtonDashed";
+import { ListSucursales } from "../organismos/SucursalesDesign/ListSucursales";
 
 export const SucursalesCajasTemplate = () => {
   return (
@@ -7,10 +9,13 @@ export const SucursalesCajasTemplate = () => {
         <Header>
           <Title>Sucursales y Cajas</Title>
           <Subtitle>Gestiona tus sucursales y cajas</Subtitle>
+          <ButtonDashed title="Nueva Sucursal" funcion={() => {}} />
         </Header>
       </section>
 
-      <section className="area2">Area2</section>
+      <section className="area2">
+        <ListSucursales />
+      </section>
     </Container>
   );
 };
