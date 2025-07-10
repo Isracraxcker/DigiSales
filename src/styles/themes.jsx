@@ -16,7 +16,7 @@ export const Light = {
   fontButton: "0.875em",
   navHeight: "5rem",
   whiteBg: "#f7b272",
-  bg: "rgb(255,255,255)",
+  bg: "rgb(220, 212, 212)",
   bgAlpha: "#f2f2f2",
   bg2: "rgb(245,245,245)",
   bg3: "#fff",
