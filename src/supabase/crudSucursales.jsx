@@ -39,6 +39,7 @@ export async function EditarSucursal(p) {
     throw new Error(error.message);
   }
 }
+
 export async function EliminarSucursal(p) {
   const { error } = await supabase.from(tabla).delete().eq("id", p.id);
   if (error) {

@@ -7,6 +7,7 @@ import { useSucursalesStore } from "../../../store/SucursalesStore";
 import { BarLoader } from "react-spinners";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { ButtonDashed } from "../../ui/buttons/ButtonDashed";
+import { Spinner1 } from "../../moleculas/Spinner1";
 
 export const ListSucursales = () => {
   const queryClient = useQueryClient();
@@ -31,7 +32,17 @@ export const ListSucursales = () => {
     queryFn: () => mostrarCajasXSucursal({ id_empresa: dataempresa?.id }),
     enabled: !!dataempresa,
   });
-  if (isLoading) return <BarLoader color="#05093d" />;
+  const editarSucursal = (p) => {
+    selectSucursal(p);
+    setStateSucursal(true);
+    setAccion("Editar");
+  };
+  if (isLoading)
+    return (
+      <LoadingContainer>
+        <Spinner1 />
+      </LoadingContainer>
+    );
   if (error) return <span>error...{error.message}</span>;
 
   return (
@@ -50,7 +61,12 @@ export const ListSucursales = () => {
                   />
                 )}
 
-                <Icon icon="mdi:edit" width="20" height="20" />
+                <Icon
+                  icon="mdi:edit"
+                  width="20"
+                  height="20"
+                  onClick={() => editarSucursal(sucursal)}
+                />
               </Acciones>
               <SucursalTitle>SUCURSAL: {sucursal.nombre}</SucursalTitle>
             </SucursalHeader>
@@ -108,6 +124,13 @@ const Acciones = styled.section`
       color: #c22929 !important;
     }
   }
+`;
+const LoadingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px; /* ajusta según el espacio que necesites */
+  width: 100%;
 `;
 const Sucursal = styled.div`
   background-color: ${({ theme }) => theme.body};

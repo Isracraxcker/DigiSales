@@ -1,12 +1,24 @@
 import { create } from "zustand";
-import { EditarSucursal, EliminarSucursal, InsertarSucursal, MostrarCajasXSucursal, MostrarSucursales, MostrarSucursalesAsignadasXuser } from "../index";
+import {
+  MostrarSucursales,
+  MostrarSucursalesAsignadasXuser,
+  MostrarCajasXSucursal,
+  InsertarSucursal,
+  EditarSucursal,
+  EliminarSucursal,
+} from "../index";
 
 export const useSucursalesStore = create((set) => ({
+  stateSucursal: false,
+  setStateSucursal: (p) => set({ stateSucursal: p }),
+  accion: "",
+  setAccion: (p) => set({ accion: p }),
+
   sucursalesItemSelect: [],
   selectSucursal: (p) => {
     set({ sucursalesItemSelect: p });
   },
-  dataSucursales: [],
+  dataSucursales: null,
   dataSucursalesAsignadas: [],
   sucursalesItemSelectAsignadas: [],
   mostrarSucursales: async (p) => {
@@ -26,13 +38,13 @@ export const useSucursalesStore = create((set) => ({
     const response = await MostrarCajasXSucursal(p);
     return response;
   },
-  InsertarSucursal: async (p) => {
+  insertarSucursal: async (p) => {
     await InsertarSucursal(p);
   },
-  EditarSucursal: async (p) => {
+  editarSucursal: async (p) => {
     await EditarSucursal(p);
   },
-  EliminarSucursal: async (p) => {
+  eliminarSucursal: async (p) => {
     await EliminarSucursal(p);
   },
 }));

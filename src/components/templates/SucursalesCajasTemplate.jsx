@@ -1,15 +1,22 @@
 import styled from "styled-components";
 import { ButtonDashed } from "../ui/buttons/ButtonDashed";
 import { ListSucursales } from "../organismos/SucursalesDesign/ListSucursales";
+import { RegistrarSucursal } from "../organismos/formularios/RegistrarSucursal";
+import { useSucursalesStore } from "../../store/SucursalesStore";
 
 export const SucursalesCajasTemplate = () => {
+  const {stateSucursal,setStateSucursal} = useSucursalesStore()
   return (
     <Container>
+     
+      {
+        stateSucursal && <RegistrarSucursal />  
+      }
       <section className="area1">
         <Header>
           <Title>Sucursales y Cajas</Title>
           <Subtitle>Gestiona tus sucursales y cajas</Subtitle>
-          <ButtonDashed title="Nueva Sucursal" funcion={() => {}} />
+          <ButtonDashed title="Nueva Sucursal" funcion={()=>setStateSucursal(true)} />
         </Header>
       </section>
 
