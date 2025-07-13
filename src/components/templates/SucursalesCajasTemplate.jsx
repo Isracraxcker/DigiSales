@@ -3,20 +3,25 @@ import { ButtonDashed } from "../ui/buttons/ButtonDashed";
 import { ListSucursales } from "../organismos/SucursalesDesign/ListSucursales";
 import { RegistrarSucursal } from "../organismos/formularios/RegistrarSucursal";
 import { useSucursalesStore } from "../../store/SucursalesStore";
+import { useCajasStore } from "../../store/CajasStore";
+import { RegistrarCaja } from "../organismos/formularios/RegistrarCaja";
 
 export const SucursalesCajasTemplate = () => {
-  const {stateSucursal,setStateSucursal} = useSucursalesStore()
+  const { stateSucursal, setStateSucursal } = useSucursalesStore();
+  const { stateCaja } = useCajasStore();
   return (
     <Container>
-     
-      {
-        stateSucursal && <RegistrarSucursal />  
-      }
+      {stateSucursal && <RegistrarSucursal />}
+
+      {stateCaja && <RegistrarCaja />}
       <section className="area1">
         <Header>
           <Title>Sucursales y Cajas</Title>
           <Subtitle>Gestiona tus sucursales y cajas</Subtitle>
-          <ButtonDashed title="Nueva Sucursal" funcion={()=>setStateSucursal(true)} />
+          <ButtonDashed
+            title="Nueva Sucursal"
+            funcion={() => setStateSucursal(true)}
+          />
         </Header>
       </section>
 

@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { Device } from "../../../styles/breakpoints";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEmpresaStore } from "../../../store/EmpresaStore";
 import { useCajasStore } from "../../../store/CajasStore";
 import { useSucursalesStore } from "../../../store/SucursalesStore";
-import { BarLoader } from "react-spinners";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { ButtonDashed } from "../../ui/buttons/ButtonDashed";
 import { Spinner1 } from "../../moleculas/Spinner1";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 export const ListSucursales = () => {
   const queryClient = useQueryClient();
@@ -37,6 +38,89 @@ export const ListSucursales = () => {
     setStateSucursal(true);
     setAccion("Editar");
   };
+  const agregarCaja = (p) => {
+    setAccionCaja("Nuevo");
+    setStateCaja(true);
+    console.log(p);
+    setCajaSelectItem(p);
+  };
+
+  const editarCaja = (p) => {
+    setStateCaja(true);
+    setAccionCaja("Editar");
+    setCajaSelectItem(p);
+  };
+  const controladorEliminarCaja = (id) => {
+    return new Promise((resolve, reject) => {
+      Swal.fire({
+        title: "¿Estás seguro(a)(e)?",
+        text: "Una vez eliminado, se eliminaran todas las ventas relacionadas",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await eliminarCaja({ id: id });
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
+        } else {
+          reject(new Error("Eliminación cancelada"));
+        }
+      });
+    });
+  };
+  const controladorEliminarSucursal = (id) => {
+    return new Promise((resolve, reject) => {
+      Swal.fire({
+        title: "¿Estás seguro(a)(e)?",
+        text: "Una vez eliminado, se eliminaran todas las ventas relacionadas",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await eliminarSucursal({ id: id });
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
+        } else {
+          reject(new Error("Eliminación cancelada"));
+        }
+      });
+    });
+  };
+  const { mutate: doDeleteSucursal } = useMutation({
+    mutationKey: ["eliminar Sucursal"],
+    mutationFn: controladorEliminarSucursal,
+    onError: (error) => {
+      toast.error(`Error: ${error.message}`);
+    },
+    onSuccess: () => {
+      toast.success("Sucursal eliminada");
+      queryClient.invalidateQueries(["mostrar Cajas XSucursal"]);
+    },
+  });
+  const { mutate: doDeleteCaja } = useMutation({
+    mutationKey: ["eliminar caja"],
+    mutationFn: controladorEliminarCaja,
+    onError: (error) => {
+      toast.error(`Error: ${error.message}`);
+    },
+    onSuccess: () => {
+      toast.success("Caja eliminada");
+      queryClient.invalidateQueries(["mostrar Cajas XSucursal"]);
+    },
+  });
+
   if (isLoading)
     return (
       <LoadingContainer>
@@ -58,6 +142,7 @@ export const ListSucursales = () => {
                     width="15"
                     height="15"
                     className="deleteicon"
+                    onClick={() => doDeleteSucursal(sucursal?.id)}
                   />
                 )}
 
@@ -80,16 +165,30 @@ export const ListSucursales = () => {
                     <CajaDescripcion>{caja.descripcion}</CajaDescripcion>
                     <Acciones $right="10px" $bottom="10px">
                       {caja?.delete && (
-                        <Icon icon="wpf:delete" width="15" height="15" />
+                        <Icon
+                          icon="wpf:delete"
+                          width="15"
+                          height="15"
+                          className="deleteicon"
+                          onClick={() => doDeleteCaja(caja?.id)}
+                        />
                       )}
 
-                      <Icon icon="mdi:edit" width="20" height="20" />
+                      <Icon
+                        icon="mdi:edit"
+                        width="20"
+                        height="20"
+                        onClick={() => editarCaja(caja)}
+                      />
                     </Acciones>
                   </CajaItem>
                 );
               })}
             </CajaList>
-            <ButtonDashed title={"Agregar caja"} />
+            <ButtonDashed
+              title={"Agregar caja"}
+              funcion={() => agregarCaja(sucursal)}
+            />
           </Sucursal>
         );
       })}
