@@ -84,7 +84,7 @@ export const BasicosConfig = () => {
               </div>
             ) : (
               <AvatarImage
-                src="https://i.ibb.co/JjqNqnz/cerdosolo.png"
+                src="https://i.ibb.co/39y0kysq/subir.png"
                 alt="Avatar"
               />
             )}
