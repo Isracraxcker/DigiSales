@@ -136,7 +136,7 @@ export function MyRoutes() {
         }
       />
 
-        <Route
+      <Route
         path="/configuracion/impresoras"
         element={
           <ProtectedRoute accessBy="authenticated">
