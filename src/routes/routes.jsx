@@ -19,6 +19,7 @@ import { Dashboard } from "../pages/Dashboard";
 import { SucursalesCaja } from "../pages/SucursalesCaja";
 import { Privacidad } from "../pages/Privacidad";
 import { Terminos } from "../pages/Terminos";
+import { Impresoras } from "../pages/Impresoras";
 
 export function MyRoutes() {
   return (
@@ -135,6 +136,16 @@ export function MyRoutes() {
         }
       />
 
+        <Route
+        path="/configuracion/impresoras"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Impresoras />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/configuracion/metodospago"
         element={
