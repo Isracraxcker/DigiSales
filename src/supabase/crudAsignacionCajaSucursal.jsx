@@ -6,5 +6,5 @@ export async function MostrarSucursalCajaAsignada(p) {
     .select(`*, sucursales(*), caja(*)`)
     .eq("id_usuario", p.id_usuario)
     .maybeSingle();
-    return data;
+  return data;
 }

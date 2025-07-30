@@ -31,7 +31,7 @@ export const useSucursalesStore = create((set) => ({
     const response = await MostrarSucursalesAsignadasXuser(p);
     set({ dataSucursalesAsignadas: response });
     set({ sucursalesItemSelectAsignadas: response[0] });
-    console.log(response[0]);
+
     return response;
   },
   mostrarCajasXSucursal: async (p) => {

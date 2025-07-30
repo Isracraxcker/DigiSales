@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { useAsignacionCajaSucursalStore } from "../../../store/AsignacionCajaSucursalStore";
-import { useImpresorasStore } from "../../../store/ImpresorasStore";
 
-export const HeaderImpresoras = () => {
+export const HeaderImpresoras = ({ dataImpresorasPorCaja, dataPcLocal }) => {
   const { dataSucursalesAsignadas } = useAsignacionCajaSucursalStore();
-  const {dataImpresorasPorCaja} = useImpresorasStore()
+  
   return (
     <Container>
       <SubContainer>
@@ -16,10 +15,9 @@ export const HeaderImpresoras = () => {
           <span>{dataSucursalesAsignadas?.sucursales.nombre} </span>
           <span>{dataSucursalesAsignadas?.caja.descripcion} </span>
         </ContainerCaja>
-
       </SubContainer>
       <CommandText>
-      ▲ ~ PC: {dataImpresorasPorCaja?.pc_name}
+        ▲ ~ PC: {dataImpresorasPorCaja?.pc_name || dataPcLocal?.machineName || 'No disponible'}
       </CommandText>
     </Container>
   );

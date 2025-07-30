@@ -10,7 +10,7 @@ import { SelectList } from "../ui/lists/SelectList";
 import { useAsignacionCajaSucursalStore } from "../../store/AsignacionCajaSucursalStore";
 import { useState } from "react";
 import ticket from "../../reports/TicketPrueba";
-import {HeaderImpresoras} from "../organismos/ImpresorasDesign/HeaderImpresoras"
+import { HeaderImpresoras } from "../organismos/ImpresorasDesign/HeaderImpresoras";
 import toast from "react-hot-toast";
 export const ImpresorasTemplate = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -43,6 +43,7 @@ export const ImpresorasTemplate = () => {
         id_caja: dataSucursalesAsignadas?.id_caja,
       }),
   });
+
   //mostrar datos de Pc local
   const {
     data: dataPcLocal,
@@ -52,6 +53,7 @@ export const ImpresorasTemplate = () => {
     queryKey: ["mostrar datos de PC"],
     queryFn: mostrarDatosPc,
   });
+
   //mostrar las impresoras locales
   const {
     data: dataImpresorasLocales,
@@ -129,10 +131,12 @@ export const ImpresorasTemplate = () => {
   }
   return (
     <Container>
-      
       {dataPcLocal ? (
         <SubContainer>
-          <HeaderImpresoras/>
+          <HeaderImpresoras
+            dataImpresorasPorCaja={dataImpresorasPorCaja}
+            dataPcLocal={dataPcLocal}
+          />
           <Title>IMPRESORAS</Title>
           <ContentSwich>
             <SubTitle>Imprimir directo</SubTitle>
@@ -148,7 +152,12 @@ export const ImpresorasTemplate = () => {
           <Avatar $bg="#d70e79">
             {statePrintDirecto ? (
               <>
-                <Btn1 funcion={probarTicket} bgcolor={"#d70e79"} color={"#fff"} titulo={"probar"} />
+                <Btn1
+                  funcion={probarTicket}
+                  bgcolor={"#d70e79"}
+                  color={"#fff"}
+                  titulo={"probar"}
+                />
                 <SelectList
                   itemSelect={selectImpresora}
                   onSelect={setSelectImpresora}
@@ -190,7 +199,7 @@ export const ImpresorasTemplate = () => {
           </span>
           <br></br>
           <section className="advertencia">
-            <Icon className="icono" icon="svg-spinners:clock" />
+            <Icon className="icono" icon="meteocons:barometer" />
             <span>si ya instalo, actualice esta pagina.</span>
           </section>
         </SubContainer>
@@ -227,9 +236,7 @@ const SubContainer = styled.div`
     width: 100%;
     align-items: center;
     .icono {
-      font-size: 50px;
-      padding-right: 10px;
-      padding-left: 10px;
+      font-size: 100px;
     }
   }
 `;

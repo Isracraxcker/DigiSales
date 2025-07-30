@@ -67,7 +67,6 @@ export const useImpresorasStore = create((set, get) => ({
             }
           : response,
     }));
-
     return response;
   },
 }));
